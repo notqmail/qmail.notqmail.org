@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>qmail-queue(8)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+qmail-queue(8)       Maintenance Procedures        qmail-queue(8)
+
+
+
+<B>NAME</B>
+     qmail-queue - queue a mail message for delivery
+
+<B>SYNOPSIS</B>
+     <B>qmail-queue</B>
+
+<B>DESCRIPTION</B>
+     <B>qmail-queue</B> reads a mail message from descriptor 0.  It then
+     reads envelope information from descriptor 1.  It places the
+     message into the  outgoing  queue  for  future  delivery  by
+     <B><A HREF="qmail-send.html">qmail-send</A></B>.
+
+     The envelope information is an envelope sender address  fol-
+     lowed by a list of envelope recipient addresses.  The sender
+     address is preceded by the letter F and terminated  by  a  0
+     byte.   Each  recipient  address is preceded by the letter T
+     and terminated by a 0 byte.  The list of recipient <A HREF="../man5/addresses.html">addresses</A>
+     is  terminated by an extra 0 byte.  If <B>qmail-queue</B> sees end-
+     of-file before the extra 0 byte, it aborts  without  placing
+     the message into the queue.
+
+     Every envelope recipient address must contain a username, an
+     @ sign, and a fully qualified domain name.
+
+     <B>qmail-queue</B> always adds a <B>Received</B> line to the  top  of  the
+     message.   Other than this, <B>qmail-queue</B> does not inspect the
+     message and does not enforce any restrictions  on  its  con-
+     tents.   However,  the  recipients  probably expect to see a
+     proper header, as described in <B><A HREF="../man5/qmail-header.html">qmail-header</A>(5)</B>.
+
+<B>EXIT</B> <B>CODES</B>
+     0  if  <B>qmail-queue</B>  has  successfully  queued  the  message,
+     nonzero  if  <B>qmail-queue</B>  has  failed  to queue the message.
+     <B>qmail-queue</B> does not print diagnostics.
+
+<B>SEE</B> <B>ALSO</B>
+     addresses(5),    <A HREF="../man5/envelopes.html">envelopes</A>(5),    qmail-header(5),    qmail-
+     inject(8), qmail-send(8), <A HREF="qmail-smtpd.html">qmail-smtpd</A>(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

@@ -1,0 +1,3182 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>qmail: Second most popular MTA on the Internet</title>
+<link rel="alternate" type="application/rss+xml" href="news.rdf" title="qmail news via rss">
+<LINK REL="SHORTCUT ICON" HREF="http://qmail.org/favicon.ico">
+</head>
+<body vlink="#004400" link="#008800" text="#000000" bgcolor="#ffffff" alink="#FF0000">
+<table>
+<tr>
+<td>
+<a href="index.html"><IMG width="203" height="186" border="0" alt="logo" SRC="Q.6.01.Logo.lg.jpg" ></a>
+</td><td> <CENTER><img _parsed=1 border=0 alt="The qmail home page"
+src="qmpage.gif" align=bottom width=377 height=46></CENTER>
+</td>
+</tr>
+</table>
+<p>
+<center><a href="http://www.ru.qmail.org/"><img src="russian2.gif" width="450" height="36" alt="View a Russian-language site"></a></center>
+<center><a href="http://qmail.kldp.org"><img src="kl-qmail-w.gif" width="330" height="34" alt="View a Korean-language site"></a></center>
+<center><a href="http://www.chinese.qmail.org"><img src="qmail-c.gif" width="330" height="34" alt="View a Chinese-language site"></a></center>
+<center><a href="http://qmail.free.fr/">qmail francophone</a></center>
+
+<p>Please note that this site is a reference for qmail users.  It's
+not designed to be easy to use -- it's designed to be comprehensive.
+There are things in here which have sharp edges!  If you're looking
+for a tutorial site, visit Dave Sill's excellent <a
+href="http://www.lifewithqmail.org">Life With Qmail</a> site.
+
+<p>
+qmail is a <a href="blurb.html">modern SMTP server</a> which makes
+sendmail <a href="http://cr.yp.to/surveys.html">obsolete</a>, written
+by <a HREF="http://cr.yp.to/djb.html">Dan Bernstein</a>, who also has
+a <A HREF="http://cr.yp.to/qmail.html">web page for qmail</a>.  qmail
+is a secure package.  You can <a href="netqmail-1.06.tar.gz">download
+netqmail 1.06</a> (Redhat <a href="rpms/index.html">RPMs</a>, and Debian <a
+href="top.html#200107200">.debs</a>, <a href="top.html#200301110">HP-UX</a>, <a
+href="top.html#200303200">Gentoo</a>, and OpenBSD <a
+href="top.html#200207290">ports</a>) and <a
+href="http://cr.yp.to/qmail/dist.html">redistribute</a> qmail for
+free.  You can get the <a href="http://www.nrg4u.com">"big
+picture"</a> of how qmail is organized.  You should read <a
+href="http://www.lifewithqmail.org/">Life with qmail</a>.
+
+<P>There is a <A HREF="mailto:qmail-help@list.cr.yp.to">discussion
+list</A> and an <a
+href="mailto:qmailannounce-help@list.cr.yp.to">announcements list</a>
+for qmail users, maintained by Dan Bernstein using qmail, <I>of
+course</I>.  There's also an <a
+href="http://www.ornl.gov/cts/archives/mailing-lists/qmail/">archive</a>.
+You can <a href="http://www-archive.ornl.gov:8000">search it</a>.
+It's also archived at <a
+href="http://marc.theaimsgroup.com/?l=qmail">The Aims Group</a>, at <a
+href="http://gossamer-threads.com/lists/qmail/users/">Gossamer
+Threads</a>, and in <a
+href="http://www.linuxinsight.com/qmail_archive_mbox_format.html">Mailbox-format
+archives</a>.  Charles Cazabon has written some guidelines for <a
+href="http://pyropus.ca/personal/writings/12-steps-to-qmail-list-bliss.html">posting
+to the list</a>.  There is also an FAQ, providing <a
+href="http://cr.yp.to/qmail/faq.html">answers to frequently-asked
+questions</a>.  qmail is <a href="not-open-source.html"><em>now</em>
+open source</a>.
+
+<p date="19991226"><a name="19991226"> Dan's updated FAQ is also available in <a
+href="http://es.qmail.org/documentacion/autor/FAQ/">other file
+formats</a>, and in <a
+href="http://www.es.qmail.org/documentacion/distro/puf/">Spanish</a>.</a>
+
+<p>A number of large Internet sites are using qmail: USA.net's
+outgoing email, Address.com, Rediffmail.com, Colonize.com, Yahoo!
+mail, Network Solutions, Verio, MessageLabs (searching 100M
+emails/week for malware), listserv.acsu.buffalo.edu (a big listserv
+hub, using qmail since 1996), Ohio State (biggest US University),
+Yahoo! Groups, Listbot, USWest.net (Western US ISP), Telenordia,
+gmx.de (German ISP), NetZero (free ISP), Critical Path (email
+outsourcing service w/ 15M mailboxes), PayPal/Confinity,
+Hypermart.net, Casema, Pair Networks, Topica, MyNet.com.tr,
+FSmail.net, Mycom.com, and vuurwerk.nl.</p>
+
+<p><img src="updated.gif" alt="updated" width=52 height=12
+date="200401270"><a name="200401270"> Charles Cazabon, Dave Sill,
+Henning Brauer, Peter Samuel, and Russell Nelson have put together a <a
+href="netqmail/index.html">netqmail-1.06</a> distribution of qmail</a>.  It is
+comprised of qmail-1.03 plus the <a href="top.html#patches">recommended
+patches</a> and some documentation.</p>
+
+<p>
+<a name="index">Table of Contents:</a>
+<ul>
+<li><a href="top.html#addons">[addons]</a>
+<li><a href="top.html#author">[author's software]</a>
+<li><a href="top.html#book">[books]</a>
+<li><a href="top.html#paidsup">[commercial support]</a>
+<li><a href="top.html#checkpassword">[checkpassword]</a>
+<li><a href="top.html#ezmlm">[ezmlm]</a>
+<li><a href="top.html#large">[high-volume servers]</a>
+<li><a href="top.html#maildir">[maildir]</a>
+<li><a href="top.html#microsoft">[Microsoft virus prevention]</a>
+
+<li date="200012280"><a href="news.html">[news]</a> qmail news is also
+available as a <a href="news.rdf">news channel</a>, and a <a
+href="http://slashdot.org/">Slashdot</a> slashbox.
+
+<li><a href="top.html#patches">[Recommended patches]</a>
+<li><a href="top.html#spam">[spam prevention]</a></a>
+<li><a href="top.html#tips">[tips]</a>
+<li><a href="top.html#usersoft">[user software]</a>
+<li><a href="top.html#userdoc">[user documentation]</a>
+</ul>
+
+<p>
+<a name="paidsup">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Commercial Support</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+ <P>
+Commercial support is available for qmail.
+ <ul>
+
+<li><a href="http://www.jcb-sc.com/">James Craig Burley, Software
+Craftsperson</a>, offers assessment, installation, support, training,
+and documentation for qmail and related software, specializing in
+low-maintenance, rock-solid anti-spam, anti-virus solutions for small-
+and medium-size organizations.
+
+<li><A HREF="http://www.saffron.net">Saffron Solutions</A> is a 
+customer-focused IT services company offering computer <A 
+HREF="http://www.saffron.net/systems/">system</A>, <A 
+HREF="http://www.saffron.net/network/">network</A>, and <A 
+HREF="http://www.saffron.net/security/">security</A> consulting and 
+systems integration.  Based in Boston, MA, Saffron Solutions provides 
+<A HREF="http://www.saffron.net/systems/qmail/">qmail</A> and other 
+open source software support to customers in the US and Canada.
+
+<li><a href="http://www.bettercom.de/de/support">bettercom</a> (located
+in Hamburg, Germany) provides support, installation and administration
+services for qmail and open-source software in Germany and
+elsewhere in Europe.
+
+<li><a href="http://www.acrconsulting.co.uk/email/qmail.html">Andrew
+Richards</a> is a qmail solutions specialist: Straightforward support,
+consultancy, maintenance and troubleshooting services for qmail and
+related systems.
+<a href="http://www.acrconsulting.co.uk/email/install.html">Design
+and installation</a> of new qmail-based systems - any size, any location.
+Tel. +44 1142 789 884.
+
+<li><a href=http://www.top-consulting.net/qmail.shtml>G-Tech Consulting</a>
+offers high-quality services and support contracts at the lowest prices. We
+offer support for Qmail, Webmail, Courier-Imap, djbdns, etc and a wide
+variety of open-source software such as Apache, ProFTPD, Linux, FreeBSD,
+OpenBSD.
+
+<li><a href="http://www.drh.net/">David Harris</a>, author of open 
+source qmail addons, provides expert qmail support and installation 
+through his firm <a href="http://www.drh.net/">DRH Internet</a>.
+Call toll free at 866-374-4678; internationally 410-461-5316.
+
+<li><a href="http://www.inter7.com/?page=qmail">Inter7</a> provides
+qmail support world-wide: remote access or at your location. Call toll
+free in the U.S. at 866.528.3530, Internationally at 815.776.9465 or
+via Voip at sip:support@inter7.com
+
+<li><a href="http://www.quist.ca">Quist Consulting</a> provides
+support for qmail in Canada, the USA and elsewhere over the Internet.
+
+<li><a href="http://www.aidasystems.com/"> AiDA Systems </a> offers
+Qmail, Webmail AntiVirus, AntiSpam, and djbdns support. We also offer
+high-availability, clustering, redundancy, load balancing (layer 4
+switching, round-robin dns) and failover services for medium/large
+ISP's. We also support migration from Windows/Unix platforms to any
+Unix platform (FreeBSD, OpenBSD, Linux, Solaris, others) Call
+209.639.2989
+
+<li><a href="http://www.blackmesh.com/qmail.php">BlackMesh</a> provides a full
+range of qmail services, from consulting to shared qmail servers and dedicated
+qmail servers.  In addition to qmail support, BlackMesh provides a full range
+of consulting and hosting--from shared to dedicated--services.  888.473.0854
+
+<li><a href="http://www.ibase.com.hk">iBase Technologies</a> from Hong
+Kong offers qmail based corporate email solutions for the Asian
+region.  Solutions include corporate email solutions,
+anti-spam/anti-virus, high-volume servers, consultancy and system
+administration services.
+
+<li><a href=" http://www.rozmic.com/team.html"> Ross Cooney</a> from <a
+href="http://www.rozmic.com">Rozmic</a> provide support for qmail to
+European based organisations and ISP's. Rozmic also provide a managed
+spam filtration service called <a
+href="http://www.emailcloud.com">EmailCloud</a> which is built upon
+qmail.
+
+<li><a href="http://www.rieger-cm.de/">RIEGER - Consulting &amp;
+Management</a> offers consulting, installaton and adminstrative
+services for qmail, djbdns and other software including help with
+general server tasks to customers located in Germany and nearby
+countries.
+
+<li><a href="http://linuxis.net">LinuxIS Consulting</a> provides consulting,
+installation, and support services for qmail, djbdns, and most other 
+DJB-ware and Open Source software.  Accepts Visa, M/C, American Express and 
+Paypal.
+
+<li><a href="http://www.clearlyconnected.com/">Clearly Connected</a> 
+provides contractual and by-the-hour support for qmail and other MTAs.  
+We have a great deal of expertise in qmail on Linux, FreeBSD, and 
+Solaris.
+
+<li><a href="http://www.excello.cz" title="Consulting, installation and
+support for qmail - Excello">Excello</a> provides support for wide
+range of qmail applications for SMB & Enterprise customers in the
+Germany and Czech republic. They also run excellent high performance
+antispam and antivirus solution on qmail platform known as <a
+href="http://www.virusfree.cz" title="Hosted antispam solution with
+SLA">Virusfree.cz</a>.
+
+<li><A HREF="http://www.linuxmagic.com">LinuxMagic Inc.</a> Offers
+high volume mail server support for ISP's and Enterprise throughout
+the world.  They have published free qmail support tools.  Also
+specializing in Anti-Spam solutions, Integration, High Performance
+Tuning. Located in Canada, 24/7 support contracts also available.
+
+<li><a href="http://www.advancedconsultinggroup.com/qmail/">Advanced
+Consulting Group</a> - Los Angeles based Qmail installation and
+support. Support for spam filtering, large deployments, and 24/7
+support.  Support all unix platforms. Call toll free (888) 595-9775.
+
+<li><a href="http://disch-services.de">Disch Services GmbH</a>
+(located near Nuremberg, Germany) is providing professional services
+for open source software. The company is running also e-mail
+servers with qmail for her german customers.
+
+</ul>
+
+
+
+<p>
+ </td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p>
+<a name="userdoc">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>User-Contributed Documentation</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+ <P>
+ Documentation contributed by users
+ <ul>
+
+ <li>qmail manual pages converted to HTML <a href="man.tar.gz">as a
+ tarball</a>, and <a href="man/index.html">individually</a>.
+
+<li>Michael Samuel collected some documentation for qmail.  It is no
+longer accessible and is not being maintained.  Arjen van Drie has a <a
+href="http://qmail.3va.net">mirror</a>.
+
+<li>Paul Gregg has written instructions on how to configure qmail to
+handle many mail users (multiple email addresses) with separate POP3
+accounts - <a href="http://www.pgregg.com/projects/">without
+using system accounts</a>.
+
+<li><a href="http://www-sv.cict.fr/lsp/Chafai/">Djalil Chafaï</a> has
+written <a
+href="http://savage.iut-blagnac.fr/projets/doc/qmail/v0.4/">«Introduction
+à qmail»</a>, an introduction to qmail for french speaking users.
+
+<li>Chris Johnson wrote something called "<a
+href="http://www.palomine.net/qmail/relaying.html">The qmail newbie's
+guide to relaying</a>", which is supposed to answer most of the
+relaying questions that come across the qmail list.
+
+<li>Adam D. McKenna has written a <a
+href="https://sites.google.com/a/flounder.net/homepage/qmail-howto">qmail HOWTO</a>.
+
+<li>Dave Sill has written <a
+href="http://www.lifewithqmail.org/">Life with qmail</a>.
+
+<li date="20000622"><a name="20000622">
+Erwin Hoffmann was supposed to give a <a
+href="http://www.fehcom.de/qmail_en.html">German-language QMAIL
+presentation</a></a> at a congress of the German Unix User Group (GUUG)
+(http://www.guug.de). However, the whole congress was canceled thus
+the presentation is more or less "virtual".
+
+<li date="20000720"><a name="20000720">
+Dave Kitabjian has some diagnostic suggestions for various qmail
+problems</a> on his <a
+href="http://www.kitabjian.com/dave/qmailhelp/">Q-Cards</a> page.
+
+<li date="20000721"><a name="20000721">
+Philip Jacob wrote up some <a
+href="http://www.whirlycott.com/phil/pop3.html">instructions</a> on
+using checkpoppasswd</a> to create virtual users on virtual hosts,
+accessing their mail via pop3.</a>
+
+<li date="200101070"><a name="200101070">Davide Giunchi has written an <a
+href="http://www.giunchi.net/italian-qmail-howto">Italian qmail
+HOWTO</a></a>, this Italian language document explains how to install,
+configure and run qmail.  This isn't a translation of the English
+"qmail howto" but is written from scratch.
+
+<li date="200101220"><a name="200101220">Oliver Lehmann has written a
+<a href="http://www.pofo.de/HOWTO/qmail/">German FreeBSD
+qmail-howto</a></a>.  Steven Fettig has translated Chapters 1-4 into
+<a href="http://www.stevenfettig.com/mythoughts/archives/cat_qmailhowto.php">English</a>.
+
+<li date="20010317"><a name="20010317">Patrick contributes an <a
+href="xinetd.text">xinetd</a> configuration for qmail-pop3d.</a>
+
+<li date="200105310"><a name="200105310">Ismail Yenigul has written a
+<a href="http://www.enderunix.org/documents/qmail.html">Turkish
+qmail-howto</a></a>.
+
+<li date="200105311"><a name="200105311"><a
+href="http://www.dulug.duke.edu/~icon/qvcs-guide/">Qmail-VmailMgr-Courier-SquirrelMail
+installation guide</a></a>, written by Konstantin Riabitsev.</a>
+
+<li date="200106250"><a name="200106250">Martin Östlund has written a <a
+href="http://support.linux.se/?main=docs/qmailhowto.php&org=docs">Swedish
+qmail-howto</a></a>.
+
+<li date="200212260"><a name="200212260">Rene Schleicher has written a <a
+href="http://www.systemprotect.de/~rene/qmail-doku.pdf">qmail/vpopmail-Installation</a>
+HOWTO in German.</a>
+
+<li date="200111160"><a name="200111160">Looking for information on how to
+<a href="http://www.goldmark.org/jeff/stupid-disclaimers/">add a
+disclaimer</a> to your outgoing email?</a>
+
+<a name="200111200" />
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200409120"><a name="200409120">Daniele Ripanti and Marco
+Rocchetti have written a <a
+href="http://web.tiscali.it/dax_ramis">HOWTO in Italian</a></a>
+describing a qmail installation on FreeBSD with POP3, IMAP, Mailing
+list, Antivirus, Antispam support and webmail.
+
+<li><a name="200206182"/><img src="updated.gif" alt="updated" width=52
+height=12 date="200807300"><a name="200807300">Reza Gamal has written
+a qmail guide in <a
+href="http://blog.chipset.or.id/qmail/">Indonesian</a>.</a>
+
+<li date="200207090"><a name="200207090">Michel Morelli is running an <a
+href="http://lists.ziobudda.net/mailman/listinfo/qmail-it">Italian-language
+list</a>.</a>
+
+<li date="200207091"><a name="200207091">Paul Niewiadomski has translated
+<a href="http://iidea.pl/~paweln/tlum/qmail-doki.tar.bz2">man pages
+into Polish</a>.</a> Actually, he's Pawe&#322; Niewiadomski, but you need
+an 8859-2 character set to properly render his name.  I can't wait for
+UTF-8 to be supported everywhere.
+
+<li date="200207100"><a name="200207100">Marco Tizzoni has translated <a
+href="http://medialab.dyndns.org/~elibus/lwq.html">Life With Qmail
+into Italian</a>.</a>
+
+<a name="200208070"></a>
+
+<li date="200302250"><a name="200302250">Mário Gamito has some <a
+href="http://www.startux.org/index.php?article=1052&visual=2">Portuguese
+documentation</a></a>.
+
+<a name="200210280"></a>
+
+<li date="200304070"><a name="200304070">Asfihani has written Installing
+Qmail With <a
+href="http://www.layangan.com/asfik/writings/qmail-vmailmgr.html">vmailmgr</a>
+and <a
+href="http://www.layangan.com/asfik/writings/qmail-vpopmail.html">vpopmail</a>
+in Indonesian language</a>.  He also covers omail admin, courier-imap
+and squirrelmail.
+
+<li date="200210300"><a name="200210300">Ciprian has <a
+href="http://www.benchmarks.dmz.ro/">three benchmark articles</a>
+comparing sendmail, qmail, and PostFix.</a>
+
+<li date="200212170"><a name="200212170">Andrew St. Jean describes his <a
+href="http://www.arda.homeunix.net/mailsetup.shtml">qmail
+configuration</a></a> and using qmail's null client, Courier IMAP, and
+TMDA.
+
+<li date="200302110"><a name="200302110">John M. Simpson is running
+<a href="http://qmail.jms1.net/courier-daemontools.shtml">courier-imap under daemontools</a></a>.
+
+
+<li date="200303200"><a name="200303200">Kris Kelley has <a
+href="http://www.skunkworx.org/guides/QmailOnGentoo.txt">Gentoo
+installation instructions</a>.</a>
+
+<li date="200305010"><a name="200305010">Frank Niedermann has written a
+HowTo install qmail on <a
+href="http://www.cargal.org/downloads/HOW-TO/debianqmail/debianqmail.html">Debian
+in German</a> language.</a>
+
+<li date="200305020"><a name="200305020">Jeffrey Clement wrote up a <a
+href="http://jclement.ca/docs/debian_qmail/">Debian HOWTO</a> on
+setting up qmail, Vmailmgr, CourierIMAP, SpamAssassin, and ezmlm</a>.
+
+<li date="200306120"><a name="200306120">Sylvestre Ledru wrote some bits on
+using <a
+href="http://sylvestre.ledru.info/howto/howto_qmail_spamassassin.php">spam
+assassin with qmail</a></a>.
+
+<li date="200311020"><a name="200311020">Roberto Lacava has Italian
+installation instructions for <a
+href="http://www.baslug.org/vega/qmail/">qmail on Red Hat 9</a></a>.
+
+<li date="200312090"><a name="200312090">Erwin Hoffmann has compiled a
+tutorial about <a href="http://www.fehcom.de/qmail/smtpauth.html">SMTP
+Authentication</a></a> (as part of my canceled Qmail Book) which is
+available in english language.  Readers will find an updated version
+of Krysztof Dabrowski's SMTP Auth patch which should cleanly interface
+with eg. netqmail-1.04.
+
+<li date="200405100"><a name="200405100">Larry M. Smith has written
+instructions for using <a
+href="http://www.fahq2.com/qmail/honeypot.html">qmail as a
+honeypot</a></a>.
+
+<li date="200410100"><a name="200410100">Sumanth NS has a <a
+href="http://ece.iisc.ernet.in/FAQ">qmail + UUCP how-to</a>.</a>
+
+<li><a name="200509010">Bill Shupp has installation
+instructions for a <a href="http://shupp.org/toaster/">qmail
+toaster</a></a>.  No, not to make crispy bread, but instead to put
+together qmail, patches, and ancillary software into one installation.
+
+<li date="200604060"><a name="200604060">Lukas Feiler has instructions for
+installing <a href="http://rocketscience.lukasfeiler.com/qmail/">qmail
+with TLS and SMTP auth</a>,...</a> Courier-IMAP/POP3, MySQL, Clam AV,
+SpamAssassin - all with virtual domain support.</a>
+
+<li date="200702150"><a name="200702150">Mark Steele wrote up some notes
+on <a href="http://www.control-alt-del.org/code/index.html">Setting up
+a Qmail front-end for M$ Exchange server</a></a>
+
+<li date="201011050"><a name="201011050">Roberto Puzzanghera has
+written an English/Italian HOWTO, which explains how to <a
+href="http://notes.sagredo.eu/node/8">put together the latest versions
+of netqmail</a>, vpopmail, dovecot, roundcube webmail, spamassassin,
+clamav, simscan and some and related software.</a>
+
+</ul>
+<p>
+ </td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="author">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Author's Enhancement Software for qmail</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<p>
+Enhancements and additions to qmail by its author, Dan Bernstein.
+<ul>
+
+<li>ezmlm has its <a href="top.html#ezmlm">own section</a>.
+
+<li>The <a href="http://cr.yp.to/serialmail.html">serialmail</a>
+package delivers mail from a Maildir to an SMTP server.
+
+<a name="noinetd"><li>The <a
+href="http://cr.yp.to/ucspi-tcp.html">Unix Client-Server TCP</a>
+package makes ordinary Unix programs into TCP/IP servers and/or
+clients.  In particular its tcpserver program should be used with
+qmail instead of inetd.  This package now includes Dan's <a
+href="rbl/index.html">rblsmtpd</a> package for blocking spam using the RBL.
+
+<p date="20000728"><a name="20000728">
+Gerrit Pape has written man pages for <a
+href="http://smarden.org/pape/djb/manpages/ucspi-tcp-0.88-man.tar.gz">ucspi-tcp-0.88</a>,
+<a
+href="http://smarden.org/pape/djb/manpages/daemontools-0.70-man.tar.gz">daemontools-0.70</a>,
+and <a
+href="http://smarden.org/pape/djb/manpages/daemontools-0.76-man.tar.gz">daemontools-0.76</a>
+to complement Dan's online HTML documentation.</p></a>
+
+<p date="20000619"><a name="20000619">
+Interestingly, William Baxter announced <a
+href="http://www.superscript.com/ucspi-ipc/intro.html">ucspi-ipc</a>
+and Bruce Guenter announced <a
+href="http://untroubled.org/ucspi-unix/">ucspi-unix</a> within two days
+of each other</a>.  Same idea, different implementations.
+
+<p date="20001214"><a name="20001214">
+Bruce Guenter also has written <a
+href="http://untroubled.org/ucspi-proxy/">ucspi-proxy</a></a>.  It passes
+data back and forth between two connections set up by a UCSPI server
+and a UCSPI client.
+
+<li date="200602150"><a name="200602150">William Baxter wrote <a
+href="http://www.superscript.com/ucspi-ssl/intro.html">ucspi-ssl</a>
+which uses OpenSSL to encrypt connections</a>.
+
+<li><a name="200510060"><a href="http://www.suspectclass.com/~sgifford/">Scott Gifford</a>
+has written an implementation of 
+<a href="http://www.suspectclass.com/~sgifford/ucspi-tls/ucspi-tls.txt">
+UCSPI-TLS</a> for qmail</a>, which adds STARTTLS (RFC 2487) support to
+qmail-smtpd and STLS (RFC 2595) support to qmail-pop3d while isolating
+the encryption in a low-privilege process for security.  You can get
+<a href="http://www.suspectclass.com/~sgifford/ucspi-tls/"> UCSPI-TLS
+patches for qmail, sslserver, and mailfront</a>, along with a detailed
+<a href="http://www.suspectclass.com/~sgifford/ucspi-tls/ucspi-tls-qmail-howto.html">
+UCSPI-TLS on qmail HOWTO</a>.
+
+<li date="200801140"><a name="200801140">Levent Serinol wrote a simple
+patch which adds <a
+href="http://lserinol.googlepages.com/tcpservermysql.htm">mysql
+support to tcpserver.</a></a>
+
+<li>The <a
+href="http://cr.yp.to/daemontools.html">daemontools</a> package
+monitors, controls, and logs the execution and output of long-running
+programs, often called daemons.
+
+<p><a name="200109250">
+Tetsu Ushijima wrote <a
+href="http://www.din.or.jp/~ushijima/qmail-conf.html">qmail-conf</a></a>,
+which creates an appropriate set of files to use daemontools to start
+up qmail services.
+
+<li date="20001227"> <a name="20001227">The <a
+href="http://cr.yp.to/qmailanalog.html">qmailanalog</a> package
+analyzes qmail log files in various ways.</a> Russ Allbery has written
+<a
+href="http://www.eyrie.org/~eagle/software/tai64nfrac/">tai64nfrac</a>,
+which converts the tai64n that daemontools-0.63 produces into the
+fractional seconds that qmailanalog expects.  Peter Samuel has
+implemented the same idea as a <a href="tai64nunix-0.70.patch.html">patch
+to daemontools</a> using Dan's coding style (Jay Soffian also wrote
+one substantially similar to Peter's).  Finally (hopefully) John Levine
+went ahead and fixed qmailanalog to <a href="qmailanalog.patch.html">accept
+tai64n dates</a>.
+
+<li date="200705040"><a name="200705040">Georg Lehner has made <a
+href="http://www.magma.com.ni/moin/TipsAnd/QmailAnalog">qmailanalog
+better integrated with multilog</a></a>.
+
+<li>The <a
+href="http://cr.yp.to/dot-forward.html">dot-forward</a> package
+emulates sendmail's .forward file processing.
+
+<li>The <a
+href="http://cr.yp.to/fastforward.html">fastforward</a> package
+supports forwarding tables under qmail.
+
+<p date="20000718"><a name="20000718">Mirko Zeibig has <a
+href="http://www.webideal.de/qmail/">an RPM</a></a> with fastforward
+with a .qmail-default and a "standard" /etc/aliases-file in it.
+
+<li>The <a
+href="http://cr.yp.to/checkpwd.html">checkpassword</a>
+package authenticates users using a generic interface.  It is required
+by qmail's included POP3 server.
+
+<li>Dan has a checklist for users <a
+href="http://cr.yp.to/qmail/sendmail.html">converting from
+sendmail to qmail</a>.
+
+<li>Dan has written a <a href="http://cr.yp.to/smtp.html">reference manual for SMTP</a>.
+
+<li>You can't find a more secure DNS server than <a
+href="http://tinydns.org/">djbdns</a>.  If you thought the DNS was hard
+to understand, you're wrong.  It's not the DNS that's difficult --
+it's just BIND.
+
+<li>If you just want to publish information via the web or ftp and you
+don't want to worry about security holes, consider using <a
+href="http://publicfile.org/">publicfile</a>.
+
+<li date="200406270"><a name="200406270"><a
+href="ezmlm-showctl.html">ezmlm-showctl</a> prints out the ezmlm
+configuration in a readable manner.</a>
+
+</ul>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="usersoft">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>User-Contributed Software for Qmail</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<P>
+General software contributed by users and supporters of qmail. 
+<ul>
+<li>Harald Hanche-Olsen has written some code to do <a
+href="http://www.math.ntnu.no/~hanche/qmail/dotlock.html"
+ver="1.03">dot-locking</a>.  Dot-locking is slightly unreliable, so
+Dan doesn't support it in qmail.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/alvesa@ahungry.com">Seth
+Alves</a> hacked on maildir.module-970707 until it <a
+href="ftp://ftp.hungry.com/pub/maildir-imap/">worked</a> (mostly) with
+imap-4.1.BETA.
+
+<li>Mattias Larsson wrote a preliminary <a
+href="http://www.algonet.se/~mta/maildir.html">patch</a> to IMAP4rev1
+which lets it work with Maildirs.  David Harris has <a
+href="http://www.davideous.com/imap-maildir/">improved</a> that patch
+to make a production quality UW-imap server with Maildir support.
+And in his turn, <a name="200102220">Herbie has updated the Maildir patch for the latest <a href="http://www.greboguru.org/qmail/">UW IMAP</a> server.</a>
+
+<li>David Summers has a <a
+href="http://summersoft.fay.ar.us/pub/qmail">qmail-imap Linux RPM</a>.
+This is a version of the IMAP/POP server that works with QMAIL, using
+Mattias's patches.  The three differences are:
+<ol>
+<li>Mail is delivered and picked up from ~user/Mailbox
+<li>Mail can be delivered and picked up from ~user/Maildir/ (see README.maildir)
+<li>CRAM-MD5 authentication has been added to the IMAP server.
+</ol>
+
+<li date="19991117"><a name="19991117">
+Sam Varshavchik wrote a <a
+href="http://www.inter7.com/courierimap/">Maildir-only IMAP server</a>
+called Courier IMAP.</a>
+
+<li><a href="http://www.qmail.org/cgi-bin/m/alia@adeviant.erratic.net">Ali Lomonaco</a> has a <a
+href="qfinger.diff.html">patch for finger</a> so it knows to look in $HOME
+for a Mailbox.  It was written for the finger from FreeBSD 2.2.2,
+which is probably the standard BSD finger.
+
+<li>Giles Lean didn't like the idea of patching majordomo, so
+following a suggestion from J.T. Conklin that he found in the list
+archives he wrote a <a
+href="http://www.nemeton.com.au/majordomo-inject.html">majordomo-inject
+script</a> and some documentation on how to use it.  Needs Perl 5.004.
+<a
+href="http://www.qmail.org/cgi-bin/m/memorya@ablank.org">Nathan
+J. Mehl</a> has thrown together a bourne shell script to automagically
+<a href="ftp://ftp.blank.org/pub/misc/addlist.sh">create all of the
+necessary aliases</a> for a majordomo list with digests in a Qmail
+environment that uses Giles majordomo-inject.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/a4jba@apsulib.cc.pdx.edu">Julie Baumler</a> is using
+UIUC's ph to redirect mail on her mail hub.  She wrote a note on how
+to <a href="phquery.html">configure qmail to use ph</a>.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell Nelson</a>'s <A
+HREF="checkhomeownership.html">checkhomeownership</A> script will report on
+users who don't own their home directories or Maildirs.  This is
+important to run before starting up qmail, because sendmail doesn't
+care a whit whether the user owns their home directory, but home
+directory ownership is how qmail decides if the user exists or not.
+If you have a mail hub, and you've botched the home directory
+ownership, the users will never be logging into it, so they won't
+notice.  And you won't notice either, until they run screaming to you
+that they haven't gotten the important mail they wanted, and their
+correspondent noted that the mail bounced.
+
+<li><A HREF="http://www.qmail.org/cgi-bin/m/dwsa@asummersoft.fay.ar.us">David Summers</A> has
+some <A
+HREF="http://summersoft.fay.ar.us/pub/qmail/qmail-smtp-1.8.tar.gz">perl
+scripts</A> that work with maildir2smtp.  Now uses APOP-style
+authentication.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell Nelson</a>'s <A HREF="newbox.html">newbox</A> script to create new
+maildrops for users who don't have login accounts on their mail server.
+
+<li>Chris Garrigues wrote a program to <a
+ href="ftp://ftp.foxharp.boston.ma.us/pub/pgf/qmail/mailroute.pl">pretty-print
+ Received: lines</a>.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/wightmana@aacm.org">Brian
+T. Wightman</a> has written a <a
+href="qmail_bounce-0.0alpha6.tar.gz">delayed-mail
+notifier</a>.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/markda@amira.net.au">Mark Delany</a> has a <a
+href="ftp://ftp.mira.net.au/unix/mail/qmail/rmail-0.1.tar.gz">rmail</a>
+for people receiving ! addresses via UUCP.  It parses ! addresses,
+applies a number of simple pattern matching rules to convert them to
+FQDN addresses and injects them into qmail.
+
+<a name="eliminate-dups">
+<li><a href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell Nelson</a> has a program
+to <a href="eliminate-dups.html">eliminate duplicate messages</a>.  It has
+two modes of operation -- strict and loose.  Strict only eliminates
+perfect duplicates, whose only difference is in the Received: lines.
+Loose eliminates duplicates that have identical From: Date:,
+Message-Id: and body parts.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/Peter.Samuela@auniq.com.au">
+Peter Samuel</a> has expanded on Russell's program and written a
+<a href="http://www.gormand.com.au/peters/tools/qmail/">
+duplicate eliminator</a> that uses dbm hash file(s) instead of a text
+file. It also has improved exception handling and provisions for sites
+without the MD5 perl module.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/rraa@astanford.edu">Russ
+Allbery</a> uses Majordomo with qmail.  He has a <a
+href="http://www.eyrie.org/~eagle/faqs/mjqmail.html">FAQ</a> on
+the subject.
+
+<li>David Harris has a system to only allow hosts who have <a
+href="http://www.davideous.com/smtp-poplock/">authenticated via the
+POP3 server to relay</a> mail using qmail. This does not require
+patching the POP or SMTP servers, but is implemented by two programs
+which cleanly interface into the system, and can work with most any
+POP or IMAP server.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/Petr.Novotnya@aantek.cz">Petr
+Novotny</a> wrote an alternative to Russell Nelson's Open-SMTP patch
+for checkpassword.  His code is a <a href="pam_open_smtp.tar.gz">PAM
+module</a> which calls external program to log $TCPREMOTEIP.  It
+requires a PAM-enabled checkpassword.
+
+<li date="200309190"><a name="200309190">Mark Willcox wrote <a
+href="http://www.datahelper.com/download/postpop/">postpop</a>, which
+is a simpler SMTP after POP solution.</a>
+
+<li date="200112200"><a name="200112200"> <a
+href="http://www.qmail.org/cgi-bin/m/micka@aio.com">Michele
+Beltrame</a> has a tool to <a
+href="http://sourceforge.net/projects/qmhandle">view the qmail
+queue</a></a> (with colored display), view messages in it and delete
+messages. It's very simple and written in Perl.
+
+<li date="200409060"><a name="200409060">Jeremy Kister wrote a <a
+href="http://jeremy.kister.net/code/qmqtool/">qmail-queue
+manipulation tool</a>.</a>
+
+<li>Keith
+Burdis has written <a
+href="http://rucus.ru.ac.za/~keith/qmail/">several qmail programs</a>,
+including dotqmail2alias, alias2dot, deliver, and compactor/exploder
+
+<li>Eric Huss has released <a
+href="http://www.netmeridian.com/e-huss/queue-fix.tar.gz">queue-fix
+1.4</a>.  It repairs or generates a qmail queue structure.  You can
+use this to help move your queue location, or if you regenerate the
+file system and the inode numbering changes.  It will also fix
+permissions and ownerships of the files.  Eric reports that Matthew
+Harrell wrote a <a href="queue-fix-todo.patch.html">patch to queue-fix</a>
+which makes it work with Russ Nelson's <a
+href="top.html#big-todo">big-todo</a> patch.  Patches upon patches!
+
+<li>Harald Hanche-Olsen has a shell/awk/gnu-find script which <a
+href="queue-rename.html">renames a queue</a> so that it has the right
+filenames (corresponding to inodes).
+
+<LI><a name="200107130"> Charles Cazabon wrote <a
+href="http://pyropus.ca/software/queue-repair/">queue_repair</a></a>.
+queue-repair is a qmail queue diagnostic and repair tool, written in
+Python, and licensed under the GPL.
+
+<li><a name="200109040">Peter Samuel has a
+qmail-compatible <a href="http://www.gormand.com.au/peters/tools/">
+vacation</a> program</a>.
+
+<li>Jason van Zyl has a patch to the cyrus imap server so that it <a
+href="http://www.periapt.com/qmail-cyrus/">authenticates out of a
+cdb</a> (the same hash format that users/assign uses) instead of
+kerberos or /etc/passwd. And he has a perl script that allow you to
+enter users into the system and it takes care of updating the
+users/assign file, and the cdb file that cyrus is using to
+authenticate from.
+
+<li date="20000726"><a name="20000726"> Bruce Guenter wrote <a
+href="http://untroubled.org/qlogtools/">qlogtools</a></a>, a set of tools
+useful in analyzing or producing logs from qmail and other packages.
+
+<li>Monte Mitzelfelt has a program which <a
+href="http://www.gonefishing.org/techstuff/qmLogsort">sorts a qmail
+log</a> file by message delivery.
+
+<li date="200101150"><a name="200101150"> Ismail Yenigul has a qmail
+log analyzer tool</a> called <a
+href="http://www.enderunix.org/isoqlog">IsoQlog</a>.
+
+<li date="20000812"><a name="20000812">
+Bruce Guenter wrote his own implementation of the mini-qmail idea</a>,
+only his (<a
+href="http://untroubled.org/nullmailer/">nullmailer</a>)
+has a queue for more reliablity.  It supports SMTP and QMQP, so it's a
+drop-in replacement for qmail-qmqpc.
+
+<LI><a name="200109280">Eric Hess needed <a
+href="http://www.ehuss.org/qmail/qmqpc-timeout.tar.gz">longer timeouts
+for qmqpc</a></a>.  The timeouts are hard coded in qmail-qmqpc.  They
+tend to be on the low side (10 seconds to connect, 60 seconds to
+read/write).  He uses some automated systems with qmqp and sometimes
+the servers are overloaded and can't respond in that timeframe.
+
+<li date="200111060"><a name="200111060">Jay Austad has his qmqpc <a
+href="random-qmqpc.patch.html">rotating the server list</a> by a random
+amount</a>.  This distributes the load over multiple qmqp servers.
+
+<li>There are a number of web interfaces for reading mailboxes:
+<ul>
+<li>Sam Varshavchik's <a href="http://www.inter7.com/sqwebmail/">sqwebmail</a>.
+<li>horde.org's <a href="http://www.horde.org/imp/">IMP</a>.  Requires PHP and an IMAP/POP3 server.
+<li><a href="http://www.atdot.org/">@.</a>
+<li><a href="http://twig.screwdriver.net/">Twig</a>.  No frames, no javascript.
+
+<LI date="200105060"><a name="200105060"> <a
+href="http://webmail.omnis.ch/omail.pl?action=about">oMail-webmail</a>
+is a simple Webmail solution for mail servers</a> based on qmail and
+optionally vmailmgr. This a GPL project, maintained by <a
+href="mailto:om@omnis.ch">Olivier Müller</a>.  The mails are read
+directly from Maildirs on the harddisk, which is much quicker than
+using protocols like POP3 or IMAP.  Other features includes multiple
+language support (currently English, French, German and Italian),
+folders and addressbook support.  oMail is programmed in
+Perl. Developers and translators are welcome to subscribe to the <a
+href="http://sourceforge.net/mail/?group_id=3658">devel mailing
+list</a>.
+
+<li date="200105220"><a name="200105220"> <a
+href="http://www.igenus.org/">iGENUS</a> is a chinese webmail
+system</a> for perl + qmail + vpopmail + mysql.
+
+<li><a name="200108280"><a
+href="http://atmail.com/webmail_client.php">Atmail</a> is a complete
+Webmail client</a> for qmail supporting POP3/IMAP accounts. Streamlined
+interface supporting Ajax and multiple Webmail templates and themes.
+
+<li><a href="http://www.mintersoft.com">VisualOffice</a> supports Maildir++.
+
+</ul>
+
+<li>Several autoresponders are available:
+<ul>
+
+<li>Eric
+Huss has written a rate-limited <a
+href="http://www.netmeridian.com/e-huss/autorespond.tar.gz">autoresponder</a>.
+
+<a name="200109180"></a><a name="200211270"></a>
+
+<li date="200303050"><a name="200303050">Bruce Guenter updated his <a
+href="http://untroubled.org/qmail-autoresponder/">autoresponder</a></a>
+based on Eric's design.
+
+
+</ul>
+
+<li>Vyacheslav Ignatyuk wrote an alpha version of a <a
+href="ftp://ftp.ant.ru/pub/qmail/qmail-manager.tar.gz">qmail
+manager module</a> for <a
+href="http://www.webmin.com">webmin</a>. It's a first alpha version,
+so may be unstable.
+
+<li date="19991201"><a name="19991201">
+Peter Green has some code to <a
+href="http://oss.gospelcom.net">Archive and process log files</a></a>
+generated by qmail-send and qmail-smtpd.
+
+<li date="20000418"><a name="20000418"> William E. Baxter has released <a
+href="http://www.superscript.com/qtools/intro.html">qtools</a></a>, a
+suite of utilities for use in .qmail files.  The tools support
+applying a filter to a message body, message head, or entire message;
+conditional delivery of a message to a Maildir; and configuration of
+simple autorepliers.
+
+<li date="20000411"><a name="20000411">
+Sam Varshavchik has a local delivery agent</a> called <a
+href="http://www.flounder.net/~mrsam/maildrop/">Maildrop</a> that has
+a custom filtering language more readable than procmail's.
+
+<li date="20000413"><a name="20000413">Russell Nelson has a program called <a
+href="no-alternative.html">no-alternative</a>, which picks the text/plain
+part out</a> of a MIME multipart/alternative message, and forwards it to
+$USER-alternative.
+
+<li date="20000810"><a name="20000810"> Russell Nelson and Magnus
+Bodin have conspired to write some scripts and documentation to throw
+information about <a href="http://x42.com/qmail/mrtg/">qmail into
+mrtg</a>.</a>
+
+<li date="200304080"><a name="200304080">Inter7 has their own <a
+href="http://www.inter7.com/?page=qmailmrtg7">MRTG</a> configuration</a>
+
+<li date="20000718"><a name="20000718">Chris Dent wrote <a href="Qmail::Queue.pm">Qmail::Queue.pm</a>.</a>
+
+<li date="20000917"><a name="20000917"> <a
+href="http://omail.omnis.ch">oMail-admin</a> is a PHP4-based
+Web-administration solution</a> for mail servers based on Dan
+Bernstein's qmail and Bruce Guenter's vmailmgr.
+
+<li date="20000915"><a name="20000915"> Dru Nelson has an <a
+href="http://sourceforge.net/projects/qmfilt/">incoming message
+filter</a></a>
+
+<li date="20000915"><a name="20000915"> Dru Nelson has an
+administrator's program to <a
+href="http://www.redwoodsoft.com/~dru/mailRemove/">remove
+queued mail</a></a> that has a certain string in it.
+
+<li><a name="200108220"><a
+href="mailto:support@linuxmagic.com">LinuxMagic</a> has written <a
+href="http://www.linuxmagic.com/opensource/qmail/qmail-remove/">qmail-remove</a>
+to remove emails from the queue</a>.  If they match a string, they are
+moved to a temporary directory.
+
+<li date="200101100"><a name="200101100"> Mail2DB -- Store incoming mail
+in a PostgreSQL database.</a> <a
+href="ftp://ftp.tummy.com/pub/tummy/Mail2DB/">Mail2DB</a> is suitable
+for putting in a .qmail/.forward file and will archive e-mail to a SQL
+database.  Currently, there is only the storage component.  This was
+written because somone on a LUG list expressed interest in such a
+system, but he only knew PHP (which isn't an ideal language for
+calling from a .qmail file ;-).  Hopefully a user interface will be
+forthcoming.
+
+<li date="200101102"><a name="200101102">Russ Nelson has a <a
+href="qmtpd-service.tar.gz">qmtpd tarball</a></a> for people using
+0.70 or later <a
+href="http://cr.yp.to/daemontools.html">daemontools</a> with qmail.
+Just drop it into your /service directory, and five seconds later,
+you're running qmtpd.  Don't forget to set your lowest MX priority to
+12801, or all your deliveries will occur using SMTP.  This is a
+companion to his <a href="top.html#200101101">qmail-remote patch</a>.
+
+<li date="200101190"><a name="200101190"> <a
+href="http://vmailadmin.sourceforge.net">Vmailadmin</a> is a web
+application that allow your client to administer the pop accounts in
+his domain</a>, easily and with security, without the need to contact
+ISP staff.
+
+<li date="200101191"><a name="200101191">Alex Kramarov has created <a
+href="http://192.117.170.66/qpq.tar">qmail-print-queue</a> to print
+the qmail queue contents</a> - it runs on all messages and displayes
+the from:, to: and date: headers; can also dump the full header of the
+message if ran with "-h" switch (if mess822 is properly installed). It
+is useful in conjunction with monitoring tools like qmail-mrtg and
+others.
+
+<li><a name="200108310">Andrew Richards has written a set of tools for
+managing multiple virtual domains using hashing to distribute maildirs called
+<a href="http://free.acrconsulting.co.uk/email/qmh.html">qmail-hashdir</a>.</a>
+
+<li date="200104060"><a name="200104060">Mahlon Smith has written a
+general <a href="http://www.martini.nu/misc/newmail.tar.gz">new mail
+checker</a></a>, useful if you use the mutt MUA and procmail to filter
+incoming mail to Maildirs, since there isn't a built in mechanism for
+doing this from within mutt.
+
+<li><a href="qmail-qsanity-0.52.html">qmail-qsanity-0.52</a> checks your
+queue data structures for internal consistency.  If it finds any
+problems, it prints a warning to stderr.  Plans are to change it to
+generate shell commands which will correct the problems.
+
+<li date="20000108"><a name="20000108"><a href="qmail-lint-0.55.html">qmail-lint-0.55</a>
+checks your qmail configuration</a> for common problems.  Prints warning
+or error messages to stdout.
+
+<li date="200104270"><a name="200104270">Davide Giunchi wrote <a
+href="http://www.folug.linux.it/qmail-masq.html">qmail-masq</a>[uerade]</a>.
+It will masquerade the internal address with an external one when
+sending email from local network users to the external internet users.
+
+<li><a name="200108201">Todd A. Jacobs has a program to
+generate <a
+href="http://www.codegnome.org/scripting/showscript.php?script=qacct.sh">random
+extension</a> addresses.</a>
+
+<li date="200201080"><a name="200201080">Wolfgang Pichler wanted graphs
+from logs, so he wrote <a
+href="http://qmailalizer.sourceforge.net">qmailalizer</a></a>.
+
+<li date="200201110"><a name="200201110">Bruce Guenter wrote <a
+href="http://untroubled.org/mailfront/">mailfront</a>, a package
+containing customizeable network front-ends for mail servers;
+specifically SMTP and POP3</a>.  Supports SMTP auth and POP3 AUTH
+PLAIN and LOGIN.
+
+<li date="200202050"><a name="200202050">Mark Delany wrote <a
+href="supplementary-groups.html">set_supplementary_groups</a></a>, which
+lets you gain group permissions for the groups you are in in
+/etc/group.  In particularly mailman requires this.
+
+<li date="200212050"><a name="200212050">LinuxMagic is porting their
+Anti-Spam/Valid User checking program</a>, <A
+HREF="http://www.linuxmagic.com/opensource/qmail">magic-smtpd</A>, a
+drop-in replacement for qmail-smtpd over to opensource. Features
+checking for Valid Users, Spam conditions, and smtpd RCPT-TO rate
+limiting, all at the smtpd level to reduce server loads before it hits
+the queue. Supports stock qmail, qmail/vpopmail, and LinuxMagic
+Mailserver installs.
+
+<li date="200301080"><a name="200301080">Larry Engleman has a <a
+href="http://www.fullywired.net/larry/qgi.html">Qt GUI</a>
+installer</a>
+
+<li date="200302040"><a name="200302040">Andreas Aardal Hanssen has
+written <a href="http://www.bincimap.org/">Binc IMAP</a></a>. It's
+invoked just like qmail-pop3d so it fits in smoothely in a vanilla
+qmail system. Works fine with vhkpwd or any checkpassword-compatible
+authenticators.
+
+<a name="200306120">
+
+<li><img src="updated.gif" alt="updated" width=52
+height=12 date="200403050"><a name="200403050">John Wiggins has a <a
+href="http://johnwiggins.net/qmailctl/">C/C++ CGI
+program</a> for the control of qmail.</a>
+
+<li date="200305131"><a name="200305131">Erwin Hoffmann wrote <a
+href="http://www.fehcom.de/qmail/qmail.html">Newanalyse</a>, helping the
+sysadmin in processing multilog logfiles.</a>
+
+<li date="200310090"><a name="200310090">Erwin Hoffmann wrote <a
+href="http://www.fehcom.de/qmail/qmvc.html">QMVC</a> - Qmail Mail and
+Virus Control</a> is an unidirectional Mail Filter and Virus Scanner
+for Qmail.  It runs from your .qmail file.
+
+<li date="200310100"><a name="200310100">Ian Stewart wrote <a
+href="https://sourceforge.net/projects/qmail-logfilter/">qmail-logfilter</a>,
+which discards the DATA phase of an smtp session</a>.
+
+<li date="200406300"><a name="200406300">N. Ersen Siseci wrote <a
+href="http://www.enderunix.org/zabit">Zabit</a>, a C-language qmail
+content filter.</a>
+
+<li date="200410110">
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200507130"><a name="200507130">EnderUNIX has
+updated <a href="http://www.enderunix.org/qsheff">qsheff</a>, a
+qmail-queue replacement to filter mail traffic</a> and more. It
+supports body filtering, subject filtering, attachment filtering,
+quarantine, white/black list, single line logging for qmail and many
+features.
+
+<li date="200410180"><a name="200410180">Russ Nelson wrote <a
+href="qmail-1.03-dk-0.54.patch.html">qmail-dk</a>, which is a qmail-queue
+replacement that signs and verifies <a href="http://domainkeys.sf.net/
+">DomainKeys</a> signatures.</a> Building on <a
+href="http://gentoo-wiki.com/Qmail_domainkeys">Gentoo</a>
+
+<li name="200410290">Sorrawut Korsuwansiri wrote <a
+href="http://mailcleaner.gits.net.th/qmail-track-0.10.tar.gz">qmail-track</a></a>,
+which he uses to locate all the logfile records associated with a
+particular pair of email addresses.
+
+<li><a name="200501040">Inter7 has updated <a
+href="http://www.inter7.com/simscan">simscan</a>, a qmail-queue
+replacement to reject unwanted email.</a> Simscan is a simple program
+that enables qmail-smtpd to reject viruses, spam, and block
+attachments during the SMTP conversation so the email never makes it
+into your computers. It is completely open source and uses other open
+source components. Very efficient and written in C.
+
+<li><a name="200512060"><a
+href="http://www.dovecot.org/">Dovecot</a> is an open source IMAP and
+POP3 server for Linux/UNIX-like systems, written with security
+primarily in mind.</a>
+
+<li date="200605260"><a name="200605260">Niki Denev wrote <a
+href="http://www.totalterror.net/src/qstat-gid.c">qstat-gid</a></a>.
+It prints info about the messages in the qmail queue sorted per GID.
+He uses it to quickly see if any user sends excessive amounts of
+mail/spam and fills the queue.
+
+<li date="200609010"><a name="200609010">Skaarup has written a package for
+<a href="http://dlog.gal.dk/">analyzing logfiles</a> for a lot of
+Dan's tools.</a>
+
+<li date="200609020"><a name="200609020">Folkert van Heusden wrote <a
+href="http://www.vanheusden.com/multitail">multitail</a>, which
+monitors multiple logfiles</a>.  MultiTail lets you view one or
+multiple files like the original tail program. The difference is that
+it creates multiple windows on your console (with ncurses).
+
+<li date="200609300"><a name="200609300">Richard Lyons wants to sign
+messages using domainkeys</a> after <a href="top.html#200205270">verh</a> has
+modified the message, so he added code to qmail-remote to [re]sign the
+message.
+
+<li date="200612110"><a name="200612110">EZIX has a <a
+href="http://ezix.org/project/wiki/NoRelaySMTP">NoRelaySMTP</a></a>,
+which writes email directly into a user's Maildir.
+
+<li date="200706200"><a name="200706200">Chris Hardie has written a
+program to <a
+href="http://www.summersault.com/software/imail2vpopmail/">migrate
+from IMail Server</a> to qmail/vpopmail</a>.
+
+<li date="201306300"><a name="201306300">Ed Neville hass a patch to <a href="http://www.usenix.org.uk/content/qmail.html">not bounce email with many Delivered-To headers</a></a>. He says that sometimes spammers cotton on to the idea that qmail bounces mail which has multiple delivered-to lines. Sometimes this can be a pathetic attempt to use a mail server to fan out junk.
+
+</ul>
+
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="maildir">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>User-Contributed Maildir Support</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<p>
+Maildir-specific software contributed by qmail users.  Maildir is a
+lock-free mailbox standard which is reliable over NFS.
+
+<p>
+<ul>
+<li><a
+href="http://www.qmail.org/cgi-bin/m/cmosleya@avoicenet.com">Chris
+Mosley</a> has a program which <a href="maildir2mboxloop.html">loops on
+maildir2mbox</a> so that programs like Elm can continue to receive
+mail without needing to exit and reenter.  Relies on Ivan Kohler's <a
+href="mbox2maildir.html">mbox2maildir</a>.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/ivana@asisd.com">Ivan
+Kohler</a> has a <a href="mbox2maildir.html">mbox2maildir</a> program.
+Gets its parameters fron the MAIL and MAILDIR environment variables.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell
+Nelson</a>'s <A HREF="convert-and-create.html">convert-and-create</A>
+script will create Maildirs for all users who receive mail and will
+convert their /var/spool/mail mbox-format mailboxes into messages in a
+Maildir.  Stuart Bain has improved it so it will <a
+href="convertsubs.pl.html">convert UW-IMAP mboxes into Courier-IMAP
+maildirs.</a>
+
+<li><a href="http://www.qmail.org/cgi-bin/m/brucega@aem.ca">Bruce Guenter</A> changed the
+above convert-and-create script to <a
+href="http://untroubled.org/mbox2maildir">convert a
+single user</a>.  Gets its parameters from the command line.
+
+<li>Valerio Granato has also done a <a href="ftp://ftp.livenet.it/pub/software/convert-and-create.pl">convert-and-create</a> variation.
+
+<li date="20001012"><a name="20001012"> Todd Underwood has written <a
+href="yammc.pl.html">Yet Another Mailbox to Mailbox Converter</a>.</a>
+
+<li date="200112090">The ultimate mbox2maildir has not yet been invented.
+However, <a name="200112090">Robin Whittle has created another <a
+href="http://www.firstpr.com.au/web-mail/mb2md/">mbox2maildir</a></a>.
+This one can do entire directories of mboxes.
+
+<li>Matthew C. Mead has <a
+href="http://www.goof.com/~mmead/mdfrm.pl">a ``from'' program</a> that
+prints a summary of mail in a maildir waiting to be read.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/rraa@astanford.edu">Russ
+Allbery</a> has his own <a
+href="http://www.eyrie.org/~eagle/software/mdfrm/">maildir summary
+program</a>.  Same idea as Matt's but a slightly different philosophy.
+
+<li><a href="http://www.mutt.org">Mutt</a> is a MUA
+that has native support for Maildirs.
+
+<li date="20000721"><a name="20000721">Mikko Hänninen has a patch to Mutt which <a
+href="http://www.wizzu.com/mutt/">converts GMT dates</a> in the
+header into local time.</a>
+
+<li>Bloodhounds International wrote maildir patches for the <a
+href="https://sites.google.com/a/flounder.net/homepage/qmail-howto/c-client.maildir.module.tar.gz">c-client library</a> (now
+distributed by Adam McKenna), which is used by Pine and IMAP2.  Dean
+Gaudet has a patch to it that lets you work with <a
+href="bh-pine-patch.html">multiple inboxes</a>.
+
+<li>Ragnar Kjørstad has adjusted the maildir patches for pine 4.00 to
+work with <a href="ftp://ftp.vestdata.no/pub/linux/c-client/">pine
+4.10, and imapd 4.5</a>.
+
+<li date="200102090">And similarly <a name="200102090">Sean Cody has a
+maildir patch for <a href="pine-maildir-4.33.html">pine 4.33</a></a>.
+
+<li><a name="200109300"> And similarly Jozef Hitzinger and Adam
+Slattery for <a
+href="http://hico.fphil.uniba.sk/pine-patches.html#maildir">pine
+4.58</a>, including Dean Gaudet's maildir-1billion fix</a>
+
+<li>GPL'ed MUA, called <a href="http://www.mew.org">Mew and IM</a> support
+qmail's Maildir.  Mew is interface for Emacs/XEmacs. IM is perl
+scripts for process mail like MH.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/pgregg-qmaila@apgregg.com">Paul
+Gregg</a> has a script which runs from a .qmail file that checks a
+Maildir for a quota (clearly only effective on a userless mailhub).
+The script is called <a
+href="http://www.pgregg.com/projects/qmail/mailquotacheck/">mailquotacheck</a>.
+
+<li date="20000114"><a name="20000114">Jeff Hayward has a patch to qmail-local</a> (which arguably belongs
+down below in the patches section except that Paul Gregg's quota check
+was already here) which treats <a href="qmail-1.03-quotas-1.1.patch.html">quota
+exceeded</a> as a permanent error, bouncing the message back to the
+sender.
+
+<li>
+<a name="xbiff">
+There are various xbiff (X mail notifiers) solutions for maildirs:
+<ul>
+  <li>Mikko Hänninen notes that <a href="http://www.fiction.net/blong/programs/#xbuffy">xbuffy</a> has Maildir patches.
+  <li>He also notes that Brandon Long has rewritten xbuffy from scratch and it's now <a href="http://www.fiction.net/blong/programs/gbuffy/">GBuffy</a>.
+  <li>Tim Mayo says that xbiff works fine with a <a href="mayo-xbiff.html">helper app</a>.
+  <li>Harald Hanche-Olsen also runs xbiff, but has an <a href="hanche-olsen-xbiff.html">entry in .qmail</a>.
+  <li>David Mandala enhanced Tim Mayo's <a href="mandala-xbiff.html">xbiff solution</a>.
+  <li>And Philip Hands also got <a href="hands-xbiff.html">his finger in the pie</a>.
+
+  <li date="19991209"><a name="19991209">Jonathan I. Kamens has the latest and arguably the greatest
+  entry in the <a href="mdcheckmail.html">Maildir-xbiff</a> category</a>.  The
+  comment at the top of the script explains why this one is better.
+
+  <li date="20000621"><a name="20000621">A <a href="ftp://ftp.meanmachine.ch/pub/unix/qmail/qcheck.tar.gz">text-only biff</a> by David Gerber.</a>
+
+  <li date="20000718"><a name="20000718">The Clarkson University <a href="http://www.clarkson.edu/unixteam/qmail.html">Unix Team</a> has an xbiff and from.</a>
+
+</ul>
+
+<li>Tetsu Ushijima has a program called <a
+href="http://pobox.com/~tu/maildirdeliver.html">maildirdeliver</a>,
+which writes a new message into a Maildir.  Most of the code is
+essentially just stolen from qmail-local.c.
+
+<li date="200206040"><a name="200206040">Len Budney wrote a little C program
+called <a
+href="http://www.pobox.com/~lbudney/linux/software/safecat.html">safecat</a></a>,
+which implements DJB's maildir algorithm to copy stdin to a file in a
+maildir. When exit codes are checked, as by qmail-local or fetchmail
+with -w option, it should be as reliable as qmail's own maildir
+delivery (which heavily influenced the safecat).
+
+<li date="19991221"><a name="19991221">
+Jonathan Kamens has written a replacement for the Emacs "<a
+href="mdmovemail.html">movemail</a>" program</a>, which understands how to read
+mail from a qmail-style maildir.
+
+<li date="20000930"><a name="20000930"> Kenji Rikitake reports that
+procmail-3.15 includes support of the maildir format</a> with no
+patch.  All you need to do is to add a slash to the mail folder names.
+
+<li date="200012230"><a name="200012230">Michael Elkins has a tool to <a
+href="http://isync.sourceforge.net/">synchronize</a> a maildir with a
+remote IMAP mailbox.</a>
+
+<li date="200101171"><a name="200101171"><a
+href="http://multivac.cwru.edu/nnmaildir/">nnmaildir</a> is a maildir
+backend for Gnus.</a>
+
+<li date="200101180"><a name="200101180">Exim has <a
+href="http://www.exim.org/exim-html-3.20/doc/html/spec_15.html#SEC418">Maildir
+support</a> in its appendfile transport</a>.  Not exactly new news,
+but worth mentioning.
+
+<li date="200104080"><a name="200104080"><a
+href="http://www.gnus.org/">Gnus</a> has had native maildir support
+since version 5.8.</a> Also see <a href="top.html#200101171">nnmaildir</a>.
+
+<LI date="200206041"><a name="200206041">Ronald C. Rivera creates home
+directories and moves email <a
+href="http://www.compass.com.ph/~ronald/mbox2maildir.pl">directly from
+an LDIF file.</a></a> It also creates the user's public_html directory
+which can be used in conjunction with mod_ldap_userdir.
+
+<li><a name="200501300">Nikola Vladov wrote a <a href="http://riemann.fmi.uni-sofia.bg/vladov/ftp/mbox2maildir.tar.gz">mbox2maildir in C</a></a>.
+
+<LI date="200206181"><a name="200206181">Tim Deegan has an RFC1339 <a
+href="http://www.tjd.phlegethon.org/software/#rfc1339">remote mail
+check daemon</a> that works with Maildir mailboxes.</a>
+
+<li><a name="200507180">Jorge Ventura wrote a <a
+href="http://qextra2mdir.sourceforge.net/">qextra2mdir</a></a>.  It
+takes the extra copy created by FAQ 8.2 and inserts it into a Maildir.
+
+<li date="200612150"><a name="200612150">Antonio Casado Rodríguez created
+<a href="http://www.ual.es/personal/acasado/mdsmon/">mdsmon</a>
+(MailDirSize Monitor)</a>
+
+</ul>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="ezmlm">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>EZ Mailing List Manager</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<p>
+EZ Mailing List Manager (EZMLM) is a mailing list manager which allows
+users to create their own mailing lists with a single command.
+
+<p>
+<ul>
+
+<li>Dan Bernstein's <a
+href="http://cr.yp.to/ezmlm.html">ezmlm</a> page.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/lindberga@aid.wustl.edu">Fred
+Lindberg</a> and <a
+href="http://www.qmail.org/cgi-bin/m/fredra@ajoshua.rivertown.net">Fred
+B. Ringel</a> have written an <a href="http://untroubled.org/ezmlm/">ezmlm
+FAQ</a>.  In addition, Fred L. has also written (in his copious free
+time) the <a href="http://untroubled.org/ezmlm/ezman-0.32/index.html">Ezman</a>, an ezmlm
+manual for both list owners and users.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/lindberga@aid.wustl.edu">Fred
+Lindberg</a> has an <a
+href="http://untroubled.org/ezmlm/pub/patches/index.html">add-on to ezmlm-0.53</a>
+called ezmlm-idx.  It gives you headers, trailers, threaded digests,
+multi-message get, thread retrieval in MIME multipart/digest with
+headers filtered to make the digest rfc1153-like (default).  It also
+has all aspects of message moderation, subscription moderation, and
+remote administration of subscriber addresses.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/lindberga@aid.wustl.edu">Fred Lindberg</a> is the
+latest author of code to ensure that an <a
+href="ftp://untroubled.org/ezmlm/pub/patches/ezmlm-issub-0.05.tar.gz">ezmlm
+subscriber is on the list</a>
+
+<li><a href="http://www.qmail.org/cgi-bin/m/lindberga@aid.wustl.edu">Fred Lindberg</a> has
+an <a
+href="ftp://untroubled.org/ezmlm/pub/patches/ezmlm-split-0.01.tar.gz">EZMLM
+list splitter</a>. It forwards subscribe/unsubscribe requests from a
+main list to one of a set of sublists based on the target address
+(hash or domain name). This way, the list can be split into a number
+of hosts for load splitting or geographic splitting without
+inconveniencing the user (who always deals with the main list).
+
+<li><a href="http://www.qmail.org/cgi-bin/m/kesima@amath.fu-berlin.de">&Ouml;zg&uuml;r Kesim</a> has a <a
+href="http://www.math.fu-berlin.de/~kesim/ezmlm/">ezmlm HOWTO</a> for
+advanced mailing lists.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/steve-qmaila@azpfe.com">Steve Peterson</a>
+implemented a simple <a href="http://www.zpfe.com/qmail/ml-sub/">web
+subscribe/unsubscribe</a> interface to ezmlm.
+
+<li>Michael Hirohama wrote <a
+href="http://sooth.com/tech/ezmlm-thresh.pl">Ezmlm-Thresh</a>, which
+allows EZMLM mailing list messages to be limited to a threshold per
+subscriber.
+
+<li><a name="200110251"> Guy Antony Halse has a web
+interface to ezmlm called <a
+href="http://rucus.ru.ac.za/~guy/ezmlm/">ezmlm-web</a></a>, currently at
+2.1.  It has improvements over Glen Stewart's version.
+
+<li>Glen Stewart has improved on Guy Antony Halse's EZmlm-Web 1.02.
+He's calling his version <a
+href="http://associate.com/macos_files/macos_files/Mac_Unix/ezmlm-web.tar.gz">EZmlm-Web
+v1.0.2gs1.2</a>.  The gs1.2 version suffix modifications are fairly
+extensive and done by Glen Stewart.  Some of the most notable changes in this release include:
+<ul>
+<li>list owner logon screen & password
+<li>ListMaster access/control from filtered, configurable IP addresses
+<li>Only the ListMaster can create and delete lists
+<li>skeleton support for WebGlimpse indexing of selected list archives
+<li>spam filter option for list owner addresses
+<li>tooltip help for all list configuration settings
+<li>case-insensitive list and subscriber address sorting
+<li>list owner can change their owner address
+<li>configuration tour (help) for list owners
+<li>many other fixes and enhancements 
+</ul>
+
+<li date="200203180"><a name="200203180">Sergiusz Pawlowicz wrote <a
+href="http://ezmlm-cgi-py.sourceforge.net/">ezmlm-cgi-py</a></a>, a
+more approachable (i.e. Python, not djb-C) version of "the Freds"
+ezmlm-cgi archive formatter.
+
+</ul>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="tips">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Living with Qmail - Tips & Advice</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<p>
+Some good advice for new qmail users, contributed by qmail users.
+<UL>
+<LI> Did you restart qmail?  I find that to be a help for a lot of
+qmail problems. :-)  [<A HREF="http://www.qmail.org/cgi-bin/m/johnma@amitchell.org">John Mitchell</A>]
+
+<LI> You should also check the permissions very carefully on all of
+the necessary directories and files.  [<A HREF="http://www.qmail.org/cgi-bin/m/johnma@amitchell.org">John Mitchell</A>]
+
+<LI> You must also put the virtual domain into
+<samp>control/rcpthosts</samp> or the mailer will bounce the message
+with a notice saying that the host wasn't in rcpthosts.  [<A
+HREF="http://www.qmail.org/cgi-bin/m/johnma@amitchell.org">John Mitchell</A>]
+
+<LI> Of course, you must also be the MX for the virtual hosts.  I had
+a problem in my setup that was driving me nuts until I realized that
+my DNS provider had missed an MX update request.  [<A HREF="http://www.qmail.org/cgi-bin/m/johnma@amitchell.org">John Mitchell</A>]
+
+<LI>Check all lines in sendmail.cf beginning with <samp>M</samp>.  Any that
+contain <samp>P=[IPC]</samp> or <samp>P=[TCP]</samp> should also have
+<samp>E=\r\n</samp>. [<A HREF="http://www.qmail.org/cgi-bin/m/tgoodwina@acygnus.co.uk">Tim
+Goodwin</A>]
+
+<LI>You might want to <a href="moderating.txt">limit posting to mailing lists</a>.
+
+<LI>The right-hand-side of entries in
+<samp>control/virtualdomains</samp> should begin with a username.  If
+you don't use a username, the mail will be handled by ~alias.  But if
+you forget, and create a user by that name, then the mail will
+suddenly be handled by the user, which is probably not what you
+intended to happen.  Best to use, in this case, <samp>alias</samp> as
+the username and avoid trouble. [<A
+HREF="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russ Nelson</A>]
+
+<li>remember to add '<a
+href="qmail-manual-html/man1/preline.html">preline</a>' before
+procmail or other filters when moving .forward to .qmail. [<a
+href="http://www.qmail.org/cgi-bin/m/ira-nospam-qmail-homepagea@ascso.com">Ira Abramov</a>]
+
+<li>If you use qmail's
+<a href="qmail-manual-html/man1/preline.html">preline</a>
+utility, remember that preline expects to pipe the <b>entire</b>
+mail message through the specified program. If the specified
+program closes standard input before preline has finished, preline
+will exit with a transient failure and you'll see the following
+error in your logs:
+
+<pre>
+    deferral: preline:_fatal:_unable_to_copy_input:_broken_pipe/
+</pre>
+
+You'll see this problem if you try to use the sendmail version of
+vacation.  Use Peter's <a href="top.html#200109040"> vacation program</a>
+instead. [Peter Samuel]
+
+<li>Run qmail from an <a href="init.d-script.html">init.d script</a> [<a
+href="http://www.qmail.org/cgi-bin/m/ldoolitta@ajlab.org">Larry Doolittle</a>]
+
+<li>You can usually create <samp>control/rcpthosts</samp> from<br>
+<samp>sed 's/:.*//' &lt;virtualdomains | cat - locals | sort
+&gt;rcpthosts</samp> <br>[<A HREF="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russ
+Nelson</A>]
+
+<li><a name="databaselookup">Sometimes you need to use a database to
+forward mail.  Create <samp>~alias/.qmail-default</samp> like this:
+
+<pre>
+    |if T=`<i>X</i>`; then forward $T; else
+       echo "Sorry, no mailbox here by that name (#5.1.1)";
+       exit 100; fi
+</pre>
+
+That all goes on one line.  Fill in the <i>X</i> part with a program
+that looks up the user, and exits with zero and prints the destination
+address, or else exits nonzero if no match is found.  By the way, the
+<i>X</i> program probably should ignore case.  For NIS, you would replace the
+<i>X</i> in the above command with: <samp>ypmatch $LOCAL aliases </samp>.
+<br>[<A HREF="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russ Nelson</A>]
+
+<li>Similarly, you could also use a simple linear search text file
+named <samp>mapping</samp> containing lines in the form
+<samp>incoming:outgoing</samp> like this:
+
+<pre>
+    |if MAP=`grep -i "$LOCAL:" mapping` && T=`echo $MAP |  awk -F: '{print $2}'` ;
+       then forward $T;
+       else echo "Sorry, no mailbox here by that name (#5.1.1)";
+       exit 100; fi
+</pre>
+
+<br>[<A HREF="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russ Nelson</A>]
+
+<li>Anything you print from a program run by a .qmail file ends up in
+the log file.  <br>[<A HREF="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russ
+Nelson</A>]
+
+<li>You can do a reasonable imitation of sendmail delivery, including
+.forward and /var/spool/mail, with
+
+<pre>
+#!/bin/sh
+exec qmail-start '|dot-forward .forward
+|preline -f /bin/mail -f "$SENDER" -d "$USER"' splogger qmail
+</pre>
+
+depending on your system's binmail interface. Of course, I recommend
+throwing binmail away, but people who need to preserve /var/spool/mail
+should still be able to use qmail.<br>[<a
+href="http://www.qmail.org/cgi-bin/m/djba@apobox.com">Daniel
+J. Bernstein</a>]
+
+<li>If you want to have private .qmail files which only work on local
+mail (e.g. a fax gateway), you can put the following test at the
+beginning of it (all on one line):
+
+<samp>| if [ -n "`sed -n -e '/invoked from network/p' -e 2q`" ]; then exit 100; else exit 0; fi</samp>
+
+That is, peek at the headers, if the message came from the network, bounce
+it, otherwise forward it along.<br>
+[<a href="http://www.qmail.org/cgi-bin/m/johnla@aiecc.com">John R. Levine</a>]
+
+<li>[<a href="http://www.qmail.org/cgi-bin/m/djba@apobox.com">Daniel
+J. Bernstein</a>] has three suggestions for allowing your users to
+relay when they're not at a known IP address (which is the <a
+href="qmail-manual-html/misc/FAQ.html#5.4.">FAQ 5.4</a> solution):
+
+<ul>
+<li>Use a secret IP address and port number, and you'll have much
+better security than user-chosen passwords.
+<li>Put a secret string into the HELO string sent by the client. This
+will be visible to the fixup script, so you can reject messages with bad
+passwords without changing qmail-smtpd---and it's still more widely
+supported than XTND XMIT.
+<li>Oh, you want <em>real</em> security? Check that all messages are <a
+href="http://www.pgp.com">PGP</a>-signed by local users. I wouldn't be
+surprised if PGP plugins are available for more clients than XTND XMIT
+patches are.
+</ul>
+
+<li date="20000109"><a name="20000109">[<a
+href="http://www.qmail.org/cgi-bin/m/arba@aanand.org">Anand
+Buddhdev</a>] wrote <a href="turnmail.html">turnmail</a></a>, modified by
+Russell Nelson for publication here, which wraps around qmail-pop3d
+and triggers a serialmail delivery to the connecting host whose user
+just authenticated themselves.  Or, a Unix system can use <a
+href="http://fetchmail.berlios.de/">fetchmail</a>,
+<a
+href="http://pyropus.ca/software/getmail/">getmail</a>
+or an NT system <a href="http://www.swsoft.co.uk">pullmail</a>.
+
+<li>Dan Bernstein suggested that one might give ordinary users access
+to qmail-qread through ucspi.  <a
+href="http://www.qmail.org/cgi-bin/m/sthauga@anethelp.no">Steinar
+Haug</a> implemented that suggestion thusly with a client that looks
+like this:
+<pre>
+#!/bin/sh
+exec /local/etc/tcpclient -RHl0 -- 127.0.0.1 20025 sh -c 'exec cat <&6'
+</pre>
+
+and he starts the server like this:
+
+<pre>tcpserver -u126 -g120 -R 127.0.0.1 20025 /var/qmail/bin/qmail-qread &</pre>
+
+<li>The default delivery instructions, which are invoked when a .qmail
+file is nonexistent or empty, are found in the first parameter of
+qmail-start.  That's why the install instructions tell you to touch
+.qmail-root .qmail-mailer-daemon and .qmail-postmaster.
+
+<li>[<a
+href="http://www.qmail.org/cgi-bin/m/arba@aanand.org">Anand
+Buddhdev</a>] recommends <a
+href="http://www.swsoft.co.uk/index.asp?page=freesoftware">pullmail</a>, which is a
+Windows NT program that pulls mail from a POP3 server, and stuffs it
+into NT's SMTP server.
+
+<li>[<a href="http://www.qmail.org/cgi-bin/m/markda@amira.net">Mark
+Delany</a>] modifies FAQ 2.3 so he can use the same .qmail file for multiple UUCP sites:
+<samp>
+Here is our .qmail-uucpfqdn-default file (all on one line)
+
+|preline -df /usr/bin/uux - -r -gC -a"$SENDER"
+    `echo $EXT | cut -f2 -d-`!rmail "(${EXT3}@$HOST)"
+
+And here is a sample virtualdomains entry:
+
+some.domain:uucpfqdn-uuhostname
+</samp>
+
+<li>Dan Bernstein noted that qmail will skip dns queries for incoming
+mail with <samp>tcpserver -Hl your.host.name</samp>; and you can skip
+them for outgoing mail with control/smtproutes.
+
+<li>Harald Hanche-Olsen has a solution to the problem of mail that has
+wrongly been queued for a remote host (because, say, you didn't have a
+host in your locals or virtualdomains):
+
+<samp>
+echo tcn.net:[127.0.0.1] >> /var/qmail/control/smtproutes
+</samp>
+
+Now send qmail-send an ALRM signal.
+
+<li>Hitesh Patel has a <a
+href="ftp://ftp.freebird.org/unixware/freebird/mailtools/qmail/qmail-UW.tar.Z">patch
+for UnixWare 2.1.x and 7.0.x</a>, which is not currently supported by
+qmail.
+
+<p>By the way..... the patch above opens up the option of sending mail
+to root... if you want this then just copy the right files into your
+qmail source directory... if you don't go into conf-unusual.h and
+comment out line 25 that says "#define ALLOW_ROOT_MAIL 1".
+<em>Probably a good idea to comment it out -russ </em>.
+
+<li>Daniel J. Bernstein suggests that if you have buggy clients that
+send bare LFs, and you want to treat their messages the same way
+sendmail does, you can simply run his fixcrio program instead
+of qmail-smtpd for your outgoing mail relay. fixcrio then takes
+qmail-smtpd as argument. fixcrio is part of the ucspi-tcp package.
+
+<li>Balazs
+Nagy likes to watch logs in a virtual terminal (/dev/tty8).  He uses
+<pre>
+... | tee >(accustamp | tailocal > /dev/tty8) | accustamp | cyclog
+</pre>
+The extra accustamp seems to be needed to make it work with bash.
+
+<LI>Frederik Vermeulen says: If you don't want a specific
+undeliverable mail to sit in the queue any longer, you can make it
+reach the queuelifetime by running <samp> touch -d '1 week ago'</samp>
+on its <samp>queue/info</samp> file. It will then be bounced after one
+more delivery attempt.
+
+<li>Russ Nelson has used qmail-local to deliver to a dynamic Mailbox
+or Maildir name.  He does it like this:
+
+<samp>|qmail-local "$USER" "$HOME" "$LOCAL" "" "nodeliver" "$HOST" "$SENDER" "/path/to/users/maildir/here/"</samp>
+
+<li>Harald Hanche-Olsen warns people to beware when patching Solaris
+machines, because at least one patch restores the
+/etc/rc?.d/[SK]??sendmail symlink.  You might want to remove files
+matching that name in your startup scripts.
+
+<li date="20000110"><a name="20000110">Vern Hart doesn't like a pile of .qmail files in his home
+directory.</a>  So he uses users/assign to put them into a subdirectory:
+<pre>
+=vern:vern:2244:18:/home/vern:::
++vern-:vern:2244:18:/home/vern:s/::
+</pre>
+This puts <samp>.qmail</samp> in his home directory but everything
+else is in <samp>.qmails/</samp>.  This changes ~/.qmail-foo to
+~/.qmails/foo and really cleans up his home.
+
+<li date="20000614"><a name="20000614">
+Jim Simmons points out that you can stop linuxconf from creating a
+potential security hole</a> by removing the /usr/sbin/sendmail line from
+/usr/lib/linuxconf/redhat/perm.  If you don't do this, linuxconf will
+change /var/qmail/bin/sendmail to running suid.
+
+<li date="20000827"><a name="20000827">
+Dag Wieers wants  to see all messages that are delivered to his
+domain but were bounced</a> because the user or alias does not exist. Since
+you cannot forward and pipe in the same dot-qmail he found the following
+solution to be his most simple option, .qmail-default:
+
+<pre>
+|forward dag@mind.be &gt;/dev/null 2&gt;&amp;1
+|echo "Sorry, no mailbox here by that name. (#5.1.1)"; exit 100
+</pre>
+
+This way someone can simply check those mails regularly and forward them
+to the right person manually (which sometimes saves time when people are
+waiting for feedback)
+
+<li date="200105290"><a name="200105290">Peter van Dijk suggests that
+you have two services running smtpd</a>, one using recordio and the
+other not.  He says that it's a great diagnostic tool.  Create
+/service/qmail-smtpd as you would normally.  Create
+/service/qmail-smtpd-recordio as a copy with recordio inserted, and
+logging to a separate space (be sure to chmod this logdir tight
+because recordio records complete emails).  Create
+/service/qmail-smtpd-recordio/down.  The switchover is then simply:
+<pre>
+# svc -u /service/qmail-smtpd-recordio ; svc -d /var/service/qmail-smtpd
+</pre>
+and viceversa.
+
+<li date="200210090"><a name="200210090">Han Boetes blocks sites with no
+reverse dns</a>.  He uses the following tcp.smtp file.  The only thing
+I would do differently is to set RBLSMTPD instead of just denying the
+connection.
+
+<pre>
+127.0.0.1:allow,RELAYCLIENT=""
+172.16.11.:allow,RELAYCLIENT=""
+=:allow
+:deny
+</pre>
+
+<li><a name="200601021">Japheth Cleaver has a <a
+href="stunnel-tip.txt">simple solution for stunnel.</a> using a
+wrapper script.</a>
+
+<li date="200303090"><a name="200303090">Richard Lyons points out that
+multilog has filtering capabilities</a>, see
+http://cr.yp.to/daemontools/multilog.html.  If you leave recordio in
+place you can select what bits of the output to write.  For example:
+
+<pre>multilog t '-* * > *' '-* * < *' /var/log/qmail/smtpd \
+           '-*' '+* * > 5*' /var/log/qmail/smtpd-err
+</pre>
+
+will do the normal logging to /var/log/qmail/smtpd, and will
+record 5xx errors sent by your server to the client in
+/var/log/qmail/smtpd-err.
+
+<li date="200303170"><a name="200303170">Qmail-popup redirects stderr to
+stdout, thus making it impossible to write a wrapper around
+qmail-pop3d which writes to the logfile by writing to stderr.  Being a
+little cleverer with the shell, you can also redirect FD 7 onto stdout
+like this:
+
+<pre>
+/var/qmail/bin/qmail-pop3d-wrapper.sh /var/qmail/bin/qmail-pop3d Maildir 2&gt;&amp;1 7&gt;&amp;1
+</pre>
+
+Once you've done that, qmail-pop3d-wrapper.sh can log to FD 7, like this:
+<pre>
+#!/bin/sh
+echo "qmail-pop3d: user $USER logged in from $TCPREMOTEIP:$TCPREMOTEPORT" &gt;&amp;7
+$@
+</pre>
+
+<li date="200310170"><a name="200310170">Alex Greg likes to see the output
+of svstat expressed in <a
+href="http://agreg.com/scripts/secs2dhms">dhms instead of seconds</a></a>.
+
+<li date="200403160"><a name="200403160">Erwin Hoffmann suggests a
+one-line fix to the errno compilation problem.  It works for most DJB
+software:
+<pre>
+cat error.h | sed -es/^extern\ int\ errno\;/#include\ \&lt;errno.h\&gt;/ &gt;error.h
+</pre>
+Or, djb suggests that you edit conf-cc to read:
+<pre>
+cc -O2 -include /usr/include/errno.h
+</pre>
+
+<li date="200611080"><a name="200611080">Russ Nelson suggests a method for
+stopping qmail reliably.</a> When you need to stop qmail to do
+something, do it like this:
+<pre>
+svc -d /service/qmail-s*
+# wait for qmail-send to exit.
+setlock /service/qmail/supervise/lock sh -c (
+    # do stuff here
+    svc -u /service/qmail-s*
+)
+</pre>
+
+</UL>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="checkpassword">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Alternative Checkpassword Implementations</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<p>
+qmail-popup and qmail-pop3d are glued together by a program called
+checkpassword.  It's run by qmail-popup, reads the username and
+password handed to the POP3 daemon, looks them up in /etc/passwd,
+verifies them, switches to the username/home directory, and runs
+pop3d.  At least that's what the <a
+href="http://cr.yp.to/checkpwd.html">standard one</a> does.
+Some alternatives are listed below.
+
+<p>
+<a href="http://www.qmail.org/cgi-bin/m/markda@amira.net">Mark
+Delany</a> has a clever way to test your checkpassword with a bit of
+command line re-direction.  For example, with username
+<samp>fred</samp>, password <samp>bloggs</samp>, <br>
+
+<samp>printf "%s\0%s\0%s\0" fred bloggs Y123456 | /bin/checkpassword id 3&lt;&amp;0</samp><br>
+
+will execute <samp>/bin/id</samp> if the password is right.
+
+<p>If you haven't a printf then enter the data into a file with your
+favourite binary editor, such as emacs, and then it's simply:<br>
+
+<samp>/bin/checkpassword id 3&lt;test.file</samp>
+
+<p>Or use perl:
+
+<samp>perl -e 'printf "%s\0%s\0Y123456\0","fred","bloggs"' | ...</samp>
+
+<p>Or use qmail-popup and use the 'user' and 'pass' commands:
+
+<samp>/var/qmail/bin/qmail-popup /bin/checkpassword id</samp>
+
+<UL>
+
+<LI><a href="http://www.qmail.org/cgi-bin/m/ja@a4u.net">Jedi/Sector One</a> has a <a
+href="http://www.jedi.claranet.fr/checklocalpwd-1.0.tar.gz">checklocalpwd.c</a>
+that checks a configuration file in addition to the users mentioned in
+/etc/passwd.
+
+<LI><a href="http://www.qmail.org/cgi-bin/m/jbackusa@aplex.nl">Jos Backus</a> has a <a
+href="vqpop.tar.gz">mkpoppass/chkpoppass</a> pair.  It uses an
+alternate username/password file and is written in perl.
+
+<li>
+<a href="http://www.qmail.org/cgi-bin/m/brucega@aem.ca">Bruce
+Guenter</a> has a virtual domain mail manager package called <a
+href="http://www.vmailmgr.org/">vmailmgr</a>.  It's designed to manage
+multiple domains of mail addresses and mailboxes on a single host.
+Co-operates with qmail for mail delivery and program control.  Has
+corresponding add/deluser and change-passwd commands, and CGI scripts.
+Knows about shadow and MD5-encrypted passwords.  Uses CDBs for the
+virtual domain tables.  Supports IMAP via an authentication module for
+Courier-IMAP.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell Nelson</a>'s <A
+HREF="newbox-0.80.html">pop-subaddr</A> patch allows multiple maildirs per POP3
+user, all of them authenticated with the same password.
+
+<li date="200205010"><a name="200205010">Alexey Mahotkin rewrote <a
+href="http://checkpasswd-pam.sourceforge.net/">checkpassword-pam</a>
+from scratch.</a>
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/Petr.Novotnya@aantek.cz">Petr
+Novotny</a> wrote an alternative to Russell Nelson's Open-SMTP patch
+for checkpassword.  His code is a <a href="pam_open_smtp.tar.gz">PAM
+module</a> which calls external program to log $TCPREMOTEIP.  It
+requires a PAM-enabled checkpassword or any POP3/IMAP system that uses
+PAM for authentication.
+
+<li><a name="20001012">
+<a href="http://www.qmail.org/cgi-bin/m/brucega@aem.ca">Bruce
+Guenter</a> has yet another <a
+href="http://untroubled.org/relay-ctrl/">SMTP relay control</a>
+package.</a>  It uses a setuid program called from checkpassword to avoid
+patching checkpassword.  Strictly speaking, it's not a patch, but it's
+here so people can find it along with the others.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/cjohnso0a@apine.shu.ac.uk">Christopher
+Johnson (EI39-1)</a> wrote a virtual domains package with the
+following features.  Inter7 is now maintaining the current version,
+called <a href="http://www.inter7.com/?page=vpopmail">vpopmail</a>.
+
+  <ul>
+     <li>Dynamic delivery - no need to have dozens of .qmail files all over the place. Just a single .qmail-default handles all the deliveries 
+     <li>Shadow password support - something that seemed to be lacking in the other programs 
+     <li>Only takes up 1 entry in /etc/passwd - everything runs under a single UID/GID 
+     <li>Decent documentation - actually, some docs I've come across for this are pretty good, but I had a bugger of a
+     time getting the things working (probably 'cos I'm using shadow'd passwords on my own Linux box). 
+     <li>Delivers direct to a Maildir for use with qmail-pop3d 
+  </ul>
+
+<li>Ken Jones has a program for administration of virtual domains
+called <a href="http://www.inter7.com/?page=qmailadmin">QmailAdmin</a>,
+using the vchkpw program. It handles pop acccounts, aliases, forwards,
+autorepsonder and ezmlm mailing list.
+
+<li date="200204230"><a name="200204230">Justin Hopper has a <a
+href="http://digitaloasys.com/contrib">quota implementation</a> for
+QmailAdmin</a>.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/stevea@asaturn5.com">Steve
+Simitzis</a> has <a href="xtnd-xmit.html">XTND XMIT mods for
+qmail-pop3d</a> that also incorporate some patches found on this site.
+
+<li>André Oppermann has patches to do user lookup (deliver and
+retrieval via qmail-pop3) using <a
+href="http://www.qmail-ldap.org/">LDAP</a>.  Cristiano Venturini has a site
+in <a href="http://www.qmail-ldap.info/">Italian for qmail-ldap</a>.
+
+<li>Pedro Melo has a patch to checkpassword-0.81 which uses a <a
+href="patch.checkpassword.html"></a>CDB file</a>.
+
+<li><a name="200109251"> <a
+href="http://www.qmail.org/cgi-bin/m/cjohnsona@apalomine.net">Chris
+Johnson</a> wrote <a
+href="http://www.palomine.net/qmail/checkcdb.html">checkcdb</a></a>, a
+version of checkpassword that authenticates users from a cdb
+database. It includes perl scripts to maintain the user database file.
+
+<li date="200101200"><a name="200101200"> Shinya Ohira fixed a
+security lapse in checkpw</a>, which gets its password from a file in
+the user's home directory, and allows both <a
+href="http://www.geocities.co.jp/SiliconValley/4777/qmail/checkpw/index.html">POP
+and APOP</a> authentication.  Magnus Bodin has a <a
+href="http://x42.com/qmail/contrib/">copy</a> if that site happens to
+be unavailable.
+
+<li date="19991119"><a name="19991119">
+Tong has a <a
+href="http://x.csusb.net/free/qmail/">PostgreSQL</a>
+checkpassword.</a>
+
+<li date="20000914"><a name="20000914">Matthias Andree has a patch to Dan's checkpassword</a>
+that allows checkpasswd to use an <a
+href="http://home.pages.de/~mandree/djb/checkpwd/">arbitrary base
+directory</a> for finding Maildirs
+
+<li date="200104060"><a name="200104060"> Jesse
+Sweetland has added Postgres support to his checkpassword and
+qmail-getpw replacements</a>.  He calls the package <a
+href="http://www.point-five.net/Qmail">sql-xpw</a>.  These differ from
+Takeshi's code because his is a patch to qmail and this code is not.
+
+<li date="200101051"><a name="200101051"> Ariel Kirsman has written a
+checkpassword which authenticates using an <a
+href="checkpasswordnt.tar.gz">NT domain</a></a>.  It is derived from
+code taken from squid.
+
+
+<li date="200102050"><a name="200102050"> Andrew Richards has a <a
+href="http://free.acrconsulting.co.uk/email/radcpw.html">checkpassword
+for Radius</a></a>, written in C. It's based around Dan's
+checkpassword, and uses the Radius client library from FreeBSD, as
+well as MD5, since that's how Radius encodes its data.
+
+<li date="200102060"><a name="200102060">Larry M. Smith has a vanilla <a
+href="checkpassword.pl.html">checkpassword.pl</a></a>.
+
+<li><a name="200106040">Piotr Swebodzinski has a <a
+href="checkpassword-C2.c">checkpassword for tru64</a> Unix.</a>
+
+<li><a name="200110101">Scott Gifford has <a
+href="http://www.suspectclass.com/~sgifford/qmail/courier-imap-checkpassword.txt">notes</a>
+for using checkpassword w/ Courier-IMAP</a>.
+
+<li date="200111240"><a name="200111240">Andrew Richards has a <a
+href="http://free.acrconsulting.co.uk/email/courcpw.html">checkpassword</a>
+that wraps around Courier-IMAP's authentication</a> for use by
+qmail-pop3d.
+
+<LI date="200205250"><a name="200205250">Andreas Aardal Hanssen has a way
+to run <a
+href="http://andreas.hanssen.name/software/multichkpwds.c">multiple
+checkpasswords</a></a> and authenticate against one, and if that
+fails, then the other.  If none succeed, it returns failure.
+
+<LI date="200210190"><a name="200210190">David Phillips has a
+checkpassword which authenticates via a <a
+href="http://david.acz.org/checkpw-pop3.html">pop3 connection</a></a>.
+While this may seem counter-productive, you can use it for smtp-auth
+where the smtp server does not have direct access to the user database.
+
+<LI date="200211290"><a name="200211290">Plácido Revilla wrote a
+checkpassword that authentifies against a <a
+href="checknukepasswd.tgz">PHPNuke</a> users database.</a> This allows
+administrators of these kind of portals to automatize the creation of
+pop3 accounts in their system.
+
+<a name="200303310"></a>
+
+<LI height=12 date="200311050"><a name="200311050"><a
+href="http://www.arda.homeunix.net/store/">Courierpasswd</a>
+allows users to to check and change their passwords using Courier
+authentication modules.</a> It can optionally read authentication tokens
+from stdin and send logging information to syslog or stderr.
+
+<LI date="200307242"><a name="200307242">Adam Aube's <a
+href="http://crux.baker.edu/aaube01/qmail.html">chkpass.pl</a>
+authenticates using a Squid auth helper program.</a>
+
+<li date="200310071"><a name="200310071">Oliver Hitz <a
+href="http://www.net-track.ch/opensource/authcdb/">authenticates
+against a CDB file</a> and works for SMTP-AUTH</a> as well as for Courier
+POP and IMAP.
+
+<li date="200403160"><a name="200403160">Tino Reichardt has a <a
+href="http://www.mcmilk.de/projects/qpasswd/">qpasswd</a>
+checkpassword.</a>
+
+<li><a name="200502020"> Ted Fines wrote a <a
+href="www.apecity.com/qmail/ldap_auth.html">perl LDAP</a>
+checkpassword.</a>
+
+<li date="200702081"><a name="200702081">Thomas Mangin's <a
+href="http://thomas.mangin.com/#tag:link_qmail-ldap_vmailmgr">qmail-ldap-multi-auth</a>
+patch allows you to run a mix of qmail-ldap and vmailmgr domains on
+the same machine.</a>
+
+<li><img src="new.gif" alt="new" width=31 height=12
+date="201005150"><a name="201005150">Cristiano Venturini has
+developed <a href="http://www.qmailsuite.com/">Qmailsuite</a> to
+manage accounts of QMail Ldap Server written in Python (command line)
+and Php5 (web application).
+
+</UL>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="addons">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Yet More Qmail Addons</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<p>
+Still need something more from qmail?  The chances are good that you
+can find it here, contributed by users and supporters of qmail.
+
+<ul>
+
+<LI>Paul Fox has created a <a
+href="ftp://ftp.foxharp.boston.ma.us/pub/pgf/qmail/getpwnam.patch">getpwnam() patch</a> for qmail
+which causes it to use getpwname() to get the uids of its usernames.
+
+<LI>Evan Champion has a <a href="condredirect.diff.html">patch to
+condredirect</a>.  It allows condredirect to handle the case where the
+child has a permanent delivery error -- for example, when the program
+condredirect is asked to run doesn't exist.
+
+<LI>John Saunders has a <a
+href="http://www.jms1.net/qmail/qmail-date-localtime.patch">patch
+to date822fmt.c</a> which causes it to emit dates in the local
+timezone.
+
+<li>Chuck Foster implemented code (which Bill Nugent updated it to qmail
+1.03) to <a href="local-bind.html" ver="1.03">bind the local address</a> for smtp
+client sessions to an address which is mapped using the remote address
+as a key.  This can be useful to bypass a firewall, or if you've got
+split routing, or if you have a better non-publicized route to the
+destination host.
+
+<li date="19991201"><a name="19991201"> <a
+href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell
+Nelson</a>'s <a href="qmail-popbull-1.03.patch.html">qmail-popbull</a>
+program</a> lets you create bulletins which get added to a user's
+mailbox as they log in.  Equivalent to an all-customers mailing list,
+but takes up much less resources, and lets you withdraw bulletins.
+
+<li date="19991208"><a name="19991208">
+<a href="http://www.qmail.org/cgi-bin/m/brucega@aem.ca">Bruce
+Guenter</a> has a <a href="http://untroubled.org/qmail+patches/">qmail
+RPM</a></a> which automatically applies a number of patches found here and
+which comes with some scripts.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/maex-qmaila@aspace.net">Markus
+Stumpf</a> has a <a
+href="http://www.lamer.de/maex/creative/software/qmail/">pair of qmail
+patches</a>, one to cause qmail-smtpd to log its disposition of mail,
+and another to convince qmail-remote to use a fixed IP address other
+than the one you get without binding to an address.  Andy Repton has
+ported the <a href="outgoingip.patch.html">fixed IP address</a> patch to
+qmail 1.03.  Damir Cifer has better instructions for his <a
+href="http://tycho.edico.si/linuxtnt/#qmail-patch">port</a>.
+
+<li>Chuck Foster originally wrote a patch for tcpcontrol.  That
+functionality got subsumed into tcpserver.  John Levine has updated it
+to the current version (<a href="ucspi-tcp-0.84-domain.patch.html">0.84</a>).
+It allows you to:
+<ul>
+<li>deny services based on domain names instead of IP addresses.
+<li>distinguish between no PTR and wrong PTR DNS records.
+<li>deny service to hosts whose forward and reverse DNS do not agree.
+</ul>
+
+<li>Christopher K. Davis has a patch to accept <a
+href="http://www.ckdhr.com/ckd/qmail-103.patch">oversize DNS
+packets</a> which works on both qmail's dns.c and tcpserver's dns.c.
+If you don't want to patch qmail, you can ameliorate the problem
+somewhat using <a href="http://www.tinydns.org">djbdns</a>, which
+returns only the records you ask for, making for a smaller ANSWER
+section.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/brucega@aem.ca">Bruce
+Guenter</a> has a patch which causes qmail programs to <a
+href="http://untroubled.org/qmail+patches/sources/qmail-1.03-autouidgid.patch">get
+their userids</a>, not compiled in via auto_uids.c, but instead by
+looking at files in /var/qmail/owners.
+
+<li><a href="http://www.qmail.org/cgi-bin/m/brucega@aem.ca">Bruce
+Guenter</a> has RPMs of <a
+href="http://untroubled.org/rpms/daemontools/">daemontools</a>.
+
+<li><a name="20001214"> Bruce Guenter wrote <a
+href="http://untroubled.org/supervise-scripts/">supervise-scripts</a></a>,
+to help him start and stop supervise-managed programs in a more
+controlled manner.
+
+<li>Nick Leverton wrote a patch to qmail-send to cause it to <a
+href="http://www.leverton.org/qmail.html">suspend remote
+delivery</a> without needing to restart qmail.
+
+<li>Ximenes Zalteca improved Dave's patch so that broken
+versions of <a href="qmail-popup-CAPA-2.patch.html">Eudora which emit a
+CAPA command</a> can still work with qmail's POP3 server.
+
+<li>Fred Lindberg has a patch which causes qmail-send to preserving
+the MIME-ness when <a
+href="http://untroubled.org/ezmlm/archive/patches/qmail-mime.tgz">bouncing MIME
+messages</a>.  It requires and includes a patch to ezmlm, since it
+breaks <a href="http://cr.yp.to/proto/qsbmf.txt">QSBMF</a>.
+
+<li><a name="200110250">Jose Luis Painceira's patch <a
+href="qmail-send.mimeheaders.tar.gz">deletes the body</a> on big
+bouncing messages</a>.  It's based on Fred Lindberg's patch (see
+previous item).  Note that if you use ezmlm, you may need Fred's patch
+for ezmlm-return, which is not included here.
+
+<li>Klaus-Uwe R. Ittner wrote a patch to make serialmail enclose the
+<a
+href="http://untroubled.org/ezmlm/pub/patches/serialmail-mime.tar.gz">bounced
+message as a MIME part</a>, in analogy with qmail-mime.tar.gz.  Useful
+for all those unfortunate people who use character sets other than
+us-ascii and want to be able to decipher what bounced.
+
+<a name="200205270">
+
+<li date="200205270">There's also the <a
+href="http://untroubled.org/ezmlm/archive/patches/qmail-verh-0.06.tar.gz">qmail-verh
+patch</a>.  This allows substitution of the recipient local/host parts
+into the message.  Useful for inserting a customized mailto: URL for
+list-unsubscribe into the body of the message.  <a
+name="200205270">Bernhard Graf has a fix for <a
+href="http://www.augensalat.de/software/qmail-verh-0.07.tar.gz">input
+buffer boundary problems</a></a>.
+
+<li><a href="http://www.nimh.org">Mrs. Brisby</a> has written a
+user/password based <a
+href="http://www.nimh.org/dl/qmail-smtpd.c">authentication</a>
+mechanism for qmail-smtpd.  This lets your microsoft's outlook express
+supports (outgoing mail server user name) and netscape 4.5 (and
+above-betas) users securely roam.  Users can use a slightly modified
+version of their own checkpassword.c program as outlined in my own <a
+href="http://www.nimh.org/hacks/vchkpw.c">vchkpw.c</a> that I use.
+Also, two very simple perl scripts to perform <a
+href="http://www.nimh.org/hacks/antispam.txt">pop3-based
+authentication</a> for qmail.
+
+<li><a name="20001006"><a name="200101111"> Krzysztof Dabrowski has made some improvements to
+Mrs. Brisby's SMTP-AUTH</a>, to let it work with <a
+href="http://members.elysium.pl/brush/qmail-smtpd-auth/">CRAM-MD5
+and PLAIN</a>.
+
+<li date="200704230"><a name="200704230">Traian Zvirid has <a
+href="http://www.camscape.ro/opensource/qmail-smtpd-auth-secure.htm">additional
+restrictions</a> on top of Krzysztof's SMTP-AUTH patch.</a>
+
+<li date="200209230"><a name="200209230">Eric M. Johnston's <a
+href="qmail-auth-20010105.tar.gz">YAQSAP
+(Yet Another qmail SMTP AUTH Patch).</a></a>
+
+<a name="20000113"></a>
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200401130"><a name="200401130">Frederik Vermeulen has written a
+patch implementing <a href="http://inoa.net/qmail-tls/">RFC2487</a>
+(starttls)</a> in qmail (qmail-smtpd as server, qmail-remote as
+client). This means you can get SSL or TLS encrypted <i>and
+authenticated</i> SMTP between the MTAs and between MTA and an MUA
+like Netscape4.5.
+
+<li date="200310072"><a name="200310072">Oliver Hitz wrote a small tool to
+<a href="http://www.net-track.ch/opensource/cmd5/">manually test
+SMTP-AUTH CRAM-MD5 authentication</a></a>.
+
+<li>Petri Kaukasoina wrote a little shared library which should help
+qmail <a
+href="ftp://elektroni.ee.tut.fi/pub/qmail_linux_metadata_message">reliability
+on Linux</a>.  Linux does not automagically fsync metadata
+(information necessary tomake a file appear in the filesystem).  It
+only fsyncs metadata when the the directory is fsynced.
+
+<li><a name="200110120"> Bruce Guenter's <a
+href="http://untroubled.org/syncdir/">syncdir</a> gives qmail bsd
+fsync semantics on a Linux filesystem.</a>
+
+<li>Scott Moorhouse rewrote a patch (which someone had written earlier
+and which I failed to publish here) to work around a Netscape bug, the
+symptoms of which are that it does not know how big a message is, so
+<a href="netscape-progress.patch.html">Netscape's download indicator
+doesn't progress.</a>
+
+<li>Frank DENIS wrote a patch to <a
+href="http://www.jedi.claranet.fr/qmail-bounce.patch">truncate bounce
+messages</a> (<a href="www.jedi.claranet.fr/qmail-bounce.patch.html">local
+copy</a>, by author's request), on the off chance that the user may
+have kept a copy of the email.
+
+<li date="20000223"><a name="20000223">
+takeshi@SoftAgency.co.jp wrote <a
+href="http://www.softagency.co.jp/mysql/qmail.en.html">MySQL +
+QMAIL</a></a>, including qmail-getpw-mysql and checkpassword-mysql, to
+look up users in a mysql database.  Iain Patterson has
+improved on <a href="http://iain.cx/unix/qmail/mysql.php">MySQL +
+QMAIL</a>.
+
+<li>Also see <a href="top.html#200101050">sql-gpw and sql-cpw</a>.
+
+<a name="200210070">
+
+<li date="200310060"><a name="200310060">Michael Devogelaere's <a
+href="http://qmail-sql.digibel.be/">qmail-sql</a> now includes ODBC support</a>.
+
+<li date="20000125"><a name="20000125">The prolific Bruce Guenter has written <a
+href="http://untroubled.org/qmail-qfilter/">qmail-qfilter</a>, which is
+a front end for qmail-queue</a> that can send the body of the message
+through one or more filters, such as qmail-inject or new-inject.
+
+<li date="20000914"><a name="20000914">
+Matthias Andree has a patch to allow qmail's sendmail wrapper to <a
+href="http://home.pages.de/~mandree/djb/qmail/">ignore the -N dsn
+option</a></a> that sendmail has, for compatibility with MUAs that use the
+-N dsn switch (mutt can do)
+
+<li date="200101170"><a name="200101101">Russ Nelson updated his
+changes to qmail-remote to <a href="qmail-1.03-qmtpc.patch.html">send using
+QMTP</a></a>.  If you wish to receive mail via qmtp, <a
+href="top.html#200101102">run qmtpd</a>.
+
+<li><a name="200107200">Gerrit Pape has <a
+href="http://smarden.org/pape/Debian/">Debian packages</a></a>.
+
+<li date="200102260"><a name="200102260">Klaus Reimer has code to change
+the <a href="qmail-bouncecontrol-1.03.patch.html">appearance of bounce
+messages.</a></a> Note that this has the potential to break <a
+href="http://cr.yp.to/proto/qsbmf.txt">QSBMF</a>.
+
+<li date="200105312"><a name="200105312">Scott Woods has qmail running on
+a Cray</a>.  It took some <a
+href="ftp://ftp.essc.psu.edu/pub/emsei/woods/qmail-unicos.patch">patching</a>
+to make it run on UNICOS, but it's running.
+
+<a name="200110100">
+
+<li date="200305070"><a name="200305070">Scott Gifford's <a
+href="http://www.suspectclass.com/~sgifford/qmail/qmail-1.03-moreipme.patch">moreipme
+patch</a> is available</a>.  This solves the problem seen when a host
+has more IP addresses than it knows about.  This happens in particular
+when you have an IP masquerading load balancer in front of a host.
+
+<li date="200112140">Mark Delaney noted that he was getting spam with a
+null envelope sender.  That by itself is insufficient reason to reject
+the email.  However, when the spam has multiple envelope recipients,
+it cannot be a bounce message.  So, <a name="200112140">Charles
+Cazabon wrote a patch to enforce <a
+href="http://pyropus.ca/software/misc/nullenvsender-recipcount.patch">single
+recipients on bounces</a></a>.
+
+<a name="200205240"></a>
+
+<li date="200205240" date="200302220"><a name="200302220">Andr&eacute; Oppermann
+updated his <a
+href="http://www.nrg4u.com/qmail/ext_todo-20030105.patch">ext-todo
+patch</a></a>, which solves the 'silly qmail syndrome'.  That's where
+qmail spends more time processing incoming email than scheduling
+deliveries.  You can get it with <a
+href="http://home.graffiti.net/feizhou:graffiti.net/patches.html">big-todo integrated</a> as
+big-ext-todo.
+
+<li date="200312201"><a name="200312201">Dr. Erwin Hoffmann has written
+his own <a href="http://www.fehcom.de/qmail/smtpauth.html">SMTP
+Auth</a> package</a>.
+
+<li date="200207160"><a name="200207160">Bjoern Kalkbrenner has
+improved the <a
+href="http://www.cyberphoria.org/projects/qmail-smtp-auth-send/">smtp-auth
+client patch</a> (<a href="http://www.murphyslantech.de/linux/qmail/qmail-smtp-auth-send-0.0.1.tar.gz">alternate location</a>) so it works with multiple users.</a> This is of most
+use for a desktop qmail installation which needs to relay mail through
+a server that requires authentication. <a name="20000127">The original
+author was Jay Soffian (<a
+href="http://www.soffian.org/downloads/qmail/qmail-remote-auth-patch-doc.txt">documentation</a>,
+<a href="qmail-remote_authenticated_smtp.patch.html">patch</a>).  Last
+person to touch that patch was <a
+href="http://www.ornl.gov/cts/archives/mailing-lists/qmail/2002/03/msg00091.html">Robert
+Sanders</a>
+
+<li date="200207290"><a name="200207290">Giacomo Cariello used to have 
+OpenBSD Qmail Ports</a>.
+
+<li date="200208050"><a name="200208050">Adrian Ho has increased <a
+href="accept-5xx.patch.html">qmail-remote's compliance</a> with
+RFC2821.</a> Some smtp servers are now emitting 5XX responses from the
+get-go, and mere RFC821 behavior doesn't deal well with them.
+
+<li date="200209250"><a name="200209250">James Raftery wants the <a
+href="http://romana.now.ie/#rcpt-logging">canonicalized hostname in
+the logfile</a></a>, so he can see the real envelope recipients of
+messages after host name canonicalization.  If you send a mail to me
+at lecter@www.redbroock.dcu.ie, your logs will show 'to remote
+lecter@www.redbrook.dcu.ie' but qmail-remote will actually use
+'lecter@prodigy.redbrook.dcu.ie' in the RCPT TO command.
+
+<li date="200211060"><a name="200211060">Miguel Beccari has <a
+href="http://www.qmailtoaster.com/">QmailToaster</a> RPM
+packages</a>.  Features: Mail Server (pop3, pop3-ssl, imap4, imap-ssl,
+smtp, smtp-ssl), Web Administration Tools (vpopmail, vqadmin), Web
+Mail Client (horde), Mailing lists(ezmlm), Autoresponder, Antispam.
+
+<li date="200303091"><a name="200303091">Ingo Rohloff has added <a
+href="http://www.ingorohloff.de/soft/serialmail-auth.patch">SMTP
+authentication support to serialsmtp.</a></a>.
+
+<li date="200303131"><a name="200303131">Jan Knepper has a qmail virtual
+<a href="http://www.digitaldaemon.com/FreeBSD/qmail/index.html">domain
+outgoing IP address patch</a></a>, based on IP adddress.
+
+<li date="200504270"><a name="200504270">Alberto Brealey-Guzman also
+has an <a
+href="https://github.com/mamapitufo/qmail-outgoingips">outgoing
+IP address patch</a></a>, but his uses a control file to do the
+mapping.
+
+<li date="200303230"><a name="200303230">Will Harris has a patch to make
+qmail <a href="http://will.harris.ch/qmail-smtpd.c.diff">fully RFC
+1870 compliant</a></a>, i.e. to support the ESMTP SIZE command.  Erwin
+Hoffman has some <a
+href="http://www.fehcom.de/qmail/qmail-smtpd.c.size.diff">corrections</a>.
+
+<li date="200304090"><a name="200304090">Andreas Mueller has compiled <a
+href="http://www.theflatnet.de/pub/hp-ux">qmail for HP-UX</a></a>.
+
+<li date="200305132"><a name="200305132">J. de Boyne Pollard suggests that
+you <a
+href="http://homepages.tesco.net./~J.deBoynePollard/Softwares/qmail.html">remove
+the bodge</a> that works around a BIND version 4 problem</a>
+
+<li date="200305170"><a name="200305170">David Phillips noticed that
+qmail's <a
+href="http://david.acz.org/software/sendmail-flagf.patch">sendmail's
+-f emulation</a> doesn't set the default for the username as sendmail
+does.</a>
+
+<li date="200307240"><a name="200307240">Insist that your local users use
+<a href="http://jozzel.subweb.cc">only certain domain names</a> on
+their outgoing email.</a>
+
+<a name="200310070">
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200610230"><a name="200610230">Balazs Nagy has a <a
+href="http://js.hu/package/ucspi-tcp/index.html">concurrent IP
+connection limiter</a> for ucspi-tcp</a>.  Tomislav Randjic has ported
+that patch to both <a
+href="http://xs3.b92.net/tomislavr/ucspi-ssl-0.70-periplimit.7.patch">ucspi-ssl</a>
+and <a
+href="http://xs3.b92.net/tomislavr/ucspi-tls-0.70-periplimit.7.patch">ucspi-tls</a>.
+
+<li date="200708240"><a name="200708240">Joshua Megerman wrote a patch to
+implement <a
+href="http://www.coyotetechnical.com/software/patches/qmail-send-concurrencyperip.patch">hashed
+per-IP connection limiting</a> in qmail-send and qmail-remote.</a>
+
+<li date="200310280"><a name="200310280">Matthew Trout checks SMTP clients
+to see if they <a
+href="http://trout.me.uk/qmail-relayreject.tar.gz">are open
+relays</a></a> before he will accept email from them.
+
+<li date="200404110"><a name="200404110">John R Levine has written a <a
+href="http://qmail.gurus.com/mess822-smtp-auth-patch.txt">SMTP AUTH
+patch for ofmipd</a> in mess822-0.58.</a>
+
+<li>Various people have created patches centered around the SMTP
+conversation's MAIL FROM: and RCPT TO: verbs.
+
+<ul>
+
+<li date="200302170"><a name="200302170">Johan Almqvist <a
+href="qmail-smtpd-log-badmailfrom.patch.html">logs
+badmailfrom hits</a></a>.
+
+<li date="200101140"><a name="200101140"> Ward Vandewege wrote a patch
+to implement <a
+href="http://patch.be/qmail/">badrcptto</a></a>, in the
+same vein as badmailfrom.
+
+<li date="200304100"><a name="200304100">John Levine wrote a <a
+href="http://www.iecc.com/bad-rcpt-noisy-patch.txt">badrcptto
+patch</a> which uses CDB and logging.</a>
+
+<li date="200406070"><a name="200406070">Oliver Neubauer has a <a
+href="http://www3.sympatico.ca/humungusfungus/code/validrcptto.html">validrcptto</a>
+patch</a>, which rejects invalid addresses in the SMTP dialog.  Note
+that you cannot use this if you have any .qmail files ending in
+-default, e.g. any ezmlm lists.
+
+<li date="200407120"><a name="200407120">Dion Sasmito wrote a <a
+href="http://www.metesek.com/projects/qmail-gmfcheck/project_qmail-gmfcheck.php">goodmailfrom</a>
+matching badmailfrom's functionality</a>.
+
+<li date="200410281"><a name="200410281">Paul Jarc's <a
+href="http://multivac.cwru.edu/qmail/">realrcptto patch</a> changes
+qmail-smtpd so it uses the same tests as qmail-send to choose a .qmail
+file.</a> The email might still be bounced by the .qmail file, but if
+it would bounce because there is no applicable .qmail file, then the
+email is rejected in the smtp dialog.
+
+<li date="200702080"><a name="200702080">Thomas Mangin's <a
+href="http://thomas.mangin.com/#tag:link_qmail_user_verification">qmail-remote-user-verification</a>
+patch performs user verification against both qmail-ldap and vmailmgr
+to bounce mail.</a>  It does not bounce mail during conversation but at
+qmail-queue (changing this is trivial tho), so it will not save you
+bandwidth but only cpu if you scan emails.
+
+<li date="200708030"><a name="200708030">Andrew Richards has modified Paul
+Jarc's realrcptto into <a
+href="http://free.acrconsulting.co.uk/email/qmail-verify.html">qmail-verify</a>.
+It now uses UDP for privilege separation which also allows an incoming
+mail server to query a separate mailstore for larger installations.
+
+<li date="200711100"><a name="200711100">John Simpson has a <a
+href="http://qmail.jms1.net/patches/validrcptto.cdb.shtml">validrcptto.cdb</a> patch</a>.
+
+</ul>
+
+<li date="200702270"><a name="200702270">Frederik Vermeulen got tired of
+his users sending oversize attachments, so he wrote an experimental
+patch that provides a qmail-queue replacement that <a
+href="http://inoa.net/qmail-outbox/">detaches large attachments</a>
+from an email</a> and replaces them by an URL where the attached files can
+be downloaded (to avoid large attachments being sent over the internet
+via email).
+
+<li date="200704210"><a name="200704210">Lukas Feiler has merged several patches into his <a href="http://rocketscience.lukasfeiler.com/bigqmail.patch">bigqmail</a> patch.</a>
+<ul><li>netqmail-1.05-tls-smtpauth-20060105.patch
+<li>validrcptto.cdb patch
+<li>big-concurrency.patch
+<li>doublebounce-trim.patch
+<li>big-ext-todo (EXTTODO patch & big-todo patch)
+<li>Alberto Brealey-Guzman's outgoingips patch
+<li>Christopher K. Davis' DNS patch
+</ul>
+
+<li date="200711101"><a name="200711101">John Simpson's <a
+href="http://qmail.jms1.net/patches/combined.shtml">combined
+patch</a>.</a>
+
+<li date="200711110"><a name="200711110">Kazinori Fujiwara has an <a
+href="http://pyon.org/fujiwara/">IPv6 patch</a></a>
+
+<li><a name="200807070">Animesh Bansriyar needed to limit
+some users to <a
+href="http://qmail.org/qmail-local.onlylocal.patch.gz">receiving only
+local email</a></a>
+
+</UL>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="microsoft">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Microsoft virus prevention</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+Microsoft products are susceptible to a large variety of viruses,
+worms, and other fauna.  The best solution is to not use them.  A
+secondary solution is to use anti-virus software to keep viruses away
+from Microsoft products.
+
+<UL>
+
+<li date="20001203"><a name="20001203">Jason Haar wrote <a
+href="http://qmail-scanner.sourceforge.net/">Qmail-Scanner</a> (also known
+as scan4virus), which scans all gatewayed Email</a> for certain
+characteristics. It is typically used for its anti-virus protection
+functions, in which case it is used in conjunction with commercial
+virus scanners. but also enables a site to react to Email (at a
+server/site level) that contains specific strings in particular
+headers, or particular attachment filenames or types (e.g. *.VBS
+attachments).
+
+<li date="20000519"><a name="20000519">
+<a href="http://amavis.org/">AMaViS</a> is A Mail Virus Scanner.</a>
+
+<li date="20000519"><a name="20000519">
+Kaspersky Lab includes qmail support for their <a
+href="http://www.avp.ru">AVP</a> anti-virus program.</a>
+
+<LI><a name="200110020">Jozef Hitzinger wrote "<a
+href="http://hico.fphil.uniba.sk/ht-wormfilter.html">How to filter ms
+e-mail worms</a>"</a>.
+
+<LI date="200201230"><a name="200201230"><a
+href="http://odeiavir.sourceforge.net">OdeiaVir</a> integrates virus
+scanning into qmail.</a>
+
+<LI date="200206210"><a name="200206210">Central Command's <a
+href="http://www.centralcommand.com/qmail_vamsi.html">Vexira Antivirus
+For Mail Servers</a>(aka VAMS+I for the Integrated version) has qmail
+support.</a>
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200401280"><a name="200401280"> Russell Nelson has an <a
+href="qmail-smtpd-viruscan-1.3.patch.html">antivirus patch for
+qmail-smtpd</a></a>, with some contributions from Charles Cazabon.
+
+<li date="200307080"><a name="200307080">F-Prot supports use of the <a
+href="http://mailtools.anomy.net/sanitizer.html#in-transit-qmail">Anomy
+sanitizer</a> with qmail</a>.
+
+<li date="200309010"><a name="200309010"><a
+href="http://www.pgregg.com/projects/qmail/">Paul Gregg</a> rejects
+HELO commands whose parameter has no dot</a>.
+
+<li date="200402020"><a name="200402020">Adam Aube's <a
+href="http://crux.baker.edu/aaube01/qmail.html">block_file.pl</a>
+rejects messages using file name and/or MIME type patterns.</a>
+
+<li date="200410280"><a name="200410280"><a
+href="http://mysite.verizon.net/vze1ypud/software/qscanq/">qscanq</a>,
+by Len Budney</a>.  Qscanq provides a virus-scanning wrapper for
+qmail. Qscanq scans every email message submitted to qmail before
+allowing it to be added to qmail's mail queue. Infected emails are
+rejected, not bounced, so you won't have to deal with double-bounces
+during virus outbreaks.
+
+<li><a
+href="http://www.bitdefender.com/bd/site/products.php?p_id=10">BitDefender
+antivirus/antispam for qmail</a>
+
+</UL>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="large">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Patches for high-volume servers</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+<UL>
+
+<a name="big-todo">
+<li>Dave Smith of XOOM.com has updated Russell Nelson's <a
+href="big-todo.103.patch.html">big-todo patch</a> for qmail 1.03.  Bruce
+Guenter added a fix for qmail-qstat.  Big-todo is only useful if you
+need to inject email into the queue when qmail-send is not running.
+This is not the usual case.
+
+<li>Johannes Erdfelt of S.u.S.E wrote a patch to allow qmail to use a
+<a href="big-concurrency.patch.html">concurrency greater</a> than 240.
+
+<li>If your queue gets larger than about 23,000 separate messages
+you'll need to change conf-split and recompile.  Different Unix
+filesystems will affect that 23,000 figure, but not by more than a
+factor of two.  This will ruin your queue, however.  The best way to
+make this change is to run two copies of qmail like this:
+<ol>
+<li>stop qmail.
+<li>rename /var/qmail to /var/qmail2.
+<li>change conf-qmail to /var/qmail2.
+<li>make setup.
+<li>change conf-split to a prime number which reflects your requirements.
+<li>change conf-qmail back to /var/qmail
+<li>make setup.
+<li>restart qmail
+<li>run /var/qmail2/rc.  In a week you'll be deleting this copy, so don't worry about setting it up under daemontools.
+</ol>
+
+<li date="200309050"><a name="200309050">Russ Nelson discards
+doublebounces without queuing them</a> with his <a
+href="doublebounce-trim.patch.html">doublebounce-trim</a> patch.
+
+<li date="200407120"> <a name="200407120">Pawel Foremski has a <a
+href="http://qmail-spp.sourceforge.net/">qmail-smtpd plugin</a>
+system</a>.
+
+<li date="200411070"><a name="200411070">Nikola Vladov has devised a
+way to <a
+href="http://riemann.fmi.uni-sofia.bg/docs/qmail+djbdns.html">link
+qmail against djbdns</a></a>'s resolver library.
+
+<li date="200711050"><a name="200711050">Thomas Mangin's <a
+href="http://thomas.mangin.com/#tag:link_vmailmgr_proxy">vmailmgr
+proxy</a> allows vmailmgr-tcp users to use multiple backend
+transparently.
+
+</UL>
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="spam">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Anti-spam techniques and code</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+<UL>
+
+<li date="20000411" date="200302160"><a name="200302160"> Chris Hardie has
+updated his qmail <a
+href="http://www.chrishardie.com/tech/qmail/qmail-antispam.html">anti-spam
+howto</a>.</a>
+
+<li date="20000810"><a name="20000810"> Dan's <a
+href="rbl/index.html">rblsmtpd</a> blocks spam using the RBL</a> and other
+DNS-based lists.  Because of the size of the RSS zone, they have
+removed the necessary TXT records that rblsmtpd relies on.  Alan Curry
+has a patch to <a href="ucspi-rss.diff.html">rblsmtpd to make it work with
+A records</a>.
+
+<a date="200403270"> <a name="200403270">David Jonas has a patch to
+rblsmtpd to let you <a
+href="http://www.linuxpenguins.com/forum/viewtopic.php?p=6">ignore
+certain A record</a> responses from the bl lookup.</a>
+
+<li><a name="200103301"></a><a
+href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell
+Nelson</a> has a pair of programs to help <a href="spam-filter.html">keep
+spam out of your mailbox</a>.
+
+<li><a name="200109252">Jason R. Mastaler has improved <a
+href="http://tmda.sourceforge.net/">TMDA</a>, an anti-spam system.</a>
+
+<li>Lionel Widdifield</a> wrote an anti-spam patch.  Someone made some
+improvements to Lionel's patch, which Lindsay Haisley has <a
+href="http://www.fmp.com/downloads/qmail-antispam4.tar.gz">ported to qmail 1.03</a>.
+
+<a name="200112280">
+
+<LI><img src="updated.gif" alt="updated" width=52 height=12
+date="200403290"><a name="200403290"><a
+href="http://www.unixpimps.org/software/qregex/">qregex</a> provides
+full regexp matching on envelope addresses.</a>With REs (Regular
+Expresions) it becomes quite easy to filter out email addresses that
+contain invalid characters or simply aren't a real address.  Andrew
+St. Jean has <a
+href="http://www.arda.homeunix.net/store/qmail/">added</a> case
+insensitive pattern matching and logging when a match is found.
+
+<li><a
+href="http://www.qmail.org/cgi-bin/m/cjohnsona@apalomine.net">Chris
+Johnson</a> has a patch to implement <a
+href="http://www.palomine.net/qmail/tarpit.html">tarpitting</a> in
+qmail-smtpd. If you don't know what tarpitting is, it's the practice
+of inserting a small sleep in an SMTP session for each RCPT TO after
+some set number of RCPT TOs. The idea is to thwart spammers who would
+hand your SMTP server a single message with a long list of RCPT
+TOs.
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200405280"><a name="200405280">Nagy Balazs wrote a patch to
+ensure that the domain name on the <a
+href="http://js.hu/package/qmail/index.html">envelope sender is a
+valid DNS name</a></a>.  This is not terribly effective against spammers,
+but I list it here because some people want it.
+
+<li date="20001108"><a name="20001108"> Jon Rust wrote <a
+href="http://jon.rusts.net/qrblcheck.c">qrblcheck</a></a>, which reads
+a message on stdin, grabs the IP address from the Received lines and
+checks it against five different DNS-based spamlists.
+
+<li date="20001230"><a name="20001230"> Jay Soffian has a qmail-queue
+replacement to <a href="qqrbl.html">filter against DNS spamlists.</a></a>.
+It uses Bruce Guenter's <a href="top.html#qmailqueue">QMAILQUEUE</a> patch.
+Matching email is not rejected, but instead an X-RBL: header is added,
+for filtering at the delivery layer.
+
+<LI date="200111130"><a name="200111130">O'Shaughnessy Evans has a set of
+shell scripts that comprise a spam-filtering system called "<a
+href="http://isle.wumpus.org/cgi-bin/pikie?SpamRule">spamrule</a>".</a>
+
+<LI date="200111131"><a name="200111131">Ask Bj&oslash;rn Hansen wrote <a
+href="http://smtpd.develooper.com/">qpsmtpd</a>, a smtp server
+with filtering tools</a>.  It's written in perl.
+
+<li><a name="200511080">Rolf Eike Beer has implemented <a
+href="http://opensource.sf-tec.de/Qsmtp/">replacements for qmail-smtpd
+and qmail-remote</a></a> which add features like IPv6, STARTTLS, AUTH,
+CHUNKING, and PIPELINING.
+
+<a name="200305130">
+
+<li date="200312200"><a name="200312200">Erwin Hoffman's <a
+href="http://www.fehcom.de/qmail/spamcontrol.html">SPAMCONTROL</a>
+combines many spam control features</a>.  Includes SMTP Auth with
+CRAM-MD5 support.
+
+<LI date="200202060"><a name="200202060">EnderUNIX Team wrote <a
+href="http://www.enderunix.org/spamguard">spamGuard</a></a>, which
+scans your log files for "too much" email from a particular user, and
+adds them to badmailfrom.
+
+<LI date="200202090"><a name="200202090">Russell Nelson has a patch to <a
+href="qmail-smtpd-relay-reject.html">reject relay probes</a> generated by
+so-called anti-spammers.</a> These relay probes have '!', '%' and '@'
+in the local (username) part of the address.
+
+<li date="200212310"><a name="200212310">Dale Woolridge, James Law, and
+Moto Kawasaki's <a href="http://spamthrottle.qmail.ca/">spam throttle</a></a>
+patch provides a method to rate limit/stutter spam (message throughput)
+via a highly parameterized control interface.  As of release 2.01,
+tcpserver is no longer a strict requirement.
+
+<LI date="200203250"><a name="200203250">James Grinter has instructions on
+<a href="http://www.gbnet.net/~jrg/qmail/ifspamh">using
+SpamAssassin</a></a>.  It's a script that runs from a .qmail file.
+
+<LI date="20020331"><a name="200203310">Chris Kennedy has written the
+<a
+href="http://sourceforge.net/projects/blackholespam/">BlackHole</a>
+spam/virus filter</a>.
+
+<LI date="200204110"><a name="200204110">Noel Mistula wrote <a
+href="http://ngm.id.au/checkhab">checkhab</a></a>, which checks
+for HTML, attachments, and binaries in email, and blocks them.
+
+<LI date="200208051"><a name="200208051">Gerrit Pape wrote <a
+href="http://smarden.org/qconfirm/">qconfirm</a></a>, a delivery
+confirmation process for a mail address.
+
+<a name="200208052"></a>
+
+<LI date="200312030"><a name="200312030">Chris Johnson
+wrote <a href="http://www.palomine.net/qdated/">qdated</a></a> to
+create and verify timestamped e-mail addresses.  These addresses
+expire after a user-configurable period of time; any mail sent to an
+expired address will bounce.
+
+<LI date="200209240"><a name="200209240">Roger Merchberger has some
+techniques to deal with <a
+href="http://www.30below.com/~zmerch/qmail/">double-bouncing
+email</a></a>.
+
+<li date="200301290"><a name="200301290"><a
+href="http://q-sorter.sourceforge.net">q-sorter</a> sorts your email
+into separate inboxes.</a>
+
+<li date="200301291"><a name="200301291"><a
+href="http://search.cpan.org/author/JRAFTERY/">Net::QMTP</a> - This
+perl module implements an object oriented interface to a Quick Mail
+Transfer Protocol (QMTP) client</a> which enables a perl program to
+send email by QMTP.
+
+<li date="200302180"><a name="200302180">Georg Lehner tells how to
+configure <a
+href="http://www.magma.com.ni/~jorge/spamassassin.html">Qmail with
+Spamassassin</a></a>.
+
+<li date="200309030"><a name="200309030">Jeffrey Clement wrote a
+time-limited email-address program called <a
+href="http://jclement.ca/software/datedmail.py/">datedmail</a></a>.
+
+<a name="200310150" />
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200409130"><a name="200409130">Luca Morettoni wrote <a
+href="http://morettoni.net/qmail-rblchk.en.html">qmail-rblchk</a></a>,
+which checks the IP address in the Received: line of an email message
+on stdin against named DNSBLs.
+
+<li date="200401020"><a name="200401020">Jean-Eudes ONFRAY wrote a <a
+href="rhsbl.patch.html">rhsbl patch</a> for tcpserver</a>.  This lets you
+block or whitelist email based on the reverse-DNS hostname rather than
+IP.
+
+<li date="200401090"><a name="200401090">Philip Gladstone wrote a
+delivery-time <a href="http://pond.gladstonefamily.net/do-spf.pl">SPF
+checker</a>.</a> More on <a href="http://spf.pobox.com">SPF</a>.
+
+<li date="200402040"><a name="200402040">Christophe Saout wrote a <a
+href="http://www.saout.de/misc/spf/">SPF checker</a></a> that runs
+inside qmail-smtpd and is written using the native dns and string
+functions that come with qmail.
+
+<li><img src="updated.gif" alt="updated" width=52 height=12
+date="200612171"><a name="200612171">Marcelo Coelho has written a <a
+href="http://opensource.mco2.net/qmail/srs/">patch for SRS</a>.  More
+info on <a href="http://www.libsrs2.org/">SRS</a>.  SRS and <a href="top.html#200402040">SPF</a> work
+together.</a>
+
+<li date="200406010"><a name="200406010">Markus Stumpf has a patch for
+qmail-smtpd that <a
+href="http://www.lamer.de/maex/creative/software/qmail/105-sober-g/">rejects
+W32/Sober-G</a> at the SMTP level.</a>
+
+<li date="200406010"><a name="200406010">Jay Soffian has modified
+qmail-smtpd to <a
+href="http://www.soffian.org/downloads/qmail/qmail-smtpd-doc.html">fork/exec
+$RCPTCHECK</a> at the RCPT TO:</a>.  $RCPTCHECK is run in the same
+environment as qmail-smtpd. Additionally $SENDER is set to the
+envelope from and $RECIPIENT is set to the envelope recipient (for the
+current rcpt to:). Based on the return code (exit value) of
+$RCPTCHECK, the rcpt to: address will either be accepted or rejected.
+
+<li><a name="200601020">Niek Baakman has made a small
+page regarding <a
+href="http://asbak.coding-slaves.com/qmail/">recipient checking</a> if
+qmail is in front of a exchange server.</a>
+
+
+<li date="200604240"><a name="200604240">Thomas Mangin has a <a
+href="http://thomas.mangin.com/#tag:link_qmail_greylisting">greylisting
+solution</a> in Python.</a>
+
+<li date="200605240"><a name="200604240">Jon Lewis has an <a
+href="http://www.lewis.org/smtp-delay/">SMTP banner delay</a>
+program</a>.  This causes SMTP clients which give up early, or start
+pipelining too soon, to have their connections rejected.  Typically
+these clients are sources of spam.
+
+<li date="200606060"><a name="200606060">Russ Nelson wrote the <a
+href="qmail-1.03-selfhelo-1.00.patch.html">selfhelo</a> patch</a>, which
+causes qmail-smtpd to reject email sent using a HELO hostname equal to
+your IP address, your hostname, or any hostname without dots.
+
+<li date="200705070"><a name="200703230"><a name="200705070">Sam
+Clippinger has written a filter for qmail that blocks spam at
+connection-time, called <a
+href="http://www.spamdyke.org/">spamdyke</a></a> It's
+similar to DJB's rblsmtpd but it provides a lot more features than
+rblsmtpd, including blacklisting, graylisting, limiting numbers of
+recipients, checking rDNS entries, checking DNS RBLs, vastly superior
+logging and more.  spamdyke supports SMTP AUTH and TLS, and will even
+provide SMTP AUTH to unpatched qmail installations!  Recompiling qmail
+is not necessary to use spamdyke.
+
+<li date="200705300"><a name="200705300">Andrew Richards has written <a
+href="http://free.acrconsulting.co.uk/email/other.html">NORCPTHOSTS</a>,
+which mandates authentication for relaying hosts.</a> The sender must
+authenticate before sending _any_ mail (including to rcpthosts listed
+domains), regardless of the content of control/rcpthosts[.cdb]. It's
+enabled by an environment variable.
+
+<li date="200809240"><a name="200809240">Jan Mojzis uses <a
+href="qmail-postgrey.patch.html">the postgrey daemon</a>.</a>
+
+<li date="200809240"><a name="200809240">Andrew Richards <a
+href="http://free.acrconsulting.co.uk/email/other.html">traps early
+talkers</a> in the SMTP dialog.</a> Building on the work of Erwin
+Hoffmann and John Simpson, Andrew has a patch to netqmail-1.06 (with
+qmail-errmsg logging patch) to catch and disconnect connections that
+try to send SMTP commands before the SMTP greeting has been issued by
+the server.
+	
+</ul>
+
+<p>
+</td></tr></table> </td><td bgcolor="#000000"><img src="1x1.gif"
+alt="" width=1 height=1></td></tr> <tr><td colspan=5
+bgcolor="#000000"> <img src="1x1.gif" alt="" width=1
+height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="book">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Qmail books</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<ul>
+
+<li date="200403280"><a name="200403280">John Levine has written the
+O'Reilly &amp; Associates "owl" book on qmail (<a
+href="http://www.oreilly.com/catalog/qmail/">owls</a> <a
+href="http://www.desertusa.com/mag00/jan/papr/ghowl.html">eat</a> <a
+href="http://www.oreilly.com/catalog/sendmail2/">bats</a>)</a>.  More
+information on the book is available on <a
+href="http://qmail.gurus.com/">John's page</a>.
+
+<li><a name="200109190">Dave Sill has written <a
+href="http://www.apress.com/book/view/1893115402">The qmail
+Handbook</a></a>.  You can buy it at <a
+href="http://www.amazon.com/exec/obidos/ASIN/1893115402/davesill">Amazon</a>.
+
+<li date="200305160"><a name="200305160">Erwin Hoffmann is writing a book
+in German on qmail, called <a
+href="http://www.fehcom.de/qmail/qmailbook.html">Qmail&amp;co.</a></a>
+Unfortunately, the book has been cancelled by the publisher.
+
+<li date="200305280"><a name="200305280">Samuel Prakoso and Tomy and Onno
+Purbo have written a <a href="http://qmail.konsultanlinux.com">qmail
+book in Indonesian</a></a>.
+
+<li date="200305290"><a name="200305290">Florian Schiessl points out his
+Qmail, vpopmail, qmailadmin, ... Howto for <a
+href="http://www.debianhowto.de/de/qmail_MTA/">Debian woody</a>.</a>
+
+<li date="200308260"><a name="200308260">Ricardo Oliveira and Mario Gamito
+have written a qmail book in Portuguese entitled <a
+href="http://www.fca.pt/cgi-bin/fca_detalhado.cgi/?&isbn=972-722-390-7">"Como
+instalar um servidor completo de email"</a></a>.
+
+<li><a name="200506100">Baris Simsek, Ismail Yenigul and
+Huzeyfe Onal have written a new <a
+href="http://www.acikkod.com/catalog/qmail/">Qmail Book in
+Turkish</a></a>.
+
+<li><a name="200506160">Rodrigo P. Telles has written <a
+href="http://qmail.telles.org/">Qmail - Guia de consulta</a></a>.  It
+is available online under a Creative Commons License.
+
+<li date="200612170"><a name="200612170">Krzysztof Marciniak has written a
+qmail book in Polish entitled "<a
+href="http://www.qmail.org.pl/ksi-ki/qmail.-szybki-i-wydajny-serwer-pocztowy.html">qmail. Szybki
+i wydajny serwer pocztowy</a>"</a>.
+
+<lidate="200612220"><a name="200612220">Felipe Costa has written a book
+for <a href="https://qmail.mirrors.auchnet.org/www.felipecosta.org/projetos/main.htm">qmail in
+Brazil-Portuguese</a></a>.
+
+</ul>
+
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+<p><a href="top.html#index">[index]</a>
+
+<p>
+<a name="patches">&nbsp;</a>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=2>&nbsp;</td>
+<td rowspan=3>&nbsp;<b>Recommended patches</b></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td>
+<td bgcolor="#000000" colspan=2>
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td width=25>&nbsp;</td><td width=350>&nbsp;</td>
+<td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td>
+<td colspan=3>
+<table border=0 cellspacing=5 ><tr><td>
+
+<ul>
+
+<li date="201702100"><a href="http://arnt.gulbrandsen.priv.no">Arnt
+Gulbrandsen</a> has implemented unicode address support according to <a
+href="https://tools.ietf.org/html/rfc6530">RFC 6530-32</a> on behalf of <a
+href="http://www.cnnic.cn">CNNIC</a>. A patch that requires the TLS patch <a
+href="http://arnt.gulbrandsen.priv.no/qmail/qmail-smtputf8.patch">is
+available</a> for download, ask Arnt if you prefer a patch without TLS.
+
+<li date="200301120">The definitions of errno in qmail (and tcpserver)
+do not work with the newest glibc (2.3.1).  Debian and redhat are
+updating to this glibc.  Executables compiled with older glibc's (2.3)
+abort on startup, and recompilation with 2.3.1 is not possible.  Mate
+Wierdl has <a href="http://djbware.csi.hu/patches/">patches</a> for all
+of djb's software.  Erwin Hoffmann points out that a one-line sed
+script will fix most of DJB's software.  Look in the <a
+href="top.html#tips">Tips</a> section.
+
+<li date="200301130">Erik Sj&ouml;lund pointed out <a
+href="http://www.ornl.gov/its/archives/mailing-lists/qmail/2000/10/msg00696.html">this
+bug</a> in qmail-local</a>.
+
+<li date="200305071">qmail ought to recognize 0.0.0.0 as a local IP
+address</a>.  <a
+href="http://www.suspectclass.com/~sgifford/qmail/qmail-0.0.0.0.patch">This
+patch</a> from Scott Gifford implements that change.
+
+<li date="200205011">David Phillips noticed that sendmail's -f option
+sets a default From: header, and so <a
+href="http://david.acz.org/software/sendmail-flagf.patch">should</a>
+qmail's emulation.
+
+<li><a name="qmailqueue">Bruce Guenter</a> has written a patch which
+causes any program that would run qmail-queue to look for an
+environment variable <a href="qmailqueue-patch.html">QMAILQUEUE</a>.  If it
+is present, it is used in place of the string "bin/qmail-queue" when
+running qmail-queue.  This could be used, for example, to add a
+program into the qmail-smtpd->qmail-queue pipeline that could do
+filtering, rewrite broken headers, etc.
+
+</ul>
+
+<p>
+</td></tr></table>
+</td><td bgcolor="#000000"><img src="1x1.gif" alt="" width=1 height=1></td></tr>
+<tr><td colspan=5 bgcolor="#000000">
+<img src="1x1.gif" alt="" width=1 height=1></td></tr>
+</table>
+
+
+<a href="timestamp.html"></a>
+<hr>
+<h5>Send kudos/brickbats/contributions to <a
+href="http://www.qmail.org/cgi-bin/m/nelson-qa@aqmail.org">Russell
+Nelson</a>.  Some design contributed by <a
+href="http://www.qmail.org/cgi-bin/m/colesa@akos.net">Steve Cole</a>
+and Olivier Mueller.  Some lint'ing by Paul Theodoropoulos.</h5>
+
+<!-- Created: Fri Jan 23 10:56:29 EST 1998 -->
+<!-- hhmts start -->
+Last modified: Sun Jan 17 17:02:48 EST 2016
+<!-- hhmts end -->
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+Gratuitious blank lines added so that top.html#link works.
+
+
+</body>
+</html>

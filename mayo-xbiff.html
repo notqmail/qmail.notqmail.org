@@ -1,0 +1,22 @@
+In /usr/lib/X11/app-defaults/XBiff:
+
+*checkCommand:/usr/local/bin/checkmail
+
+In /usr/local/bin/checkmail:
+
+#!/bin/sh
+ls $HOME/Maildir/new > $HOME/.curmail
+if [ "`wc -l $HOME/.curmail | colrm 8`" != "      0" ]; then
+    if [ -f $HOME/.prevmail ]; then
+        if [ "`diff --brief $HOME/.curmail $HOME/.prevmail`" ]; then
+            mv $HOME/.curmail $HOME/.prevmail
+            exit 0
+        fi
+        exit 1
+    fi
+    mv $HOME/.curmail $HOME/.prevmail
+    exit 0
+else
+    exit 2
+fi
+

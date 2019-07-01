@@ -1,0 +1,167 @@
+<h1>Run packages</h1>
+
+The packages listed here help you run various services such as
+<tt>qmail</tt> and <tt>djbdns</tt> using <tt>daemontools</tt>.  As a
+minimum, you need to install the <tt>functions</tt>,
+<tt>runlevelconf</tt>, and <tt>dt-run</tt> packages.  This will enable
+you to run all DJB packages to run under <tt>daemontools</tt> except
+<tt>qmail</tt>.  To run <tt>qmail</tt> under <tt>daemontools</tt>,
+install the <tt>qmail-run</tt> package. If you want to run some
+non-DJB packages, such as <tt>rsync</tt>, <tt>proftpd</tt>,
+<tt>telnetd</tt>, under <tt>daemontools</tt>, install the
+<tt>other-run</tt> package.
+
+<h2>functions</h2>
+
+This package is required by all the others.  It provides some shell
+functions that helps to set up PATH-like environments.  
+
+<ul>
+<li>To get the latest binary rpm, click <a
+href="RPMS/functions-4-112memphis.noarch.rpm.html">here.</a> 
+
+<li>To get the latest source rpm, click <a
+href="SRPMS/functions-4-112memphis.src.rpm">here.</a>
+
+<li>To get the latest spec file, click <a
+href="SPECS/functions.spec.html">here.</a>
+
+</ul>
+
+
+<a name="runlevelconf:main"><h2>runlevelconf</h2></a>
+
+This package makes it easy to have services run under various run
+levels.  You can (and should) read about <tt>runlevelconf</tt> <a
+href="SOURCES/runlevelconf_README.html">here</a>.
+
+<h4>Prerequisites</h4>
+
+The following packages need to be installed on your system before you
+can install <tt>runlevelconf</tt>.
+
+<ul>
+
+<li><a href="tree.html">tree</a>
+
+<li><a href="daemontools.html">daemontools</a>
+
+</ul>
+
+<h4>runlevelconf main course</h4>
+
+<ul>
+
+<li>To get the latest binary rpm, click <a
+href="RPMS/runlevelconf-0.08-112memphis.noarch.rpm.html">here.</a> 
+
+<li>To get the latest source rpm, click <a
+href="SRPMS/runlevelconf-0.08-112memphis.src.rpm">here.</a>
+
+<li>To get the latest spec file, click <a
+href="SPECS/runlevelconf.spec.html">here.</a>
+
+</ul>
+
+<a name="dt-run:main"><h2>dt-run</h2></a>
+This package sets up and runs services unders <tt>daemontools</tt>.
+You can (and should) read about <tt>dt-run</tt> <a
+href="SOURCES/dt-run_README.html">here</a>.
+
+<h4>Prerequisites</h4>
+
+The following packages need to be installed on your system before you
+can install <tt>dt-run</tt>.
+
+<ul>
+
+<li><a href="run.html#runlevelconf:main">runlevelconf</a>
+
+<li><a href="ucspi-tcp.html">ucspi-tcp</a>
+
+</ul>
+
+<h4>dt-run main course</h4>
+
+<ul>
+
+<li>To get the latest binary rpm, click <a
+href="RPMS/dt-run-11.07-112memphis.noarch.rpm.html">here.</a> 
+
+<li>To get the latest source rpm, click <a
+href="SRPMS/dt-run-11.07-112memphis.src.rpm">here.</a>
+
+<li>To get the latest spec file, click <a
+href="SPECS/dt-run.spec.html">here.</a>
+
+</ul>
+
+<h2>qmail-run</h2>
+
+This package sets up <tt>qmail</tt> to run under <tt>daemontools</tt>.
+The <a href="SOURCES/dt-run_README.html">description of the <tt>dt-run</tt>
+package</a> also describes <tt>qmail-run</tt>,
+
+
+<h4>Prerequisites</h4>
+
+The following packages need to be installed on your system before you
+can install <tt>qmail-run</tt>.
+
+<ul>
+
+<li><a href="run.html#dt-run:main">dt-run</a>
+
+<li><a href="qmail.html">qmail</a>
+
+</ul>
+
+<h4>qmail-run main course</h4>
+
+
+<ul>
+
+<li>To get the latest binary rpm, click <a
+href="RPMS/qmail-run-11.07-112memphis.noarch.rpm.html">here.</a> 
+
+<li>To get the latest source rpm, click <a
+href="SRPMS/qmail-run-11.07-112memphis.src.rpm">here.</a>
+
+<li>To get the latest spec file, click <a
+href="SPECS/qmail-run.spec.html">here.</a>
+
+</ul>
+
+
+<h2>other-run</h2>
+
+This package sets up some non-DJB services---such as telnetd, rlogind,
+wuftpd, proftpd, rsync---to run under <tt>daemontools</tt>.  The <a
+href="SOURCES/dt-run_README.html">description of the <tt>dt-run</tt>
+package</a> also describes <tt>other-run</tt>,
+
+<h4>Prerequisites</h4>
+
+The following packages need to be installed on your system before you
+can install <tt>other-run</tt>.
+
+<ul>
+
+<li><a href="run.html#dt-run:main">dt-run</a>
+
+</ul>
+
+<h4>dt-run main course</h4>
+
+<ul>
+
+<li>To get the latest binary rpm, click <a
+href="RPMS/other-run-11.07-112memphis.noarch.rpm.html">here.</a> 
+
+<li>To get the latest source rpm, click <a
+href="SRPMS/other-run-11.07-112memphis.src.rpm">here.</a>
+
+<li>To get the latest spec file, click <a
+href="SPECS/other-run.spec.html">here.</a>
+
+</ul>

@@ -1,0 +1,85 @@
+Janos Farkas writes:
+ > My point is not total elimination of all spam-suspicious mail (I'll have
+ > other tools for that, as you can see from my address -- yes, it's still
+ > not finished, should anyone ask :),
+
+Inspired by Janos's idea, I've written two anti-spam email address
+manipulators.  One expires addresses, and the other matches the
+address against the sender, so that only certain senders work.  The
+code is disgustingly short, so I'm including it here.
+
+Expiring addresses
+------------------
+
+This one lets you advertise an email address that only works for a
+period of time.  It uses an encrypted TAI date.  If someone sends
+mail after that date, their mail bounces and they're given a new
+expiring address.  If you post to Usenet with "$USER-dated", then
+that mail will immediately bounce back a new dated address to them.
+No, I don't have a good system for inserting a dated address into your
+mail or posts, although I'd entertain suggestions.
+
+echo '|bin/dated-mail'    >.qmail-dated-default
+echo './Mailbox-preferred'>>.qmail-dated-default
+
+#!/usr/bin/perl
+# -*- Perl -*-
+
+use Crypt::IDEA;
+
+my $timeout = 5*24*60*60;		# five days
+my $ext2 = $ENV{'EXT2'};
+my $user = $ENV{'USER'};
+my $key = pack("H*", "55941241c04759c741112d05c23bcd1d");
+my $cipher = new IDEA $key;
+my $in;
+
+if (length($ext2) == 16 && length($in = pack("H*", $ext2)) == 8) {
+    $date = unpack("H*",$cipher->decrypt($in));
+} else {
+    $date = 0;
+}
+exit 0 if $date > time;
+$in = sprintf("%16d",time+$timeout);
+print "That email address has expired.  Use $user-dated-".unpack("H*",$cipher->encrypt(pack("H*", $in)))." instead\n";
+exit 100;
+
+
+Matching Sender
+---------------
+
+This one gives you an address that only a certain sender can use.  To
+get the proper address, subscribe to a list (to get the envelope
+sender they'll be using).  Examine the log file output to get the
+address that will pass the filter, and resubscribe to the list using
+that address.  Or, if it's a person who's sending you mail, once he
+sends you mail, tell him the address that will get into your preferred
+mailbox.
+
+echo '|bin/sender-mail 1' >>.qmail
+echo '|bin/sender-mail'    >.qmail-l-default
+echo './Mailbox-preferred'>>.qmail-l-default
+
+
+#!/usr/bin/perl
+# -*- Perl -*-
+
+use MD5;
+my $md5 = new MD5;
+my $really = shift;
+my $user = $ENV{'USER'};
+my $sender;
+
+$sender = $ENV{'SENDER'};
+$sender =~ s/-return-\d*-.*\@//; # eliminate serial numbers from ezmlm lists.
+$sender =~ s/nelson.*=crynwr\.com//; # eliminate VERP
+
+$md5->add("Insert your hash seed here");
+$md5->add($sender);
+$hash = $md5->hexdigest;
+
+exit 0 if $hash eq $ENV{'EXT2'};
+print "The address $user-l-$hash will pass\n";
+exit 99 if $really;
+exit 0;
+

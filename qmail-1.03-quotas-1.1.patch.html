@@ -1,0 +1,143 @@
+qmail-1.03-quotas-1.1.patch
+Jan 3, 2000
+
+This patch to qmail-1.03 modifies the way qmail-local treats a 'quota
+exceeded' error when writing to a maildir.
+
+The virgin code as distributed by DJB treats this as a 'temporary
+error on maildir' and leaves the message in the queue for later
+delivery retries.  The modified code treats it as a permanent error
+and immediately returns the message to the sender.
+
+This allows you use the standard unix file system quota mechanism to
+enforce per-uid limits on either the number of files (inodes) in that
+uid's maildir(s) or the total size of all files (blocks) in the
+maildir(s), or both, without leaving yourself (as) exposed to
+potential denial of service by running out of space for the qmail
+queue area.
+
+Please let me know if you find this useful (or not).  I am happy to
+receive bug reports as well as other comments.
+
+Thanks,
+-- Jeff Hayward
+   j.hayward@ots.utexas.edu
+
+
+*** qmail-1.03/qmail-local.c	Mon Jan  3 12:15:42 2000
+--- qmail-local.c	Tue Dec 21 19:41:39 1999
+***************
+*** 41,46 ****
+--- 41,49 ----
+  void temp_qmail(fn) char *fn;
+  { strerr_die5x(111,"Unable to open ",fn,": ",error_str(errno),". (#4.3.0)"); }
+  
++ char *overquota = 
++ 	"Recipient's mailbox is full, message returned to sender. (#5.2.2)";
++ 
+  int flagdoit;
+  int flag99;
+  
+***************
+*** 110,116 ****
+  
+   alarm(86400);
+   fd = open_excl(fntmptph);
+!  if (fd == -1) _exit(1);
+  
+   substdio_fdbuf(&ss,read,0,buf,sizeof(buf));
+   substdio_fdbuf(&ssout,write,fd,outbuf,sizeof(outbuf));
+--- 113,124 ----
+  
+   alarm(86400);
+   fd = open_excl(fntmptph);
+!  if (fd == -1) {
+!    if (errno == error_dquot)
+!      _exit(5);
+!    else
+!      _exit(1);
+!  }
+  
+   substdio_fdbuf(&ss,read,0,buf,sizeof(buf));
+   substdio_fdbuf(&ssout,write,fd,outbuf,sizeof(outbuf));
+***************
+*** 131,137 ****
+     /* if it was error_exist, almost certainly successful; i hate NFS */
+   tryunlinktmp(); _exit(0);
+  
+!  fail: tryunlinktmp(); _exit(1);
+  }
+  
+  /* end child process */
+--- 139,150 ----
+     /* if it was error_exist, almost certainly successful; i hate NFS */
+   tryunlinktmp(); _exit(0);
+  
+!  fail: 
+!    if (errno == error_dquot) {
+!      tryunlinktmp(); _exit(5);
+!    } else {
+!      tryunlinktmp(); _exit(1);
+!    }
+  }
+  
+  /* end child process */
+***************
+*** 162,167 ****
+--- 175,181 ----
+     case 2: strerr_die1x(111,"Unable to chdir to maildir. (#4.2.1)");
+     case 3: strerr_die1x(111,"Timeout on maildir delivery. (#4.3.0)");
+     case 4: strerr_die1x(111,"Unable to read message. (#4.3.0)");
++    case 5: strerr_die1x(100,overquota);
+     default: strerr_die1x(111,"Temporary error on maildir delivery. (#4.3.0)");
+    }
+  }
+***************
+*** 221,227 ****
+   return;
+  
+   writeerrs:
+!  strerr_warn5("Unable to write ",fn,": ",error_str(errno),". (#4.3.0)",0);
+   if (flaglocked) seek_trunc(fd,pos);
+   close(fd);
+   _exit(111);
+--- 235,246 ----
+   return;
+  
+   writeerrs:
+!  if (errno == error_dquot) { 
+!    if (flaglocked) seek_trunc(fd,pos);
+!    close(fd);
+!    strerr_die1x(100,overquota);
+!  } else
+!    strerr_warn5("Unable to write ",fn,": ",error_str(errno),". (#4.3.0)",0);
+   if (flaglocked) seek_trunc(fd,pos);
+   close(fd);
+   _exit(111);
+*** qmail-1.03/error.h	Mon Jan  3 12:15:42 2000
+--- error.h	Tue Sep 15 11:52:14 1998
+***************
+*** 16,21 ****
+--- 16,22 ----
+  extern int error_pipe;
+  extern int error_perm;
+  extern int error_acces;
++ extern int error_dquot;
+  
+  extern char *error_str();
+  extern int error_temp();
+*** qmail-1.03/error.c	Mon Jan  3 12:15:42 2000
+--- error.c	Tue Sep 15 11:53:29 1998
+***************
+*** 93,95 ****
+--- 93,102 ----
+  #else
+  -13;
+  #endif
++ 
++ int error_dquot =
++ #ifdef EDQUOT
++ EDQUOT;
++ #else
++ -14;
++ #endif

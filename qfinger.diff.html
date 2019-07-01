@@ -1,0 +1,20 @@
+*** util.c.bak	Sun Nov  2 17:44:10 1997
+--- util.c	Sun Nov  2 17:45:49 1997
+***************
+*** 359,365 ****
+  	    strdup(p) : NULL;
+  	pn->homephone = ((p = strsep(&bp, ",")) && *p) ?
+  	    strdup(p) : NULL;
+! 	(void)sprintf(tbuf,"%s/%s", _PATH_MAILDIR, pw->pw_name);
+  	pn->mailrecv = -1;		/* -1 == not_valid */
+  	if (stat(tbuf, &sb) < 0) {
+  		if (errno != ENOENT) {
+--- 359,365 ----
+  	    strdup(p) : NULL;
+  	pn->homephone = ((p = strsep(&bp, ",")) && *p) ?
+  	    strdup(p) : NULL;
+! 	(void)sprintf(tbuf,"%s/Mailbox", pw->pw_dir);
+  	pn->mailrecv = -1;		/* -1 == not_valid */
+  	if (stat(tbuf, &sb) < 0) {
+  		if (errno != ENOENT) {
+

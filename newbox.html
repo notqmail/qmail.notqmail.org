@@ -1,0 +1,47 @@
+The following script allows POP3 users to create up to four
+sub-mailboxes.  It goes into .qmail-newbox-default.  All they have to
+do is send mail to $USER-newbox-BOXNAME.  The subject and body of the
+mail are ignored.  A similar script to delete a mailbox could be
+written, but it not safe since anyone can forge mail.
+
+This script goes along with the patch to checkpassword included below.
+It allows POP3 users to log in using a sub-mailbox name
+(e.g. nelson-qmail) and their usual password.
+
+|if [ "X$SENDER" != "X$USER@$HOST" ]; then echo "Sorry, only $USER@$HOST can create mailboxes"; exit 1; fi
+|if [ `ls -d Maildir-*|wc -l` -ge 4 ]; then echo "Sorry, no more than four mailboxes per user"; exit 1; fi
+|if [ -f "Maildir-$EXT2" ]; then echo "Sorry, a plain file named Maildir-$EXT2 already exists"; exit 1; fi
+|if [ -d "Maildir-$EXT2/new" ]; then echo "Sorry, Maildir named Maildir-$EXT2 already exists"; exit 1; fi
+|maildirmake "Maildir-$EXT2" && echo "./Maildir-$EXT2/">.qmail-$EXT2 && chmod 644 .qmail-$EXT2
+|(echo "Subject: new mailbox";echo "To: $USER";echo "";echo "Your mailbox, $USER-$EXT2@$HOST, has been created") | qmail-inject -h
+
+
+--- orig/checkpassword.c        Sun Sep  1 08:54:38 1996
++++ ./checkpassword.c   Sun Sep  1 08:55:30 1996
+@@ -36,6 +36,7 @@
+  struct userpw *spw;
+ #endif
+  char *login;
++ char *ext;
+  char *password;
+  char *stored;
+  char *encrypted;
+@@ -66,6 +67,21 @@
+  password = up + i;
+  if (i == uplen) _exit(2);
+  while (up[i++]) if (i == uplen) _exit(2);
++ ext = login;
++ while(*ext && *ext != '-') ext++;
++ if (*ext)
++  {
++   char *newarg;
++
++   *ext++ = 0;
++   newarg = (char *) malloc(strlen(argv[argc-1]) + 1 + strlen(ext) + 1);
++   if (!newarg) _exit(111);
++   strcpy(newarg, argv[argc-1]);
++   strcat(newarg, "-");
++   strcat(newarg, ext);
++   argv[argc-1] = newarg;
++ }
++

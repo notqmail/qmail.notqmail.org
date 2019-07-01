@@ -1,0 +1,116 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          forgeries - how easy it is to forge mail
+
+     <B>SUMMARY</B>
+          An electronic mail message can easily be forged.  Almost
+          everything in it, including the return address, is
+          completely under the control of the sender.
+
+          An electronic mail message can be manually traced to its
+          origin if (1) all system administrators of intermediate
+          machines are both cooperative and competent, (2) the sender
+          did not break low-level TCP/IP security, and (3) all
+          intermediate machines are secure.
+
+          Users of <I>cryptography</I> can automatically ensure the integrity
+          and secrecy of their mail messages, as long as the sending
+          and receiving machines are secure.
+
+     <B>FORGERIES</B>
+          Like postal mail, electronic mail can be created entirely at
+          the whim of the sender.  <B>From</B>, <B>Sender</B>, <B>Return-Path</B>, and
+          <B>Message-ID</B> can all contain whatever information the sender
+          wants.
+
+          For example, if you inject a message through <B>sendmail</B> or
+          <B>qmail-inject</B> or <B>SMTP</B>, you can simply type in a <B>From</B> field.
+          In fact, <B>qmail-inject</B> lets you set up <B>MAILUSER</B>, <B>MAILHOST</B>,
+          and <B>MAILNAME</B> environment variables to produce your desired
+          <B>From</B> field on every message.
+
+     <B>TRACING</B> <B>FORGERIES</B>
+          Like postal mail, electronic mail is postmarked when it is
+          sent.  Each machine that receives an electronic mail message
+          adds a <B>Received</B> line to the top.
+
+          A modern <B>Received</B> line contains quite a bit of information.
+          In conjunction with the machine's logs, it lets a competent
+          system administrator determine where the machine received
+          the message from, as long as the sender did not break low-
+          level TCP/IP security or security on that machine.
+
+          Large multi-user machines often come with inadequate logging
+          software.  Fortunately, a system administrator can easily
+          obtain a copy of a 931/1413/Ident/TAP server, such as
+          <B>pidentd</B>.  Unfortunately, some system administrators fail to
+          do this, and are thus unable to figure out which local user
+          was responsible for generating a message.
+
+          If all intermediate system administrators are competent, and
+          the sender did not break machine security or low-level
+          TCP/IP security, it is possible to trace a message
+          backwards.  Unfortunately, some traces are stymied by
+          intermediate system administrators who are uncooperative or
+          untrustworthy.
+
+     <B>CRYPTOGRAPHY</B>
+          The sender of a mail message may place his message into a
+          <I>cryptographic</I> envelope stamped with his seal.  Strong
+          cryptography guarantees that any two messages with the same
+          seal were sent by the same cryptographic entity:  perhaps a
+          single person, perhaps a group of cooperating people, but in
+          any case somebody who knows a secret originally held only by
+          the creator of the seal.  The seal is called a <I>public</I> <I>key</I>.
+
+          Unfortunately, the creator of the seal is often an insecure
+          machine, or an untrustworthy central agency, but most of the
+          time seals are kept secure.
+
+          One popular cryptographic program is <B>pgp</B>.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man1/pgp.html">pgp(1)</A></B>, <B><A HREF="https://qmail.mirrors.auchnet.org/man/man8/identd.html">identd(8)</A></B>, <B><A HREF="https://qmail.mirrors.auchnet.org/man/man8/qmail-header.html">qmail-header(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

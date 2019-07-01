@@ -1,0 +1,162 @@
+From log-return-355-nelson-lists=crynwr.com@list.cr.yp.to Mon Mar 27 00:10:03 2000
+X-VM-v5-Data: ([nil nil nil t nil nil nil nil nil]
+	["6063" "Mon" "27" "March" "2000" "10:06:03" "+1000" "Peter Samuel" "Peter.Samuel@ind.tansu.com.au" "<Pine.GSO.4.10.10003271004170.16362-300000@grizzly.ind.tansu.com.au>" "115" "tai64nunix" "^From:" nil nil "3" nil nil nil nil nil]
+	nil)
+X-VM-Summary-Format: "%n %*%a %-17.17F %-3.3m %2d %4l/%-5c %I\"%s\"\n"
+X-VM-Labels: nil
+X-VM-VHeader: ("Resent-" "From:" "Sender:" "To:" "Apparently-To:" "Cc:" "Subject:" "Date:") nil
+X-VM-Last-Modified: (14562 26706 270047)
+X-VM-POP-Retrieved: nil
+X-VM-Bookmark: 4
+Return-Path: <log-return-355-nelson-lists=crynwr.com@list.cr.yp.to>
+Delivered-To: nelson-lists@desk.crynwr.com
+Received: (qmail 20851 invoked by uid 0); 27 Mar 2000 00:10:02 -0000
+Received: from ns1.crynwr.com (HELO ns.crynwr.com) (192.203.178.14)
+  by desk.crynwr.com with SMTP; 27 Mar 2000 00:10:02 -0000
+Received: (qmail 29806 invoked by uid 500); 27 Mar 2000 00:08:34 -0000
+Delivered-To: nelson-lists@crynwr.com
+Received: (qmail 29802 invoked from network); 27 Mar 2000 00:08:33 -0000
+Received: from muncher.math.uic.edu (131.193.178.181)
+  by pdam.crynwr.com with SMTP; 27 Mar 2000 00:08:33 -0000
+Received: (qmail 19419 invoked by uid 1002); 27 Mar 2000 00:08:19 -0000
+Mailing-List: contact log-help@list.cr.yp.to; run by ezmlm
+Delivered-To: mailing list log@list.cr.yp.to
+Received: (qmail 14257 invoked from network); 27 Mar 2000 00:08:19 -0000
+Received: from mailo.vtcif.telstra.com.au (202.12.144.17)
+  by muncher.math.uic.edu with SMTP; 27 Mar 2000 00:08:19 -0000
+Received: (from uucp@localhost) by mailo.vtcif.telstra.com.au (8.8.2/8.6.9) id KAA23391 for <log@list.cr.yp.to>; Mon, 27 Mar 2000 10:07:19 +1000 (EST)
+Received: from maili.vtcif.telstra.com.au(202.12.142.17)
+ via SMTP by mailo.vtcif.telstra.com.au, id smtpdsEhCA_; Mon Mar 27 10:06:45 2000
+Received: (from uucp@localhost) by maili.vtcif.telstra.com.au (8.8.2/8.6.9) id KAA13340 for <log@list.cr.yp.to>; Mon, 27 Mar 2000 10:06:44 +1000 (EST)
+Received: from localhost(127.0.0.1), claiming to be "bunyip.tansu.com.au"
+ via SMTP by localhost, id smtpd0RMiEg; Mon Mar 27 10:06:08 2000
+Received: (qmail 22604 invoked from network); 27 Mar 2000 00:06:06 -0000
+Received: from humpback.ind.tansu.com.au (HELO ind.tansu.com.au) (149.135.128.11)
+  by bunyip.tansu.com.au with SMTP; 27 Mar 2000 00:06:06 -0000
+Received: (qmail 20636 invoked from network); 27 Mar 2000 00:06:03 -0000
+Received: from grizzly.ind.tansu.com.au (149.135.128.25)
+  by humpback.ind.tansu.com.au with QMQP; 27 Mar 2000 00:06:03 -0000
+Message-ID: <Pine.GSO.4.10.10003271004170.16362-300000@grizzly.ind.tansu.com.au>
+MIME-Version: 1.0
+Content-Type: MULTIPART/MIXED; BOUNDARY="-559023410-351212254-954115563=:16362"
+From: "Peter Samuel" <Peter.Samuel@ind.tansu.com.au>
+To: log@list.cr.yp.to
+Subject: tai64nunix
+Date: Mon, 27 Mar 2000 10:06:03 +1000 (EST)
+
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+  Send mail to mime@docserver.cac.washington.edu for more info.
+
+---559023410-351212254-954115563=:16362
+Content-Type: TEXT/PLAIN; charset=US-ASCII
+
+The following patch to daemontools-0.70 creates the tai64nunix executable.
+tai64nunix takes multilog output and converts the tai64 time to unix
+epoch time:
+ 
+    echo hello | multilog t e 2>&1 | tai64nunix
+    953888914.320443500 hello
+ 
+The code is tai64nlocal.c stripped down.
+
+Regards
+Peter
+----------
+Peter Samuel                                peter@eserv.com.au
+Technical Consultant                        or at present:
+eServ. Pty Ltd                              Peter.Samuel@ind.tansu.com.au
+Phone: +61 2 9206 3410                      Fax: +61 2 9281 1301
+
+"If you kill all your unhappy customers, you'll only have happy ones left"
+
+---559023410-351212254-954115563=:16362
+Content-Type: TEXT/PLAIN; charset=US-ASCII; name="tai64nunix.c"
+Content-Transfer-Encoding: BASE64
+Content-ID: <Pine.GSO.4.10.10003271006030.16362@grizzly.ind.tansu.com.au>
+Content-Description: 
+Content-Disposition: attachment; filename="tai64nunix.c"
+
+I2luY2x1ZGUgPHN5cy90eXBlcy5oPg0KI2luY2x1ZGUgImJ1ZmZlci5oIg0K
+I2luY2x1ZGUgImV4aXQuaCINCiNpbmNsdWRlICJmbXQuaCINCg0KY2hhciBu
+dW1bRk1UX1VMT05HXTsNCg0Kdm9pZCBnZXQoY2hhciAqY2gpDQp7DQogIGlu
+dCByOw0KDQogIHIgPSBidWZmZXJfR0VUQyhidWZmZXJfMCxjaCk7DQogIGlm
+IChyID09IDEpIHJldHVybjsNCiAgaWYgKHIgPT0gMCkgX2V4aXQoMCk7DQog
+IF9leGl0KDExMSk7DQp9DQoNCnZvaWQgb3V0KGNoYXIgKmJ1ZixpbnQgbGVu
+KQ0Kew0KICBpZiAoYnVmZmVyX3B1dChidWZmZXJfMSxidWYsbGVuKSA9PSAt
+MSkNCiAgICBfZXhpdCgxMTEpOw0KfQ0KDQp0aW1lX3Qgc2VjczsNCnVuc2ln
+bmVkIGxvbmcgbmFub3NlY3M7DQp1bnNpZ25lZCBsb25nIHU7DQoNCm1haW4o
+KQ0Kew0KICBjaGFyIGNoOw0KDQogIGZvciAoOzspIHsNCiAgICBnZXQoJmNo
+KTsNCiAgICBpZiAoY2ggPT0gJ0AnKSB7DQogICAgICBzZWNzID0gMDsNCiAg
+ICAgIG5hbm9zZWNzID0gMDsNCiAgICAgIGZvciAoOzspIHsNCiAgICAgICAg
+Z2V0KCZjaCk7DQogICAgICAgIHUgPSBjaCAtICcwJzsNCiAgICAgICAgaWYg
+KHUgPj0gMTApIHsNCiAgICAgICAgICB1ID0gY2ggLSAnYSc7DQogICAgICAg
+ICAgaWYgKHUgPj0gNikgYnJlYWs7DQogICAgICAgICAgdSArPSAxMDsNCiAg
+ICAgICAgfQ0KICAgICAgICBzZWNzIDw8PSA0Ow0KICAgICAgICBzZWNzICs9
+IG5hbm9zZWNzID4+IDI4Ow0KICAgICAgICBuYW5vc2VjcyAmPSAweGZmZmZm
+ZmY7DQogICAgICAgIG5hbm9zZWNzIDw8PSA0Ow0KICAgICAgICBuYW5vc2Vj
+cyArPSB1Ow0KICAgICAgfQ0KICAgICAgc2VjcyAtPSA0NjExNjg2MDE4NDI3
+Mzg3OTE0VUxMOw0KICAgICAgb3V0KG51bSxmbXRfdWludDAobnVtLHNlY3Ms
+OSkpOw0KICAgICAgb3V0KCIuIiwxKTsNCiAgICAgIG91dChudW0sZm10X3Vp
+bnQwKG51bSxuYW5vc2Vjcyw5KSk7DQogICAgfQ0KICAgIGZvciAoOzspIHsN
+CiAgICAgIG91dCgmY2gsMSk7DQogICAgICBpZiAoY2ggPT0gJ1xuJykgYnJl
+YWs7DQogICAgICBnZXQoJmNoKTsNCiAgICB9DQogIH0NCn0NCg==
+---559023410-351212254-954115563=:16362
+Content-Type: TEXT/PLAIN; charset=US-ASCII; name=tai64nunix-diffs
+Content-Transfer-Encoding: BASE64
+Content-ID: <Pine.GSO.4.10.10003271006031.16362@grizzly.ind.tansu.com.au>
+Content-Description: 
+Content-Disposition: attachment; filename=tai64nunix-diffs
+
+KioqIEZJTEVTLm9yaWcJTW9uIE1hciAgNiAxNjoyMTowOSAyMDAwDQotLS0g
+RklMRVMJRnJpIE1hciAyNCAxOTo0NjozNCAyMDAwDQoqKioqKioqKioqKioq
+KioNCioqKiAxNSwyMCAqKioqDQotLS0gMTUsMjEgLS0tLQ0KICBtdWx0aWxv
+Zy5jDQogIHRhaTY0bi5jDQogIHRhaTY0bmxvY2FsLmMNCisgdGFpNjRudW5p
+eC5jDQogIHNvZnRsaW1pdC5jDQogIHNldHVpZGdpZC5jDQogIGVudnVpZGdp
+ZC5jDQoqKiogTWFrZWZpbGUub3JpZwlNb24gTWFyICA2IDE2OjIxOjA5IDIw
+MDANCi0tLSBNYWtlZmlsZQlGcmkgTWFyIDI0IDE5OjI2OjU3IDIwMDANCioq
+KioqKioqKioqKioqKg0KKioqIDMzNiwzNDIgKioqKg0KICANCiAgcHJvZzog
+XA0KICBzdnNjYW4gc3VwZXJ2aXNlIHN2YyBzdm9rIHN2c3RhdCBmZ2hhY2sg
+bXVsdGlsb2cgdGFpNjRuIHRhaTY0bmxvY2FsIFwNCiEgc29mdGxpbWl0IHNl
+dHVpZGdpZCBlbnZ1aWRnaWQgZW52ZGlyIHNldGxvY2sgcnRzIG1hdGNodGVz
+dA0KICANCiAgcHJvdC5vOiBcDQogIGNvbXBpbGUgcHJvdC5jIGhhc3Noc2dy
+LmggcHJvdC5oDQotLS0gMzM2LDM0MiAtLS0tDQogIA0KICBwcm9nOiBcDQog
+IHN2c2NhbiBzdXBlcnZpc2Ugc3ZjIHN2b2sgc3ZzdGF0IGZnaGFjayBtdWx0
+aWxvZyB0YWk2NG4gdGFpNjRubG9jYWwgXA0KISB0YWk2NG51bml4IHNvZnRs
+aW1pdCBzZXR1aWRnaWQgZW52dWlkZ2lkIGVudmRpciBzZXRsb2NrIHJ0cyBt
+YXRjaHRlc3QNCiAgDQogIHByb3QubzogXA0KICBjb21waWxlIHByb3QuYyBo
+YXNzaHNnci5oIHByb3QuaA0KKioqKioqKioqKioqKioqDQoqKiogNTM0LDUz
+OSAqKioqDQotLS0gNTM0LDU0NyAtLS0tDQogIHRhaTY0bmxvY2FsLm86IFwN
+CiAgY29tcGlsZSB0YWk2NG5sb2NhbC5jIGJ1ZmZlci5oIGV4aXQuaCBmbXQu
+aA0KICAJLi9jb21waWxlIHRhaTY0bmxvY2FsLmMNCisgDQorIHRhaTY0bnVu
+aXg6IFwNCisgbG9hZCB0YWk2NG51bml4Lm8gdW5peC5hIGJ5dGUuYQ0KKyAJ
+Li9sb2FkIHRhaTY0bnVuaXggdW5peC5hIGJ5dGUuYSANCisgDQorIHRhaTY0
+bnVuaXgubzogXA0KKyBjb21waWxlIHRhaTY0bnVuaXguYyBidWZmZXIuaCBl
+eGl0LmggZm10LmgNCisgCS4vY29tcGlsZSB0YWk2NG51bml4LmMNCiAgDQog
+IHRhaV9ub3cubzogXA0KICBjb21waWxlIHRhaV9ub3cuYyB0YWkuaCB1aW50
+NjQuaA0KKioqIFRBUkdFVFMub3JpZwlNb24gTWFyICA2IDE2OjIxOjA5IDIw
+MDANCi0tLSBUQVJHRVRTCUZyaSBNYXIgMjQgMTk6NDk6MjAgMjAwMA0KKioq
+KioqKioqKioqKioqDQoqKiogMTA5LDExNCAqKioqDQotLS0gMTA5LDExNiAt
+LS0tDQogIHRhaTY0bg0KICB0YWk2NG5sb2NhbC5vDQogIHRhaTY0bmxvY2Fs
+DQorIHRhaTY0bnVuaXgubw0KKyB0YWk2NG51bml4DQogIHNvZnRsaW1pdC5v
+DQogIHNvZnRsaW1pdA0KICBzZXR1aWRnaWQubw0KKioqIGNvbmYtaG9tZS5v
+cmlnCU1vbiBNYXIgIDYgMTY6MjE6MDkgMjAwMA0KLS0tIGNvbmYtaG9tZQlG
+cmkgTWFyIDI0IDE5OjI0OjM3IDIwMDANCioqKioqKioqKioqKioqKg0KKioq
+IDEsNCAqKioqDQohIC91c3IvbG9jYWwNCiAgDQogIFRoaXMgaXMgdGhlIGRh
+ZW1vbnRvb2xzIGhvbWUgZGlyZWN0b3J5LiBQcm9ncmFtcyB3aWxsIGJlIGlu
+c3RhbGxlZCBpbg0KICAuLi4vYmluLg0KLS0tIDEsNCAtLS0tDQohIC9wa2dz
+L2RhZW1vbnRvb2xzLTAuNzANCiAgDQogIFRoaXMgaXMgdGhlIGRhZW1vbnRv
+b2xzIGhvbWUgZGlyZWN0b3J5LiBQcm9ncmFtcyB3aWxsIGJlIGluc3RhbGxl
+ZCBpbg0KICAuLi4vYmluLg0KKioqIGhpZXIuYy5vcmlnCU1vbiBNYXIgIDYg
+MTY6MjE6MDkgMjAwMA0KLS0tIGhpZXIuYwlGcmkgTWFyIDI0IDE5OjU1OjQ0
+IDIwMDANCioqKioqKioqKioqKioqKg0KKioqIDE1LDIwICoqKioNCi0tLSAx
+NSwyMSAtLS0tDQogICAgYyhhdXRvX2hvbWUsImJpbiIsIm11bHRpbG9nIiwt
+MSwtMSwwNzU1KTsNCiAgICBjKGF1dG9faG9tZSwiYmluIiwidGFpNjRuIiwt
+MSwtMSwwNzU1KTsNCiAgICBjKGF1dG9faG9tZSwiYmluIiwidGFpNjRubG9j
+YWwiLC0xLC0xLDA3NTUpOw0KKyAgIGMoYXV0b19ob21lLCJiaW4iLCJ0YWk2
+NG51bml4IiwtMSwtMSwwNzU1KTsNCiAgICBjKGF1dG9faG9tZSwiYmluIiwi
+c29mdGxpbWl0IiwtMSwtMSwwNzU1KTsNCiAgICBjKGF1dG9faG9tZSwiYmlu
+Iiwic2V0dWlkZ2lkIiwtMSwtMSwwNzAwKTsNCiAgICBjKGF1dG9faG9tZSwi
+YmluIiwiZW52dWlkZ2lkIiwtMSwtMSwwNzU1KTsNCg==
+---559023410-351212254-954115563=:16362--
+

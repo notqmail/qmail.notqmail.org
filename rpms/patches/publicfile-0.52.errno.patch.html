@@ -1,0 +1,23 @@
+diff -u publicfile-0.52.old/error.h publicfile-0.52/error.h
+--- publicfile-0.52.old/error.h	1999-11-09 01:23:46.000000000 -0600
++++ publicfile-0.52/error.h	2003-01-14 11:59:15.000000000 -0600
+@@ -1,7 +1,7 @@
+ #ifndef ERROR_H
+ #define ERROR_H
+ 
+-extern int errno;
++#include <errno.h>
+ 
+ extern int error_intr;
+ extern int error_nomem;
+diff -u publicfile-0.52.old/leapsecs_read.c publicfile-0.52/leapsecs_read.c
+--- publicfile-0.52.old/leapsecs_read.c	1999-11-09 01:23:46.000000000 -0600
++++ publicfile-0.52/leapsecs_read.c	2003-01-14 11:59:41.000000000 -0600
+@@ -2,7 +2,6 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <errno.h>
+-extern int errno;
+ #include "tai.h"
+ #include "leapsecs.h"
+ 

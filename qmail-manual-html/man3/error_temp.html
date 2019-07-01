@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>error_temp(3)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+error_temp(3)          C Library Functions          error_temp(3)
+
+
+
+<B>NAME</B>
+     error_temp - identify soft syscall <A HREF="error.html">error</A> codes
+
+<B>SYNTAX</B>
+     <B>#include</B> <B>&lt;error.h&gt;</B>
+
+     int <B>error_temp</B>(<I>e</I>);
+
+     int <I>e</I>;
+
+<B>DESCRIPTION</B>
+     <B>error_temp</B>  returns  1  if  syscall  error  code <I>e</I> is a soft
+     error, 0 if it is a hard error.  Normally <I>e</I> is <B>errno</B>.
+
+     A hard error is persistent: file not found,  read-only  file
+     system, symbolic link loop, etc.
+
+     A  soft  error  is  usually transient: out of memory, out of
+     disk space,  I/O  error,  disk  quota  exceeded,  connection
+     refused, host unreachable, etc.
+
+<B>SEE</B> <B>ALSO</B>
+     error(3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

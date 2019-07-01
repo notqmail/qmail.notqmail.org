@@ -1,0 +1,116 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-control - qmail configuration files
+
+     <B>INTRODUCTION</B>
+          You can change the behavior of the <B>qmail</B> system by modifying
+          <B>qmail</B>'s <I>control</I> <I>files</I> in <B>/var/qmail/control</B>.
+
+          <B>qmail</B> can survive with just one control file, <I>me</I>, containing
+          the fully-qualified name of the current host.  This file is
+          used as the default for other hostname-related control
+          files.
+
+          Comments are allowed in <I>badmailfrom</I>, <I>badmailpatterns</I>,
+          <I>badrcptto</I>, <I>locals</I>, <I>percenthack</I>, <I>qmqpservers</I>, <I>rcpthosts</I>,
+          <I>smtproutes</I>, and <I>virtualdomains</I>.  Trailing spaces and tabs
+          are allowed in any control file.
+
+          The following table lists all control files other than <I>me</I>.
+          See the corresponding man pages for further details.
+
+               control             default            used by
+
+               <I>badmailfrom</I>         (none)             qmail-smtpd
+               <I>badmailpatterns</I>     (none)             qmail-smtpd
+               <I>badrcptto</I>           (none)             qmail-smtpd
+               <I>bouncefrom</I>          MAILER-DAEMON      qmail-send
+               <I>bouncehost</I>          <I>me</I>                 qmail-send
+               <I>concurrencylocal</I>    10                 qmail-send
+               <I>concurrencyremote</I>   20                 qmail-send
+               <I>defaultdomain</I>       <I>me</I>                 qmail-inject
+               <I>defaulthost</I>         <I>me</I>                 qmail-inject
+               <I>databytes</I>           0                  qmail-smtpd
+               <I>doublebouncehost</I>    <I>me</I>                 qmail-send
+               <I>doublebounceto</I>      postmaster         qmail-send
+               <I>envnoathost</I>         <I>me</I>                 qmail-send
+               <I>helohost</I>            <I>me</I>                 qmail-remote
+               <I>idhost</I>              <I>me</I>                 qmail-inject
+               <I>localiphost</I>         <I>me</I>                 qmail-smtpd
+               <I>locals</I>              <I>me</I>                 qmail-send
+               <I>morercpthosts</I>       (none)             qmail-smtpd
+               <I>percenthack</I>         (none)             qmail-send
+               <I>plusdomain</I>          <I>me</I>                 qmail-inject
+               <I>qmqpservers</I>         (none)             qmail-qmqpc
+               <I>queuelifetime</I>       604800             qmail-send
+               <I>rcpthosts</I>           (none)             qmail-smtpd
+               <I>smtpgreeting</I>        <I>me</I>                 qmail-smtpd
+               <I>smtproutes</I>          (none)             qmail-remote
+               <I>timeoutconnect</I>      60                 qmail-remote
+               <I>timeoutremote</I>       1200               qmail-remote
+               <I>timeoutsmtpd</I>        1200               qmail-smtpd
+               <I>virtualdomains</I>      (none)             qmail-send
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man8/qmail-inject.html">qmail-inject(8)</A></B>, <B><A HREF="../man8/qmail-qmqpc.html">qmail-qmqpc(8)</A></B>, <B><A HREF="../man8/qmail-remote.html">qmail-remote(8)</A></B>, qmail-
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man8/send.html">send(8)</A></B>, <B><A HREF="../man8/qmail-showctl.html">qmail-showctl(8)</A></B>, <B><A HREF="../man8/qmail-smtpd.html">qmail-smtpd(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

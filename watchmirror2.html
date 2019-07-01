@@ -1,0 +1,95 @@
+#!/usr/bin/perl
+# Copyright Crynwr Software, 2001.
+# See http://opensource.org/licenses/gpl-license.html for permission to copy
+
+# usage: watchmirror top-level-directory-of-site
+# The top-level directory should have a file called timestamp.html
+# This file contains exactly and only the Unix timestamp of the
+# latest file on the site.
+# Watchmirror grovels through index2.html looking for occurrances of
+# top.html ...
+
+# ...yadda yadda yadda.  Do you really care?  This is rather a bit
+# specialized for qmail.org.  You have to have a top-level page which
+# is a list of mirrors.  You have to have a single top-level page called
+# "top.html".  Do you really want to impose those constraints on your
+# site?  If you really want me to release this properly, send me email
+# at watchmirror2@russnelson.com.
+
+# make sure stdout and stderr appear in the same place.
+$|=1;
+$dir = shift;
+#exit if -M "$dir/timestamp.html" < 1.0;
+open(IN, "<$dir/index2.html");
+open(OUT, ">$dir/index.html.new");
+$current = (stat("$dir/timestamp.html"))[9];
+@mon = qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;
+while(<IN>) {
+  if (m!href="http://(.*?)/(.*)"!) {
+    $host = $1;
+    $url = $2;
+    $url =~ s/top.html/timestamp.html/;
+    $mail = "";
+    $mail = $1 if s/mail="(.*?)" //;
+    $ignoreunreachable = s/ignoreunreachable="" //;
+    print "$host/$url : ";
+    if (!open(TS, "http@ $host $url 80|")) {
+      $status = " (qmail.org problem)";
+    } else {
+      @remote = <TS>;
+      chomp @remote;
+      $remote = join("", @remote);
+      print $remote;
+      close(TS);
+      if ($remote eq "") {
+        $status = " (site unreachable)";
+        $status = "" if $ignoreunreachable;
+      } elsif ($remote !~ m/Last modified (.*)/) {
+        $status = " (timestamp.html bad)"
+      } elsif ($1 < $current - 3600 - 86400 - 86400) {
+        @_ = localtime($1);
+        $status = "(last updated $mon[$_[4]] $_[3])";
+      } else {
+        print $remote;
+        $status = ""
+      }
+    }
+    $mirrorstatus = -s "/www/qmail/mirrorstatus/$mail";
+    $mirrorlatest = -M "/www/qmail/mirrorstatus/$mail";
+    if ($status && $mail) {
+        open(F, ">>/www/qmail/mirrorstatus/$mail") or die;
+        print F " ";
+        close(F);
+        $qmail = $mail;
+        $qmail =~ s/@/=/;
+        die "quote in '$qmail' in line $_" if $qmail =~ /"/;
+        open(M, "|/var/qmail/bin/qmail-inject -H -fm-$qmail\@qmail.org nelson\@crynwr.com") or die;
+        print M "From: nelson\@qmail.org\nTo: $mail\n";
+        print M "Subject: qmail mirror status\n\n";
+        print M "Hi.  This is the qmail mirror manager at qmail.org.
+Right at this moment, I'm having a bit of trouble with your mirror,
+$host/$url
+I've tried to fetch timestamp.html and this is what I found out:
+$status
+Do you think you could take a look at your mirror?
+-russ
+p.s. if my network happens to be down right now, you're getting this
+message for spurious reasons, sorry.  Try checking to see if you can
+get to mirror.qmail.org.  If you can't, well, that would explain it.
+";
+        close(M) or die;
+    }
+    print "$status\n";
+    if ($mirrorstatus > 4 and $mirrorlatest < 14.0) {
+      s!</a>!</a>$status <img src="red.gif" height="12" width="$mirrorstatus">!;
+    } else {
+      s!</a>!</a>$status!;
+    }
+
+  }
+  print OUT;
+}
+close(IN);
+close(OUT);
+rename("$dir/index.html.new","$dir/index.html");
+utime($current, $current, "$dir/index.html");

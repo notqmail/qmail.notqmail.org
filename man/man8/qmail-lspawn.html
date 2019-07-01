@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-lspawn - schedule local deliveries
+
+     <B>SYNOPSIS</B>
+          <B>qmail-lspawn</B> <I>defaultdelivery</I>
+
+     <B>DESCRIPTION</B>
+          <B>qmail-lspawn</B> reads a series of local delivery commands from
+          descriptor 0, invokes <B>qmail-local</B> to perform the deliveries,
+          and prints the results to descriptor 1.  It passes
+          <I>defaultdelivery</I> to <B>qmail-local</B> as the default delivery
+          instruction.
+
+          <B>qmail-lspawn</B> invokes <B>qmail-local</B> asynchronously, so the
+          results may not be in the same order as the commands.
+
+          For each recipient address, <B>qmail-lspawn</B> finds out which
+          local user controls that address.  It first checks the
+          <B>qmail-users</B> mechanism; if the address is not listed there,
+          it invokes <B>qmail-getpw</B>.  <B>qmail-lspawn</B> then runs <B>qmail-local</B>
+          under the user's uid and gid.  It does not set up any
+          supplementary groups.
+
+          <B>qmail-lspawn</B> treats an empty mailbox name as a trash
+          address.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man5/envelopes.html">envelopes(5)</A></B>, <B><A HREF="../man5/qmail-users.html">qmail-users(5)</A></B>, <B><A HREF="qmail-getpw.html">qmail-getpw(8)</A></B>, <B><A HREF="qmail-send.html">qmail-send(8)</A></B>,
+          <B><A HREF="qmail-local.html">qmail-local(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

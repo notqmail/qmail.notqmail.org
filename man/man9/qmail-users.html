@@ -1,0 +1,116 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-users - assign mail addresses to users
+
+     <B>OVERVIEW</B>
+          The file <B>QMAILHOME/users/assign</B> assigns addresses to users.
+          For example,
+
+             =joe.shmoe:joe:503:78:/home/joe:::
+
+          says that mail for <B>joe.shmoe</B> should be delivered to user
+          <B>joe</B>, with uid 503 and gid 78, as specified by
+          <B>/home/joe/.qmail</B>.
+
+          Assignments fed to <B>qmail-newu</B> will be used by <B>qmail-lspawn</B>
+          to control <B>qmail-local</B>'s deliveries.  See <B><A HREF="../man8/qmail-newu.html">qmail-newu(8)</A></B>.  A
+          change to <B>QMAILHOME/users/assign</B> will have no effect until
+          <B>qmail-newu</B> is run.
+
+     <B>STRUCTURE</B>
+          <B>QMAILHOME/users/assign</B> is a series of assignments, one per
+          line.  It ends with a line containing a single dot.  Lines
+          must not contain NUL.
+
+     <B>SIMPLE</B> <B>ASSIGNMENTS</B>
+          A simple assignment is a line of the form
+
+             =local:user:uid:gid:homedir:dash:ext:
+
+          Here <I>local</I> is an address; <I>user</I>, <I>uid</I>, and <I>gid</I> are the account
+          name, uid, and gid of the user in charge of <I>local</I>; and
+          messages to <I>local</I> will be controlled by
+          <I>homedir</I><B>/.qmail</B><I>dashext</I>.
+
+          If there are several assignments for the same <I>local</I> address,
+          <B>qmail-lspawn</B> will use the first one.
+
+          <I>local</I> is interpreted without regard to case.
+
+     <B>WILDCARD</B> <B>ASSIGNMENTS</B>
+          A wildcard assignment is a line of the form
+
+             +loc:user:uid:gid:homedir:dash:pre:
+
+          This assignment applies to any address beginning with <I>loc</I>,
+          including <I>loc</I> itself.  It means the same as
+
+             =locext:user:uid:gid:homedir:dash:preext:
+
+          for every string <I>ext</I>.
+
+          A more specific wildcard assignment overrides a less
+          specific assignment, and a simple assignment overrides any
+          wildcard assignment.  For example:
+
+             +:alias:7790:2108:QMAILHOME/alias:-::
+             +joe-:joe:507:100:/home/joe:-::
+             =joe:joe:507:100:/home/joe:::
+
+          The address <B>joe</B> is handled by the third line; the address
+          <B>joe-direct</B> is handled by the second line; the address <B>bill</B>
+          is handled by the first line.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man8/qmail-pw2u.html">qmail-pw2u(8)</A></B>, <B><A HREF="../man8/qmail-newu.html">qmail-newu(8)</A></B>, <B><A HREF="../man8/qmail-lspawn.html">qmail-lspawn(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

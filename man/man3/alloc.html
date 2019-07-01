@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          alloc - allocate memory
+
+     <B>SYNTAX</B>
+          <B>#include</B> <B>&lt;alloc.h&gt;</B>
+
+          char *<B>alloc</B>(<I>new</I>);
+
+          void <B>alloc_free</B>(<I>x</I>);
+
+          void <B>alloc_re</B>(&amp;<I>x</I>,<I>old</I>,<I>new</I>);
+
+          char *<I>x</I>;
+          unsigned int <I>old</I>;
+          unsigned int <I>new</I>;
+
+     <B>DESCRIPTION</B>
+          <B>alloc</B> allocates enough space from the heap for <I>new</I> bytes of
+          data, adequately aligned for any data type.  <I>new</I> may be 0.
+          <B>alloc</B> returns a pointer to the space.  If space is not
+          available, <B>alloc</B> returns 0, setting <B>errno</B> appropriately.
+
+          <B>alloc_free</B> returns space to the heap.
+
+          <B>alloc_re</B> expands the space allocated to <I>x</I> from <I>old</I> bytes to
+          <I>new</I> bytes.  It allocates new space, copies <I>old</I> bytes from
+          the old space to the new space, returns the old space to the
+          heap, and changes <I>x</I> to point to the new space.  It then
+          returns 1.  If space is not available, <B>alloc_re</B> returns 0,
+          leaving the old space alone.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man2/sbrk.html">sbrk(2)</A></B>, <B><A HREF="https://qmail.mirrors.auchnet.org/man/man3/malloc.html">malloc(3)</A></B>, <B><A HREF="error.html">error(3)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

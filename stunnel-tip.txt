@@ -1,0 +1,56 @@
+From: "Japheth Cleaver"
+Subject: Stunnel tip for qmail-{pop3d,smtpd}-ssl
+Date: Mon, 05 Dec 2005 09:01:28 -0800
+
+
+After searching for a way to easily bring up SSL-enabled versions of 
+these services without messing up my existing means of configuration 
+too much, I came upon a rather simple solution for stunnel (which 
+seems to give people fits sometimes). Simply create a wrapper script 
+named qmail-stunnel-wrapper.sh like so:
+
+--- snip ---
+#!/bin/ash
+
+SSLCERT=$1; shift
+
+exec /usr/sbin/stunnel -fd 3 3<<HERE
+debug=4
+foreground=yes
+cert=$SSLCERT
+exec=$1
+execargs=$*
+HERE
+--- snip ---
+
+...and you can call it from within your 
+supervise/qmail-{pop3d,smtpd}-ssl/run command line:
+
+exec /usr/local/sbin/softlimit -m 20971520 /usr/local/sbin/tcpserver \
+         -v -x /etc/tcprules.d/qmail-pop3d.cdb -c 120 -R 0 995 \
+         /var/qmail/bin/qmail-stunnel-wrapper.sh \
+         /var/qmail/control/pop3d-ssl.pem \
+         /var/qmail/bin/qmail-popup "`cat /var/qmail/control/me`" \
+         /usr/sbin/vchkpw \
+         /var/qmail/bin/qmail-pop3d-wrapper.sh \
+         /var/qmail/bin/qmail-pop3d Maildir 2>&1 7>&1
+
+
+This way you can keep your existing configuration in the same 
+exec-pipeline method of the run files -- like the qmail-pop3d-wrapper 
+and FD7 redirect -- without having to make a separate stunnel config 
+file for each SSL service. Plus your qmail-smtpd-ssl service can be 
+run using the same wrapper.
+
+Note that you need stunnel v4.05 or higher for this to work.
+
+
+Hope this is useful for someone!
+
+
+Regards,
+
+Japheth Cleaver
+cleaver rohan.sdsu.edu / cleaver redwire.net
+
+

@@ -1,0 +1,137 @@
+<HTML><HEAD><TITLE>qmail-smtpd(8)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+qmail-smtpd(8)       Maintenance Procedures        qmail-smtpd(8)
+
+
+
+<B>NAME</B>
+     qmail-smtpd - receive mail via SMTP
+
+<B>SYNOPSIS</B>
+     <B>qmail-smtpd</B>
+
+<B>DESCRIPTION</B>
+     <B>qmail-smtpd</B> receives  mail  messages  via  the  Simple  Mail
+     Transfer  Protocol (SMTP) and invokes <B><A HREF="qmail-queue.html">qmail-queue</A></B> to deposit
+     them into the outgoing queue.  <B>qmail-smtpd</B> must be  supplied
+     several environment variables; see <B><A HREF="../man5/tcp-environ.html">tcp-environ</A>(5)</B>.
+
+     <B>qmail-smtpd</B> is responsible for counting  hops.   It  rejects
+     any message with 100 or more <B>Received</B> or <B>Delivered-To</B> header
+     fields.
+
+     <B>qmail-smtpd</B> supports ESMTP, including the 8BITMIME and PIPE-
+     LINING options.
+
+<B>TRANSPARENCY</B>
+     <B>qmail-smtpd</B> converts the SMTP newline  convention  into  the
+     UNIX newline convention by converting CR LF into LF.
+
+     <B>qmail-smtpd</B> accepts messages  that  contain  long  lines  or
+     non-ASCII  characters, even though such messages violate the
+     SMTP protocol.
+
+<B>CONTROL</B> <B>FILES</B>
+     <I>badmailfrom</I>
+          Unacceptable envelope  sender  addresses.   <B>qmail-smtpd</B>
+          will  reject  every  recipient address for a message if
+          the envelope sender address is listed  in  <I>badmailfrom</I>.
+          A line in <I>badmailfrom</I> may be of the form <B>@</B><I>host</I>, meaning
+          every address at <I>host</I>.
+
+     <I>localiphost</I>
+          Replacement host name for local IP addresses.  Default:
+          <I>me</I>,  if  that  is supplied.  <B>qmail-smtpd</B> is responsible
+          for  recognizing  dotted-decimal  <A HREF="../man5/addresses.html">addresses</A>   for   the
+          current  host.  When it sees a recipient address of the
+          form  <I>box</I>@[<I>d</I>.<I>d</I>.<I>d</I>.<I>d</I>],  where  <I>d</I>.<I>d</I>.<I>d</I>.<I>d</I>  is  a  local   IP
+          address,  it replaces [<I>d</I>.<I>d</I>.<I>d</I>.<I>d</I>] with <I>localiphost</I>.  This
+          is done before <I>rcpthosts</I>.
+
+     <I>rcpthosts</I>
+          Allowed  RCPT  domains.   If  <I>rcpthosts</I>  is   supplied,
+          <B>qmail-smtpd</B>  will reject any envelope recipient address
+          with a domain not listed in <I>rcpthosts</I>.
+
+          Exception:  If the environment variable <B>RELAYCLIENT</B>  is
+          set, <B>qmail-smtpd</B> will ignore <I>rcpthosts</I>, and will append
+          the value of <B>RELAYCLIENT</B>  to  each  incoming  recipient
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+
+
+
+qmail-smtpd(8)       Maintenance Procedures        qmail-smtpd(8)
+
+
+
+          address.
+
+          <I>rcpthosts</I> may include wildcards:
+
+             heaven.af.mil
+             .heaven.af.mil
+
+          Envelope recipient addresses without @ signs are always
+          allowed through.
+
+     <I>smtpgreeting</I>
+          SMTP greeting message.  Default:  <I>me</I>, if that  is  sup-
+          plied;  otherwise  <B>qmail-smtpd</B> will refuse to run.  The
+          first word of <I>smtpgreeting</I> should be the current host's
+          name.
+
+     <I>timeoutsmtpd</I>
+          Number of seconds <B>qmail-smtpd</B> will <A HREF="../man3/wait.html">wait</A>  for  each  new
+          buffer  of  data from the remote SMTP client.  Default:
+          1200.
+
+<B>SEE</B> <B>ALSO</B>
+     <A HREF="../man1/tcp-env.html">tcp-env</A>(1),   tcp-environ(5),    <A HREF="../man5/qmail-control.html">qmail-control</A>(5),    qmail-
+     inject(8), qmail-queue(8), <A HREF="qmail-remote.html">qmail-remote</A>(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          2
+
+
+
+</PRE></BODY></HTML>

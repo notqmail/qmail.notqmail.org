@@ -1,0 +1,116 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-queue - queue a mail message for delivery
+
+     <B>SYNOPSIS</B>
+          <B>qmail-queue</B>
+
+     <B>DESCRIPTION</B>
+          <B>qmail-queue</B> reads a mail message from descriptor 0.  It then
+          reads envelope information from descriptor 1.  It places the
+          message into the outgoing queue for future delivery by
+          <B>qmail-send</B>.
+
+          The envelope information is an envelope sender address
+          followed by a list of envelope recipient addresses.  The
+          sender address is preceded by the letter F and terminated by
+          a 0 byte.  Each recipient address is preceded by the letter
+          T and terminated by a 0 byte.  The list of recipient
+          addresses is terminated by an extra 0 byte.  If <B>qmail-queue</B>
+          sees end-of-file before the extra 0 byte, it aborts without
+          placing the message into the queue.
+
+          Every envelope recipient address should contain a username,
+          an @ sign, and a fully qualified domain name.
+
+          <B>qmail-queue</B> always adds a <B>Received</B> line to the top of the
+          message.  Other than this, <B>qmail-queue</B> does not inspect the
+          message and does not enforce any restrictions on its
+          contents.  However, the recipients probably expect to see a
+          proper header, as described in <B>qmail-header(5)</B>.
+
+     <B>FILESYSTEM</B> <B>RESTRICTIONS</B>
+          <B>qmail-queue</B> imposes two constraints on the queue structure:
+          each <B>mess</B> subdirectory must be in the same filesystem as the
+          <B>pid</B> directory; and each <B>todo</B> subdirectory must be in the
+          same filesystem as the <B>intd</B> directory.
+
+     <B>EXIT</B> <B>CODES</B>
+          <B>qmail-queue</B> does not print diagnostics.  It exits 0 if it
+          has successfully queued the message.  It exits between 1 and
+          99 if it has failed to queue the message.
+
+          All <B>qmail-queue</B> error codes between 11 and 40 indicate
+          permanent errors:
+
+          <B>11</B>   Address too long.
+
+          <B>31</B>   Mail server permanently refuses to send the message to
+               any recipients.  (Not used by <B>qmail-queue</B>, but can be
+               used by programs offering the same interface.)
+
+          All other <B>qmail-queue</B> error codes indicate temporary errors:
+
+          <B>51</B>   Out of memory.
+
+          <B>52</B>   Timeout.
+
+          <B>53</B>   Write error; e.g., disk full.
+
+          <B>54</B>   Unable to read the message or envelope.
+
+          <B>55</B>   Unable to read a configuration file.  (Not used by
+               <B>qmail-queue</B>.)
+
+          <B>56</B>   Problem making a network connection from this host.
+               (Not used by <B>qmail-queue</B>.)
+
+          <B>61</B>   Problem with the qmail home directory.
+
+          <B>62</B>   Problem with the queue directory.
+
+          <B>63</B>   Problem with queue/pid.
+
+          <B>64</B>   Problem with queue/mess.
+
+          <B>65</B>   Problem with queue/intd.
+
+          <B>66</B>   Problem with queue/todo.
+
+          <B>71</B>   Mail server temporarily refuses to send the message to
+               any recipients.  (Not used by <B>qmail-queue</B>.)
+
+          <B>72</B>   Connection to mail server timed out.  (Not used by
+               <B>qmail-queue</B>.)
+
+          <B>73</B>   Connection to mail server rejected.  (Not used by
+               <B>qmail-queue</B>.)
+
+          <B>74</B>   Connection to mail server succeeded, but communication
+               failed.  (Not used by <B>qmail-queue</B>.)
+
+          <B>81</B>   Internal bug; e.g., segmentation fault.
+
+          <B>91</B>   Envelope format error.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man5/addresses.html">addresses(5)</A></B>, <B><A HREF="../man5/envelopes.html">envelopes(5)</A></B>, <B><A HREF="../man5/qmail-header.html">qmail-header(5)</A></B>, qmail-
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man8/inject.html">inject(8)</A></B>, <B><A HREF="qmail-qmqpc.html">qmail-qmqpc(8)</A></B>, <B><A HREF="qmail-send.html">qmail-send(8)</A></B>, <B><A HREF="qmail-smtpd.html">qmail-smtpd(8)</A></B>
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

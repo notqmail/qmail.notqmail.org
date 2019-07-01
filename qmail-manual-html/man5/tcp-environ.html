@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>tcp-environ(5)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+tcp-environ(5)     Headers, Tables, and Macros     tcp-environ(5)
+
+
+
+<B>NAME</B>
+     tcp-environ - TCP-related environment variables
+
+<B>DESCRIPTION</B>
+     The following environment variables describe a  TCP  connec-
+     tion.  They are set up by <B><A HREF="../man1/tcp-env.html">tcp-env</A></B>, <B>tcpclient</B>, and <B>tcpserver</B>.
+     Note that <B>TCPLOCALHOST</B>, <B>TCPREMOTEHOST</B>, and <B>TCPREMOTEINFO</B> can
+     contain arbitrary characters.
+
+     PROTO
+          The string <B>TCP</B>.
+
+     TCPLOCALHOST
+          The domain name  of  the  local  host,  with  uppercase
+          letters   converted  to  lowercase.   If  there  is  no
+          currently  available  domain  name  for  the  local  IP
+          address, <B>TCPLOCALHOST</B> is not set.
+
+     TCPLOCALIP
+          The IP address of the  local  host,  in  dotted-decimal
+          form.
+
+     TCPLOCALPORT
+          The local TCP port number, in decimal.
+
+     TCPREMOTEHOST
+          The domain name of  the  remote  host,  with  uppercase
+          letters   converted  to  lowercase.   If  there  is  no
+          currently available  domain  name  for  the  remote  IP
+          address, <B>TCPREMOTEHOST</B> is not set.
+
+     TCPREMOTEINFO
+          A connection-specific string, perhaps a username,  sup-
+          plied  by  the  remote host via 931/1413/IDENT/TAP.  If
+          the remote host did not supply connection  information,
+          <B>TCPREMOTEINFO</B> is not set.
+
+     TCPREMOTEIP
+          The IP address of the remote host.
+
+     TCPREMOTEPORT
+          The remote TCP port number.
+
+<B>SEE</B> <B>ALSO</B>
+     tcpclient(1), tcpserver(1), tcp-env(1), tcp(4)
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

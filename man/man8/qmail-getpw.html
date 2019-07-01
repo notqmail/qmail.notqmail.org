@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-getpw - give addresses to users
+
+     <B>SYNOPSIS</B>
+          <B>qmail-getpw</B> <I>local</I>
+
+     <B>DESCRIPTION</B>
+          In <B>qmail</B>, each user controls a vast array of local
+          addresses.  <B>qmail-getpw</B> finds the user that controls a
+          particular address, <I>local</I>.  It prints six pieces of
+          information, each terminated by NUL:  <I>user</I>; <I>uid</I>; <I>gid</I>;
+          <I>homedir</I>; <I>dash</I>; and <I>ext</I>.  The user's account name is <I>user</I>;
+          the user's uid and gid in decimal are <I>uid</I> and <I>gid</I>; the
+          user's home directory is <I>homedir</I>; and messages to <I>local</I> will
+          be handled by <I>homedir</I><B>/.qmail</B><I>dashext</I>.
+
+          In case of trouble, <B>qmail-getpw</B> exits nonzero without
+          printing anything.
+
+          <B>WARNING:</B> The operating system's <B>getpwnam</B> function, which is
+          at the heart of <B>qmail-getpw</B>, is inherently unreliable:  it
+          fails to distinguish between temporary errors and
+          nonexistent users.  Future versions of <B>getpwnam</B> should
+          return ETXTBSY to indicate temporary errors and ESRCH to
+          indicate nonexistent users.
+
+     <B>RULES</B>
+          <B>qmail-getpw</B> considers an account in <B>/etc/passwd</B> to be a user
+          if (1) the account has a nonzero uid, (2) the account's home
+          directory exists (and is visible to <B>qmail-getpw</B>), and (3)
+          the account owns its home directory.  <B>qmail-getpw</B> ignores
+          account names containing uppercase letters.  <B>qmail-getpw</B>
+          also assumes that all account names are shorter than 32
+          characters.
+
+          <B>qmail-getpw</B> gives each user control over the basic <I>user</I>
+          address and all addresses of the form <I>user</I><B>-</B><I>anything</I>.  When
+          <I>local</I> is <I>user</I>, <I>dash</I> and <I>ext</I> are both empty.  When <I>local</I> is
+          <I>user</I><B>-</B><I>anything</I>, <I>dash</I> is a hyphen and <I>ext</I> is <I>anything</I>.  <I>user</I>
+          may appear in any combination of uppercase and lowercase
+          letters at the front of <I>local</I>.
+
+          A catch-all user, <B>alias</B>, controls all other addresses.  In
+          this case <I>ext</I> is <I>local</I> and <I>dash</I> is a hyphen.
+
+          You can override all of <B>qmail-getpw</B>'s decisions with the
+          <B>qmail-users</B> mechanism, which is reliable, highly
+          configurable, and much faster than <B>qmail-getpw</B>.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man5/qmail-users.html">qmail-users(5)</A></B>, <B><A HREF="qmail-lspawn.html">qmail-lspawn(8)</A></B>
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

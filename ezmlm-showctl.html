@@ -1,0 +1,119 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+if ($#ARGV < 0) {
+	print "gimme at least one dir\n";
+	exit -1;
+}
+my $dir;
+
+my @dirs = @ARGV;
+
+
+my %sopts;
+my %fopts;
+
+$sopts{"a"} = " [x] (a) webarchive";
+$sopts{"A"} = " [ ] (A) webarchive";
+$sopts{"b"} = " [x] (b) block archive - moderators only";
+$sopts{"B"} = " [x] (B) archive open for all/subscribed users";
+$sopts{"c"} = " [-] (c) (don't use me) use .ezmlmrc";
+$sopts{"C"} = " [x] (C) use default configfile";
+$sopts{"d"} = " [x] (d) digest list";
+$sopts{"D"} = " [ ] (D) digest list";
+$sopts{"e"} = " [x] (e) edit mode";
+$sopts{"E"} = " [ ] (E) edit mode";
+$sopts{"f"} = " [x] (f) prefix subject";
+$sopts{"F"} = " [ ] (F) prefix subject";
+$sopts{"g"} = " [x] (g) guard archive - SENDERS only";
+$sopts{"G"} = " [ ] (G) guard archive - SENDERS only";
+$sopts{"h"} = " [-] (h) don't use me";
+$sopts{"H"} = " [x] (H) require confirmation on subscription";
+$sopts{"i"} = " [x] (i) indexed for webaccess";
+$sopts{"I"} = " [ ] (I) indexed for webaccess";
+$sopts{"j"} = " [-] (j) (don't use me) no confirmation on un-subscription";
+$sopts{"J"} = " [x] (J) require confirmation on un-subscription";
+$sopts{"k"} = " [x] (k) kill file (<dir>/deny)";
+$sopts{"K"} = " [ ] (K) kill file (<dir>/deny)";
+$sopts{"l"} = " [x] (l) subscriber list for remote-admins";
+$sopts{"L"} = " [ ] (L) subscriber list for remote-admins";
+$sopts{"m"} = " [x] (m) moderated list";
+$sopts{"M"} = " [ ] (M) moderated list";
+$sopts{"n"} = " [x] (n) dir/text editable for remote admins";
+$sopts{"N"} = " [ ] (N) dir/text editable for remote admins";
+$sopts{"o"} = " [x] (o) forward mails on moderated lists to the moderator";
+$sopts{"O"} = " [ ] (O) forward mails on moderated lists to the moderator";
+$sopts{"p"} = " [x] (p) public list";
+$sopts{"P"} = " [ ] (P) public list (temporary shutdown)";
+$sopts{"q"} = " [x] (q) <list>-request support";
+$sopts{"Q"} = " [ ] (Q) <list>-request support";
+$sopts{"r"} = " [x] (r) remote administration";
+$sopts{"R"} = " [ ] (R) remote administration";
+$sopts{"s"} = " [x] (s) subscription moderation";
+$sopts{"S"} = " [ ] (S) subscription moderation";
+$sopts{"t"} = " [x] (t) trailer";
+$sopts{"T"} = " [ ] (T) trailer";
+$sopts{"u"} = " [x] (u) subscribers only";
+$sopts{"U"} = " [ ] (U) subscribers only";
+$sopts{"w"} = " [-] (w) (don't use me) [large lists with mysql-support only] ()";
+$sopts{"W"} = " [x] (W) no address restriction";
+$sopts{"x"} = " [x] (x) add some extras (mimeremove)";
+$sopts{"X"} = " [ ] (X) no extras";
+
+$fopts{"0"} = " - lists is sublist of ";
+$fopts{"3"} = " - set From: header to ";
+$fopts{"4"} = " - set 'testdigopts' to ";
+$fopts{"5"} = " - list-owner ";
+$fopts{"6"} = " - enable mysql-support, set options to ";
+$fopts{"7"} = " - set path to the database of message moderators to ";
+$fopts{"8"} = " - set path to the database of subscription moderators to ";
+$fopts{"9"} = " - set path to the database of remote administrators to ";
+$fopts{"X"} = " - (don't know) ";
+$fopts{"D"} = " - listdir    ";
+$fopts{"T"} = " - dot-file   ";
+$fopts{"L"} = " - listname   ";
+$fopts{"H"} = " - hostname   ";
+$fopts{"C"} = " - listpass   ";
+
+
+foreach $dir (@dirs) {
+	if (! -d $dir) {
+		print STDERR "not a dir $dir\n";
+		next;
+	}
+
+	if (! -e "$dir/config") {
+		print STDERR "no config in $dir found\n";
+		next;
+	}
+	
+	print ".-== list config for $dir ==----\n";
+	print "|\n";
+	open FILE, "$dir/config";
+	while (<FILE>) {
+		if (/^F:/) {
+			s/^F://;
+			my @o = split(//);
+		
+			foreach(@o){
+				if (defined $sopts{$_}){
+					print "| ".$sopts{$_}."\n";
+				}
+			}
+			print "|\n";
+		} elsif (/^(.):(.+)$/) {
+			if (defined $fopts{$1}){
+				if ("C" eq $1) {
+					print "|".$fopts{$1}."(hidden)\n";
+				} else {
+					print "|".$fopts{$1}."'$2'\n";
+				}
+			}
+		}
+	}
+	close FILE;
+	print "|\n";
+	print "'-== list config for $dir ==----\n";
+	print "\n";
+}

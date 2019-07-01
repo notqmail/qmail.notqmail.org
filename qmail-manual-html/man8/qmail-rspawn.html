@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>qmail-rspawn(8)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+qmail-rspawn(8)      Maintenance Procedures       qmail-rspawn(8)
+
+
+
+<B>NAME</B>
+     qmail-rspawn - schedule remote deliveries
+
+<B>SYNOPSIS</B>
+     <B>qmail-rspawn</B>
+
+<B>DESCRIPTION</B>
+     <B>qmail-rspawn</B> reads a series of remote delivery commands from
+     descriptor   0,   invokes   <B><A HREF="qmail-remote.html">qmail-remote</A></B>   to   perform  the
+     deliveries, and prints the results to descriptor 1.
+
+     <B>qmail-rspawn</B> invokes  <B>qmail-remote</B>  asynchronously,  so  the
+     results may not be in the same order as the commands.
+
+<B>SEE</B> <B>ALSO</B>
+     <A HREF="qmail-send.html">qmail-send</A>(8), qmail-remote(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

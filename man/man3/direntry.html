@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          direntry - read directory entries
+
+     <B>SYNTAX</B>
+          <B>#include</B> <B>&lt;direntry.h&gt;</B>
+
+          DIR *<B>opendir</B>(<I>fn</I>);
+
+          struct direntry *<B>readdir</B>(<I>dir</I>);
+
+          void <B>closedir</B>(<I>dir</I>);
+
+          DIR *<I>dir</I>;
+          char *<I>fn</I>;
+
+     <B>DESCRIPTION</B>
+          The point of <B>direntry.h</B> is to provide a uniform interface to
+          BSD's <B>sys/dir.h</B> and POSIX's <B>dirent.h</B>.
+
+          The <B>readdir</B> interface is highly unsatisfactory.  It does not
+          distinguish between I/O errors and end-of-directory.  It
+          uses <B>malloc</B>.  The return type for <B>closedir</B> varies: some
+          implementations return the <B>close</B> return value.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B>readdir(3)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

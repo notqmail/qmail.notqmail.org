@@ -1,0 +1,91 @@
+This is alpha software, so be gentle with it!
+
+This package's main purpose is to give you tools to run services under
+svscan controlled supervises in a sysV like init environment.  In
+particular, the package
+
+-- Sets up dt-svscan.init which starts/stops svscan and the supervises
+   under svscan's control.
+
+-- Sets up dt-runlevel.init which manages all the runlevel changes for
+   the services running under svscan.  
+
+In fact, dt-svscan.init and dt-runlevel.init provide an environment that
+functions on its own.  This means that once dt-svscan.init started
+svscan, just given the runlevel to change to, dt-runlevel.init decides
+which services to stop/start, and in which order.
+
+The order in which services are started/stopped are set up by the
+administrator using the runlevelconf package.
+
+Since setting up daemons to run under svscan requires to set up run
+scripts and links in svscan's service directory, the package provides
+run files for a large number of services (including all the qmail
+daemons), and two scripts, add-service.sh and remove-service.sh.  
+
+To see how things would approximately work, it is probably best to
+give an example (the detailed installation notes are in INSTALL, and
+the detailed description of how things work is in MANUAL).  
+
+Suppose you would like to set up qmail, qmail-smtpd and dnscache to
+run under svscan.
+
+First, you install the basic dt-run files along with qmail's run files:
+
+make ibase iqmail
+
+After this, you will make appropriate entries in /etc/inittab that
+would run dt-svscan.init and dt-runlevel.init.
+
+The qmail daemons's run files are put under /var/service.  For
+example, for qmail-smtpd, you will have
+
+/var/service/qmail-smtpd/run
+/var/service/qmail-smtpd/log/run
+/var/service/qmail-smtpd/log/main/
+
+Next you set up the run files for dnscache by running
+
+dnscache-conf dnscache dtlog /var/service/dnscache
+
+Then you run 
+
+add-service.sh qmail qmail-smtpd dnscache
+
+The three main things the add-service.sh script does are:
+
+First, it sets up the programs (in fact, they are just
+links to a "meta" init file) qmail.init, qmail-smtpd.init
+and dnscache.init in /usr/local/sbin.  You can use these programs to
+manually start/stop and signal the services---as you used to do with
+init scripts in /etc/rc.d/init.d/. So you can do
+
+qmail.init reload 
+
+to let qmail-send know about your new virtualdomain.
+
+Second, add-service.sh lets runlevelconf know at which runlevels the
+services should be started/stopped.
+
+Finally, add-service.sh sets up the links in svscan's directory,
+/service, to /var/service/{qmail,qmail-smtpd,dnscache}.  The script
+add-service.sh makes sure that these services get started in the
+current runlevel only if they are supposed to run.
+ 
+If you decide to use rblsmtpd instead of bare qmail-smtpd, you can
+just do
+
+remove-service.sh qmail-smtpd
+add-service.sh rblsmtpd
+
+In the MANUAL file, you can read about how to tell add-service.sh at
+which runlevels you want a particular service to be run, and in what
+order the services should be started.  You can also add a service to
+the list of services add-service.sh knows about.
+
+Besides the qmail run files, if you do
+
+make iother
+
+run scripts for many common services are installed, such as
+for telnetd, rlogind, wuftpd, proftpd, rsync.

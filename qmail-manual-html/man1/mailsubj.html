@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>mailsubj(1)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+mailsubj(1)               User Commands               mailsubj(1)
+
+
+
+<B>NAME</B>
+     mailsubj - send a mail message with a subject line
+
+<B>SYNOPSIS</B>
+     <B>mailsubj</B> <I>subject</I> <I>recip</I> ...
+
+<B>DESCRIPTION</B>
+     <B>mailsubj</B> inserts <I>subject</I> and the list of <I>recip</I>s into a  mail
+     message:
+
+        Subject: subject
+        To: recip ...
+
+        body
+
+     <B>mailsubj</B> reads the body of the  message  from  its  standard
+     input.  Then it sends the message.
+
+     Note that <I>subject</I> and <I>recip</I> must be quoted properly for  the
+     message header.
+
+<B>SEE</B> <B>ALSO</B>
+     <A HREF="../man5/addresses.html">addresses</A>(5), <A HREF="../man5/qmail-header.html">qmail-header</A>(8), <A HREF="../man8/qmail-inject.html">qmail-inject</A>(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

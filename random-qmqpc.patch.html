@@ -1,0 +1,117 @@
+From austad@marketwatch.com Tue Nov 06 05:48:02 2001
+X-VM-v5-Data: ([nil nil nil nil nil nil nil nil nil]
+	["2105" "Mon" "5" "November" "2001" "23:46:37" "-0600" "Austad, Jay" "austad@marketwatch.com" nil "91" "RE: Patch for qmail-qmqpc" "^From:" nil nil "11" nil nil nil nil nil]
+	nil)
+Return-Path: <austad@marketwatch.com>
+Delivered-To: nelson@desk.crynwr.com
+Received: (qmail 21071 invoked from network); 6 Nov 2001 05:48:02 -0000
+Received: from ns1.crynwr.com (HELO ns.crynwr.com) (192.203.178.14)
+  by desk.crynwr.com with SMTP; 6 Nov 2001 05:48:02 -0000
+Received: (qmail 15924 invoked by uid 500); 6 Nov 2001 05:47:14 -0000
+Delivered-To: nelson@crynwr.com
+Received: (qmail 15920 invoked from network); 6 Nov 2001 05:47:13 -0000
+Received: from mail.marketwatch.com (HELO mspexch2.office.mktw.net) (206.147.106.4)
+  by pdam.crynwr.com with SMTP; 6 Nov 2001 05:47:13 -0000
+Received: by mspexch2.office.mktw.net with Internet Mail Service (5.5.2653.19)
+	id <V7NXH101>; Mon, 5 Nov 2001 23:46:44 -0600
+Message-ID: <54180709DD3FE145917BB165AFE7EFA0BCE0EA@mspexch2.office.mktw.net>
+MIME-Version: 1.0
+X-Mailer: Internet Mail Service (5.5.2653.19)
+Content-Type: text/plain;
+	charset="iso-8859-1"
+From: "Austad, Jay" <austad@marketwatch.com>
+To: 'Russell Nelson' <nelson@crynwr.com>
+Subject: RE: Patch for qmail-qmqpc
+Date: Mon, 5 Nov 2001 23:46:37 -0600 
+
+Here you go:
+
+####################################################################
+# This patch makes qmail-qmqpc randomly choose servers from your
+# /var/qmail/control/qmqpservers file instead of picking the first
+# available server.  It can handle 255 servers, but is easily 
+# modified to support more.
+# 
+# Patch by Jay Austad - austad@marketwatch.com
+# Usage: put this file in your qmail directory and do:
+# patch <qmail-qmqpc-randomLB-0.1.patch
+####################################################################
+--- qmail-qmqpc.c.orig	Mon Jul 24 10:50:23 2000
++++ qmail-qmqpc.c	Mon Nov  5 23:33:51 2001
+@@ -1,7 +1,11 @@
+ #include <sys/types.h>
+ #include <sys/socket.h>
++#include <stddef.h>
+ #include <netinet/in.h>
+ #include <arpa/inet.h>
++#include <stdlib.h>
++#include <sys/time.h>
++#include <sys/timeb.h>
+ #include "substdio.h"
+ #include "getln.h"
+ #include "readwrite.h"
+@@ -62,6 +66,12 @@
+ char strnum[FMT_ULONG];
+ stralloc line = {0};
+ 
++struct sindex
++{
++		int pos[256];
++		int len;
++};
++
+ void getmess()
+ {
+   int match;
+@@ -139,21 +149,38 @@
+ {
+   int i;
+   int j;
+-
++  int randj;
++  int randarr[256];
++  struct timeb tp;
++  struct sindex serverindex;
++  
+   sig_pipeignore();
+-
+   if (chdir(auto_qmail) == -1) die_home();
+   if (control_init() == -1) die_control();
+   if (control_readfile(&servers,"control/qmqpservers",0) != 1) die_control();
+-
+   getmess();
+-
+-  i = 0;
+-  for (j = 0;j < servers.len;++j)
+-    if (!servers.s[j]) {
+-      doit(servers.s + i);
+-      i = j + 1;
+-    }
++  serverindex.len = 1;
++  serverindex.pos[0]=0;
++  for (j = 0; j < servers.len; j++)
++  {
++		  if (servers.s[j] == NULL) {
++				  serverindex.pos[serverindex.len] = j+1;
++				  serverindex.len++;
++		  }
++  }
++  serverindex.len--;
++  ftime(&tp);
++  srand(tp.millitm);
++  randj = (serverindex.len*1.0)*rand()/(RAND_MAX+1.0);
++
++byte_copy(randarr, 4 * (serverindex.len - randj), serverindex.pos + randj);
++byte_copy(randarr + (serverindex.len-randj), (randj) * 4, serverindex.pos);
++
++for (j=0; j < serverindex.len; j++)
++  {
++	  doit(servers.s + randarr[j]);
++  }
++						  
+ 
+   _exit(lasterror);
+ }
+
+
+

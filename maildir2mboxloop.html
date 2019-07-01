@@ -1,0 +1,162 @@
+ What this script does.
+
+ Allows elm or other M.U.A. without Maildir
+ support to use elm in conjunction with pop mail. 
+ It retrieves email as it arrives.
+ You don't have to run elm again to see the
+ mail that arrived while you were running elm
+ And avoids the problem of a a duplicate /tmp/mbox.Mailbox
+ by using a unique name i.e.
+ MAIL=$HOME/Mailbox.$USER  
+  in /tmp/mbox.Mailbox.* 
+ The "*" is derived by elm from the $MAIL env var
+ 
+
+
+ The whole script can be used or parts can be used.
+ for example an elm that doesn't need to be used with
+ pop3 but can retrieve newmail - or visa-versa  
+ Though I didn't manage to spell my name right 
+ in my letter to Ivan. The script seems reliable
+ I have replaced the script with a final version.
+ Final because I am done - not because the script is the 
+ best it can be.
+                                                       Chris Mosley  
+
+> Thanks for the script; I will install it today.  I've Cc:'ed the qmail list
+> as well.
+> 
+> At 09:13 PM 9/27/97 -0400, you wrote:
+> >
+> >This script will  work. I have tested it in parts
+> >(to make sure all conditional statements are working -
+> >they were all not working as I had assumed they would)
+> >and alltogether. Asyncronous process will self-destruct if
+> >it becomes detached. There is no loss of mail. I have tested it
+> >with many and long emails.
+> > I wonder about giving this and mbox2maildir to qmail so they can
+> >make it available in the utility section of their www site.
+> >
+> >Ivan,
+> >Please email me back about this even if you don't decide to install it
+> >globally.  But I'm having difficulty receiving email <g>. It could
+> >also be installed under an alternate name.      
+> >                                                    Thanks      
+> >                                                    Chistopher Mosley 
+> >--------------------------------------------------------------------------
+> >
+
+
+This elm wrapper seems to work well after a lot of testing. If there
+is a mailbox hanging around change its name to Mailbox.$USER before
+using this wrapper. It should have the functionality of elm
+when sendmail was being used (pop3 and ability to retrieve new email.)
+It can take considerable abuse and should work well under most 
+conditions. There is one change from my last posting, the line:
+
+PROCESS=`ps -x$SCRIPT_PROCESS  | wc -l` 
+should be
+PROCESS=`ps $SCRIPT_PROCESS  | wc -l` 
+
+if the loop is detached from terminal it might as well not exist.
+
+The first conversion from mbox to maildir is also probably an
+unneeded and probably ineffective redundancy
+(way of ending an escaped asyncronous loop). 
+Since iteration of loop also depends on the existence of $MAIL.
+There should probably be a "sleep" as long as the sleep in the loop
+after the conversion. What is important that the script works
+in practice - and I have to stop ammending the script sometime.
+
+
+mbox2maildir is derived from the public domain perl script
+convert_and_create  by Russell Nelson and can be supplied
+if anyone is interested.  
+________________________________________________________________________
+
+
+
+#!/bin/sh
+MAILDIR=$HOME/Maildir
+MAIL=$HOME/Mailbox.$USER
+MAILTMP=$HOME/Mailbox.tmp
+SCRIPT_PROCESS=$$
+export MAILDIR MAIL MAILTMP 
+export SCRIPT_PROCESS
+ 
+#------------------------------
+
+# In case mailbox wasn't deleted last elm session,
+# this should rarely if ever happen. 
+# $MAIL must not use PID so name of mailbox will remain the same
+# from session to session.
+
+ 
+if test -f $MAIL
+then
+  if test -s $MAIL
+     then /usr/local/bin/mbox2maildir
+  else
+     rm  -f $MAIL
+  fi
+fi
+
+#------------------------------
+
+# Create a mailbox even if there isn't any mail 
+# in order to receive mail. 
+ 
+MAIL_DIR_EMPTY=`ls $MAILDIR/new | sed q` 
+if test THE = "THE$MAIL_DIR_EMPTY"   
+   then /usr/bin/echo -n > $MAIL 
+else  
+   /var/qmail/bin/maildir2mbox
+fi
+
+#------------------------------
+
+# Background process to retrieve new mail. 
+# Process will end if mailbox deleted (as in mbox2maildir)
+# or will self destruct when the script
+# process no longer exists
+
+
+(DONE=false
+while test  -f $MAIL -a $DONE = false        
+do
+    sleep 15
+    NEWMAIL=`ls $MAILDIR/new | sed q`
+    PROCESS=`ps $SCRIPT_PROCESS  | wc -l`  
+    if test  $PROCESS -eq 1 
+    then  DONE=true
+    else  
+          DONE=false  
+    fi
+    if test -f $MAIL -a "A$NEWMAIL" != A -a $DONE = false 
+    then  /var/qmail/bin/maildir2mbox 
+    fi
+done)&
+
+#------------------------------
+elm.real $@
+#------------------------------
+
+# Simply delete mailbox if file length zero,
+# mbox2maildir does not work with empty file.
+# kill asynchronous process to prevent conflicts 
+# between mbox2maildir and maildir2mbox. 
+# "sleep" so script can rest from its labors
+# before running mbox2maildir. 
+     
+kill $!
+sleep 1
+if test -s $MAIL
+   then /usr/local/bin/mbox2maildir
+else 
+  rm -f $MAIL
+fi 
+# "wait" can be used here but script takes
+# longer to end. It is not critical.
+
+#---------------------------
+

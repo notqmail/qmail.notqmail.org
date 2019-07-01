@@ -1,0 +1,137 @@
+<HTML><HEAD><TITLE>qmail-users(5)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+qmail-users(5)     Headers, Tables, and Macros     qmail-users(5)
+
+
+
+<B>NAME</B>
+     qmail-users - assign mail <A HREF="addresses.html">addresses</A> to users
+
+<B>OVERVIEW</B>
+     The file <B>/var/<A HREF="../man7/qmail.html">qmail</A>/users/assign</B> assigns addresses to users.
+     For example,
+
+        =joe.shmoe:joe:503:78:/home/joe:::
+
+     says that mail for <B>joe.shmoe</B> should  be  delivered  to  user
+     <B>joe</B>,   with   uid   503   and   gid   78,  as  specified  by
+     <B>/home/joe/.qmail</B>.
+
+     Assignments fed to <B><A HREF="../man8/qmail-newu.html">qmail-newu</A></B> will be used  by  <B><A HREF="../man8/qmail-lspawn.html">qmail-lspawn</A></B>
+     to  control <B><A HREF="../man8/qmail-local.html">qmail-local</A></B>'s deliveries.  See <B>qmail-newu</B>(8).  A
+     change to <B>/var/qmail/users/assign</B> will have no effect  until
+     <B>qmail-newu</B> is run.
+
+<B>STRUCTURE</B>
+     <B>/var/qmail/users/assign</B> is a series of assignments, one  per
+     line.   It  ends with a line containing a single dot.  Lines
+     must not contain NUL.
+
+<B>SIMPLE</B> <B>ASSIGNMENTS</B>
+     A simple assignment is a line of the form
+
+        =local:user:uid:gid:homedir:dash:ext:
+
+     Here <I>local</I> is an address; <I>user</I>, <I>uid</I>, and <I>gid</I> are the account
+     name,  uid, and gid of the user in charge of <I>local</I>; and mes-
+     sages to <I>local</I> will be controlled by <I>homedir</I><B>/.qmail</B><I>dashext</I>.
+
+     If there are several assignments for the same <I>local</I> address,
+     <B>qmail-lspawn</B> will use the first one.
+
+     <I>local</I> is interpreted without regard to case.
+
+<B>WILDCARD</B> <B>ASSIGNMENTS</B>
+     A wildcard assignment is a line of the form
+
+        +loc:user:uid:gid:homedir:dash:pre:
+
+     This assignment applies to any address beginning  with  <I>loc</I>,
+     including <I>loc</I> itself.  It means the same as
+
+        =locext:user:uid:gid:homedir:dash:preext:
+
+     for every string <I>ext</I>.
+
+     A  more  specific  wildcard  assignment  overrides  a   less
+     specific  assignment,  and a simple assignment overrides any
+     wildcard assignment.  For example:
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+
+
+
+qmail-users(5)     Headers, Tables, and Macros     qmail-users(5)
+
+
+
+        +:alias:7790:2108:/var/qmail/alias:-::
+        +joe-:joe:507:100:/home/joe:-::
+        =joe:joe:507:100:/home/joe:::
+
+     The address <B>joe</B> is handled by the third  line;  the  address
+     <B>joe-direct</B>  is  handled by the second line; the address <B>bill</B>
+     is handled by the first line.
+
+<B>SEE</B> <B>ALSO</B>
+     <A HREF="../man8/qmail-pw2u.html">qmail-pw2u</A>(8), qmail-newu(8), qmail-lspawn(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          2
+
+
+
+</PRE></BODY></HTML>

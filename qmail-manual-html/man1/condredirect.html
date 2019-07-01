@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>condredirect(1)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+condredirect(1)           User Commands           condredirect(1)
+
+
+
+<B>NAME</B>
+     condredirect - perhaps redirect mail to another address
+
+<B>SYNOPSIS</B>
+     in <B>.qmail</B>:  <B>|condredirect</B> <I>newaddress</I> <I>program</I> [ <I>arg</I> ... ]
+
+<B>DESCRIPTION</B>
+     <B>condredirect</B> feeds each new mail message to <I>program</I> with the
+     given  arguments.  If <I>program</I> exits 0, <B>condredirect</B> forwards
+     the mail message  to  <I>newaddress</I>,  and  then  exits  99,  so
+     further commands in <B>.qmail</B> are ignored.
+
+     If <I>program</I> exits 111, <B>condredirect</B> exits  111,  so  delivery
+     will be retried later.
+
+     If <I>program</I> exits anything else (or  does  not  exist),  <B>con-</B>
+     <B>dredirect</B>  exits  0, so the rest of <B>.qmail</B> will be processed
+     as usual.
+
+     Note that it is not safe for <I>program</I> to fork  a  child  that
+     reads the message in the background.
+
+<B>SEE</B> <B>ALSO</B>
+     dot-qmail(5), <A HREF="../man8/qmail-command.html">qmail-command</A>(8), <A HREF="../man8/qmail-queue.html">qmail-queue</A>(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

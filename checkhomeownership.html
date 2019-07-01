@@ -1,0 +1,52 @@
+#! /usr/bin/perl
+# -*- Perl -*-
+# put into the public domain by Russell Nelson <nelson@qmail.org>
+# NO GUARANTEE AT ALL; support is available for a fee from the author.
+#
+# Reports anyone in /etc/passwd whom qmail won't deliver mail to.
+# Reports any maildirs that don't exist or are owned by the wrong user.
+# Assumes that nothing is trying to modify the mailboxes in /var/spool/mail
+#   This assumption could be removed by locking the mailboxes and deleting
+#   the mail after moving it.
+# version 0.00 - first release to the public.
+# version 0.01 - removed check for "drop" in password field.  Changed
+#   documentation, since it doesn't create maildirs, but instead checks for them.
+# version 0.02 - removed 'stat.pl'.
+# ==============================================================================
+# Modified - Julio Maidanik <julio.maidanik@coasin.com.ar>
+# The report format has been changed, including  user ok
+# ------------------------------------------------------------------------------ 	
+
+while(($name, $passwd, $uid, $gid, $quota, $comment, $gcos, $dir, $shell) =
+      getpwent()) {
+    $uids{$uid} = $name;
+}
+endpwent();
+
+while(($name, $passwd, $uid, $gid, $quota, $comment, $gcos, $dir, $shell) =
+      getpwent()) {
+      
+    print "${uid}: $name, $dir, ";  
+    if (!-e $dir) {
+	print "home dir  doesn't exist (passwd: $passwd)\n";
+	next;
+    }
+    $st_uid = (stat($dir))[4];
+    if ($uid != $st_uid) {
+	print "home dir is owned by $st_uid, who is $uids{$st_uid}\n";
+	next;
+    }
+    
+    $st_uid = (stat("$dir/Maildir"))[4];
+    if (!$st_uid) {
+    	print "$dir/Maildir doesn't exist\n";
+	next;
+    }
+    if ($uid != $st_uid) {
+	print "$dir/Maildir is owned by $st_uid, who is $uids{$st_uid}\n";
+	next;
+    }
+    print "ok\n"
+}
+endpwent();
+

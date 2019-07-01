@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-popup - read a POP username and password
+
+     <B>SYNOPSIS</B>
+          <B>qmail-popup</B> <I>hostname</I> <I>subprogram</I>
+
+     <B>DESCRIPTION</B>
+          <B>qmail-popup</B> reads a POP username and password from the
+          network.  It then runs <I>subprogram</I>.
+
+          <B>qmail-popup</B> is most commonly invoked from <B>inetd</B> as
+
+             qmail-popup CHANGEME checkpassword qmail-pop3d Maildir
+
+          with CHANGEME replaced by the fully qualified domain name of
+          the local host.
+
+          <B>qmail-popup</B> expects descriptor 0 to read from the network
+          and descriptor 1 to write to the network.  It reads a
+          username and password from descriptor 0 in POP's USER-PASS
+          style or APOP style.  It invokes <I>subprogram</I>, with the same
+          descriptors 0 and 1; descriptor 2 writing to the network;
+          and descriptor 3 reading the username, a 0 byte, the
+          password, another 0 byte, an APOP timestamp derived from
+          <I>hostname</I>, and a final 0 byte.  <B>qmail-popup</B> then waits for
+          <I>subprogram</I> to finish.  It prints an error message if
+          <I>subprogram</I> crashes or exits nonzero.
+
+          <B>qmail-popup</B> should be used only within a secure network.
+          Otherwise an eavesdropper can steal passwords.  Even if you
+          use APOP, an active attacker can still take over the
+          connection and wreak havoc.
+
+          <B>qmail-popup</B> has a 20-minute idle timeout.
+
+          <B>qmail-popup</B> is based on a program contributed by Russ
+          Nelson.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man5/maildir.html">maildir(5)</A></B>, <B><A HREF="qmail-local.html">qmail-local(8)</A></B>, <B><A HREF="qmail-pop3d.html">qmail-pop3d(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

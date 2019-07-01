@@ -1,0 +1,169 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          qmail-smtpd - receive mail via SMTP
+
+     <B>SYNOPSIS</B>
+          <B>qmail-smtpd</B>
+
+     <B>DESCRIPTION</B>
+          <B>qmail-smtpd</B> receives mail messages via the Simple Mail
+          Transfer Protocol (SMTP) and invokes <B>qmail-queue</B> to deposit
+          them into the outgoing queue.  <B>qmail-smtpd</B> must be supplied
+          several environment variables; see <B>tcp-environ(5)</B>.
+
+          <B>qmail-smtpd</B> is responsible for counting hops.  It rejects
+          any message with 100 or more <B>Received</B> or <B>Delivered-To</B> header
+          fields.
+
+          <B>qmail-smtpd</B> supports ESMTP, including the 8BITMIME and
+          PIPELINING options.
+
+     <B>TRANSPARENCY</B>
+          <B>qmail-smtpd</B> converts the SMTP newline convention into the
+          UNIX newline convention by converting CR LF into LF.  It
+          returns a temporary error and drops the connection on bare
+          LFs; see <B>http://pobox.com/~djb/docs/smtplf.html</B>.
+
+          <B>qmail-smtpd</B> accepts messages that contain long lines or
+          non-ASCII characters, even though such messages violate the
+          SMTP protocol.
+
+     <B>CONTROL</B> <B>FILES</B>
+          <I>badmailfrom</I>
+               Unacceptable envelope sender addresses.  <B>qmail-smtpd</B>
+               will reject every recipient address for a message if
+               the envelope sender address is listed in <I>badmailfrom</I>.
+               A line in <I>badmailfrom</I> may be of the form <B>@</B><I>host</I>, meaning
+               every address at <I>host</I>.
+
+          <I>databytes</I>
+               Maximum number of bytes allowed in a message, or 0 for
+               no limit.  Default: 0.  If a message exceeds this
+               limit, <B>qmail-smtpd</B> returns a permanent error code to
+               the client; in contrast, if the disk is full or <B>qmail-</B>
+               <B>smtpd</B> hits a resource limit, <B>qmail-smtpd</B> returns a
+               temporary error code.
+
+               <I>databytes</I> counts bytes as stored on disk, not as
+               transmitted through the network.  It does not count the
+               <B>qmail-smtpd</B> Received line, the <B>qmail-queue</B> Received
+               line, or the envelope.
+
+               If the environment variable <B>DATABYTES</B> is set, it
+               overrides <I>databytes</I>.
+
+          <I>localiphost</I>
+               Replacement host name for local IP addresses.  Default:
+               <I>me</I>, if that is supplied.  <B>qmail-smtpd</B> is responsible
+               for recognizing dotted-decimal addresses for the
+               current host.  When it sees a recipient address of the
+               form <I>box</I>@[<I>d</I>.<I>d</I>.<I>d</I>.<I>d</I>], where <I>d</I>.<I>d</I>.<I>d</I>.<I>d</I> is a local IP
+               address, it replaces [<I>d</I>.<I>d</I>.<I>d</I>.<I>d</I>] with <I>localiphost</I>.  This
+               is done before <I>rcpthosts</I>.
+
+          <I>morercpthosts</I>
+               Extra allowed RCPT domains.  If <I>rcpthosts</I> and
+               <I>morercpthosts</I> both exist, <I>morercpthosts</I> is effectively
+               appended to <I>rcpthosts</I>.
+
+               You must run <B>qmail-newmrh</B> whenever <I>morercpthosts</I>
+               changes.
+
+               Rule of thumb for large sites:  Put your 50 most
+               commonly used domains into <I>rcpthosts</I>, and the rest into
+               <I>morercpthosts</I>.
+
+          <I>rcpthosts</I>
+               Allowed RCPT domains.  If <I>rcpthosts</I> is supplied,
+               <B>qmail-smtpd</B> will reject any envelope recipient address
+               with a domain not listed in <I>rcpthosts</I>.
+
+               Exception:  If the environment variable <B>RELAYCLIENT</B> is
+               set, <B>qmail-smtpd</B> will ignore <I>rcpthosts</I>, and will append
+               the value of <B>RELAYCLIENT</B> to each incoming recipient
+               address.
+
+               <I>rcpthosts</I> may include wildcards:
+
+                  heaven.af.mil
+                  .heaven.af.mil
+
+               Envelope recipient addresses without @ signs are always
+               allowed through.
+
+          <I>smtpgreeting</I>
+               SMTP greeting message.  Default:  <I>me</I>, if that is
+               supplied; otherwise <B>qmail-smtpd</B> will refuse to run.
+               The first word of <I>smtpgreeting</I> should be the current
+               host's name.
+
+          <I>timeoutsmtpd</I>
+               Number of seconds <B>qmail-smtpd</B> will wait for each new
+               buffer of data from the remote SMTP client.  Default:
+               1200.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man1/tcp-env.html">tcp-env(1)</A></B>, <B><A HREF="../man5/tcp-environ.html">tcp-environ(5)</A></B>, <B><A HREF="../man5/qmail-control.html">qmail-control(5)</A></B>, qmail-
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man8/inject.html">inject(8)</A></B>, <B><A HREF="qmail-newmrh.html">qmail-newmrh(8)</A></B>, <B><A HREF="qmail-queue.html">qmail-queue(8)</A></B>, <B><A HREF="qmail-remote.html">qmail-remote(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

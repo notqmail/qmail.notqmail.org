@@ -1,0 +1,120 @@
+From markd@BushWire.Net Tue Feb 05 17:20:01 2002
+X-VM-v5-Data: ([nil nil nil nil nil nil nil nil nil]
+	["2441" "" "5" "February" "2002" "17:18:09" "+0000" "Mark Delany" "markd@BushWire.Net" nil "95" "set_supplementary_groups on qmail.org?" "^From:" nil nil "2" nil nil nil nil nil]
+	nil)
+Return-Path: <markd@BushWire.Net>
+Delivered-To: nelson@desk.crynwr.com
+Received: (qmail 6874 invoked from network); 5 Feb 2002 17:20:01 -0000
+Received: from ns1.crynwr.com (HELO ns.crynwr.com) (192.203.178.14)
+  by desk.crynwr.com with SMTP; 5 Feb 2002 17:20:01 -0000
+Received: (qmail 13832 invoked by uid 500); 5 Feb 2002 17:18:16 -0000
+Delivered-To: nelson@crynwr.com
+Received: (qmail 13829 invoked from network); 5 Feb 2002 17:18:15 -0000
+Received: from f1.bushwire.net (HELO bushwire.net) (@66.92.187.124)
+  by pdam.crynwr.com with SMTP; 5 Feb 2002 17:18:15 -0000
+Received: (qmail 36488 invoked by uid 1001); 5 Feb 2002 17:18:09 -0000
+Message-ID: <20020205171809.26730.qmail@prefix.bushwire.net>
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="+HP7ph2BbKc20aGI"
+Content-Disposition: inline
+From: "Mark Delany" <markd@BushWire.Net>
+To: nelson@crynwr.com
+Subject: set_supplementary_groups on qmail.org?
+Date: 5 Feb 2002 17:18:09 +0000
+
+
+--+HP7ph2BbKc20aGI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hey Russ.
+
+Any interest in putting this up on qmail.org?
+
+It solves the program of running processes in .qmail that need to
+acquire their supplementary groups. In particular "mailman".
+
+
+Regards.
+
+
+--+HP7ph2BbKc20aGI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="set_supplementary_groups.c"
+
+/******************************************************************************
+ * set_supplementary_groups looks up your username and sets the
+ * supplementary groups of the user, then execs the program on the
+ * command line. A classic djb-exec-chain designed to play in a .qmail
+ * file.  Use it any way you want, as long as you don't blame me for
+ * anything.
+ * 
+ * The motive for this program is that commands run within a .qmail do
+ * not have their supplementary groups set because the attributes of a
+ * user do not necessarily come from /etc/passwd. With this in mind, this
+ * program only makes sense in a /etc/passwd, /etc/group environment.
+ * 
+ * SECURITY ALERT: This program must be setuid root to work. Don't do
+ * this unless you realize what sort of security risks you are taking.
+ *
+ * Install:
+ *
+ *  $ cc set_supplementary_groups.c -o set_supplementary_groups
+ *  # chown root set_supplementary_groups
+ *  # chmod a=x,u+s set_supplementary_groups
+ * 
+ * Example .qmail file
+ * 
+ * | set_supplementary_groups id -G
+ * 
+ * Version: 0.2a MarkD@Bushwire.Net   Feb2002.
+ *****************************************************************************/
+
+#include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <pwd.h>
+
+static void
+warn(char *msg)
+{
+  puts(msg);
+  exit(120);
+}
+
+
+extern int
+main(int argc, char** argv)
+{
+  char* program = *++argv;
+  struct passwd* pw;
+  int myuid;
+
+  if (!program) {
+    warn("Usage: set_supplementary_groups command [ command args ]");
+  }
+
+  myuid = getuid();
+  if (myuid <= 0) {
+    warn("uid is effectively zero - am I running via qmail-local?");
+  }
+
+  pw = getpwuid(getuid());
+  if (!pw) {
+    warn("getpwuid failed to get passwd entry for this user");
+  }
+
+  if (initgroups(pw->pw_name, getgid()) == -1) {
+    warn("initgroups failed - am I setuid root?");
+  }
+
+  if (setuid(myuid) == -1) {
+    warn("Cannot give away uid 0 - which Unix is this?");
+  }
+
+  execvp(program, argv);
+  warn("execv failed - is program in path?");
+}
+
+--+HP7ph2BbKc20aGI--
+

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Mirror Manager</title>
+  </head>
+
+  <body>
+    <h1>Mirror Manager</h1>
+
+<p>qmail.org has many mirrors.  To let people know which mirrors are
+well-maintained, I check every mirror every day using a script.  The
+script fetches http://qmail.example.com/timestamp.html, and compares
+it to the one on mirror.qmail.org.  If that file is unavailable for
+any reason, or is badly formatted, a note is inserted into the listing
+of mirrors.  Also, if the mirror has been unavailable in the past two
+weeks, and they've been unavailable for more than four times in the past
+several months, they get a red bar next to their name, indicating the
+number of days of outage.</p>
+
+<p>If there is a note, then the script has also sent email to the
+responsible person at the mirroring site.  I call this the Auto-Annoy
+feature.  If that email bounces (yes, you'd think that qmail mirror
+admins would have well-administered email systems, but no), then that
+adds two days to the red bar.</p>
+
+<p>That's how it currently works.  In the future, I'm going to modify it
+to also check each site to see if the site also responds to qmail.org
+as the name of the server.  If it does, then the site will be added
+into a round-robin record for qmail.org.</p>
+
+<p>Here's the <a href="watchmirror2.html">mirroring software<a> itself.</p>
+
+    <hr>
+    <address><a href="mailto:nelson@crynwr.com">Russell Nelson</a></address>
+<!-- Created: Mon Jul 30 16:53:57 EDT 2001 -->
+<!-- hhmts start -->
+Last modified: Mon Jan 31 10:10:46 EST 2005
+<!-- hhmts end -->
+  </body>
+</html>

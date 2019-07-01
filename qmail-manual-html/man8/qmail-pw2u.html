@@ -1,0 +1,137 @@
+<HTML><HEAD><TITLE>qmail-pw2u(8)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+qmail-pw2u(8)        Maintenance Procedures         qmail-pw2u(8)
+
+
+
+<B>NAME</B>
+     qmail-pw2u - build address assignments from a passwd file
+
+<B>SYNOPSIS</B>
+     <B>qmail-pw2u</B> [ <B>-ohHuUC</B> ] [ <B>-c</B><I>char</I> ]
+
+<B>DESCRIPTION</B>
+     <B>qmail-pw2u</B> reads a V7-format passwd file from standard input
+     and prints a <B><A HREF="../man5/qmail-users.html">qmail-users</A></B>-format assignment file.
+
+     A V7-format passwd file is a series of lines.  Each line has
+     the format
+
+        user:password:uid:gid:gecos:home:shell
+
+     where <I>user</I> is an account name, <I>uid</I> and <I>gid</I> are the  user  id
+     and group id of that account, and <I>home</I> is the account's home
+     directory.   <I>password</I>,  <I>gecos</I>,  and  <I>shell</I>  are  ignored  by
+     <B>qmail-pw2u</B>.
+
+     If   you    put    the    output    of    <B>qmail-pw2u</B>    into
+     <B>/var/<A HREF="../man7/qmail.html">qmail</A>/users/assign</B>,  and  then  run  <B><A HREF="qmail-newu.html">qmail-newu</A></B>, <B>qmail-</B>
+     <B>lspawn</B> will obey  the  assignments  printed  by  <B>qmail-pw2u</B>.
+     <B>WARNING:</B>  After  changing  any  users,  uids,  gids, or home
+     directories in your passwd file, you must run <B>qmail-pw2u</B> and
+     <B>qmail-newu</B>  again  if  you  want  <B><A HREF="qmail-lspawn.html">qmail-lspawn</A></B>  to  see  the
+     changes.
+
+<B>RULES</B>
+     By default, <B>qmail-pw2u</B> follows  the  same  rules  as  <B><A HREF="qmail-getpw.html">qmail-</A></B>
+     <B><A HREF="qmail-getpw.html">getpw</A></B>.   It skips <I>user</I> if (1) <I>uid</I> is zero, (2) <I>home</I> does not
+     exist, (3) <I>user</I> does not own  <I>home</I>,  or  (4)  <I>user</I>  contains
+     uppercase  letters.   It then gives each remaining <I>user</I> con-
+     trol over the basic <I>user</I> address and all  <A HREF="../man5/addresses.html">addresses</A>  of  the
+     form  <I>user</I><B>-</B><I>anything</I>.   A catch-all user, <B>alias</B>, controls all
+     other addresses.
+
+     You  may  change  these  rules  by  setting  up   files   in
+     <B>/var/qmail/users</B>:
+
+     <B>include</B>
+          Allowed users, one per line.  If  <B>include</B>  exists,  and
+          <I>user</I> is not listed in <B>include</B>, <I>user</I> is ignored.
+
+     <B>exclude</B>
+          Ignored users, one per line.  If  <B>exclude</B>  exists,  and
+          <I>user</I> is listed in <B>exclude</B>, <I>user</I> is ignored.
+
+     <B>mailnames</B>
+          Replacement names for users.  Each line has the form
+
+             user:mailname1:mailname2:...
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+
+
+
+qmail-pw2u(8)        Maintenance Procedures         qmail-pw2u(8)
+
+
+
+          The addresses <I>mailname1</I> and <I>mailname1</I><B>-</B><I>ext</I> and <I>mailname2</I>
+          and so on will be delivered to <I>user</I>.
+
+          <B>WARNING:</B> The addresses <I>user</I> and <I>user</I><B>-</B><I>ext</I>  will  not  be
+          delivered  to  <I>user</I> unless <I>user</I> is listed as one of the
+          <I>mailname</I>s.
+
+          A line in <B>mailnames</B> is silently  ignored  if  the  user
+          does not exist.
+
+     <B>subusers</B>
+          Extra addresses.  Each line has the form
+
+             sub:user:pre:
+
+          <I>sub</I> will be handled by <I>home</I><B>/.qmail-</B><I>pre</I>, where  <I>home</I>  is
+          <I>user</I>'s  home  directory;  <I>sub</I><B>-</B><I>ext</I>  will  be  handled by
+          <I>home</I><B>/.qmail-</B><I>pre</I><B>-</B><I>ext</I>.
+
+     <B>append</B>
+          Extra assignments, printed at the end  of  <B>qmail-pw2u</B>'s
+          output.
+
+<B>OPTIONS</B>
+     <B>-o</B>    (Default.)  Skip <I>user</I> if <I>home</I> does not  exist  (or  is
+          not  visible  to <B>qmail-pw2u</B>).  Skip <I>user</I> if <I>home</I> is not
+          owned by <I>user</I>.
+
+     <B>-h</B>    Stop if <I>home</I> does not exist.  This is  appropriate  if
+          every  user is supposed to have a home directory.  Skip
+          <I>user</I> if <I>home</I> is not owned by <I>user</I>.
+
+     <B>-H</B>    Do not check the existence or ownership of <I>home</I>.
+
+     <B>-U</B>    (Default.)  Skip  <I>user</I>  if  there  are  any  uppercase
+          letters in <I>user</I>.
+
+     <B>-u</B>    Allow uppercase letters in <I>user</I>.
+
+     <B>-c</B><I>char</I>
+          Use <I>char</I> as the user-extension delimiter in place of <B>-</B>.
+
+     <B>-C</B>    Disable the user-extension mechanism.
+
+<B>SEE</B> <B>ALSO</B>
+     qmail-users(5),   qmail-lspawn(8),   qmail-newu(8),   qmail-
+     getpw(8)
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          2
+
+
+
+</PRE></BODY></HTML>

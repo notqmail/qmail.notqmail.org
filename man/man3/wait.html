@@ -1,0 +1,116 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          wait - check child process status
+
+     <B>SYNTAX</B>
+          <B>#include</B> <B>&lt;wait.h&gt;</B>
+
+          int <B>wait_nohang</B>(&amp;<I>wstat</I>);
+          int <B>wait_stop</B>(&amp;<I>wstat</I>);
+          int <B>wait_stopnohang</B>(&amp;<I>wstat</I>);
+          int <B>wait_pid</B>(&amp;<I>wstat</I>,<I>pid</I>);
+
+          int <B>wait_exitcode</B>(<I>wstat</I>);
+          int <B>wait_crashed</B>(<I>wstat</I>);
+          int <B>wait_stopped</B>(<I>wstat</I>);
+          int <B>wait_stopsig</B>(<I>wstat</I>);
+
+          int <I>pid</I>;
+          int <I>wstat</I>;
+
+     <B>DESCRIPTION</B>
+          <B>wait_nohang</B> looks for zombies (child processes that have
+          exited).  If it sees a zombie, it eliminates the zombie,
+          puts the zombie's exit status into <I>wstat</I>, and returns the
+          zombie's process ID.  If there are several zombies,
+          <B>wait_nohang</B> picks one.  If there are children but no
+          zombies, <B>wait_nohang</B> returns 0.  If there are no children,
+          <B>wait_nohang</B> returns -1, setting <B>errno</B> appropriately.
+
+          <B>wait_stopnohang</B> is similar to <B>wait_nohang</B>, but it also looks
+          for children that have stopped.
+
+          <B>wait_stop</B> is similar to <B>wait_stopnohang</B>, but if there are
+          children it will pause waiting for one of them to stop or
+          exit.
+
+          <B>wait_pid</B> waits for child process <I>pid</I> to exit.  It eliminates
+          any zombie that shows up in the meantime, discarding the
+          exit status.
+
+          <B>wait_stop</B> and <B>wait_pid</B> retry upon <B>error_intr</B>.
+
+     <B>STATUS</B> <B>PARSING</B>
+          If the child stopped, <B>wait_stopped</B> is nonzero; <B>wait_stopsig</B>
+          is the signal that caused the child to stop.
+
+          If the child exited by crashing, <B>wait_stopped</B> is zero;
+          <B>wait_crashed</B> is nonzero.
+
+          If the child exited normally, <B>wait_stopped</B> is zero;
+          <B>wait_crashed</B> is zero; and <B>wait_exitcode</B> is the child's exit
+          code.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man2/wait.html">wait(2)</A></B>, <B><A HREF="error.html">error(3)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          tcp-env - set up TCP-related environment variables
+
+     <B>SYNOPSIS</B>
+          <B>tcp-env</B> [ <B>-rR</B> ] [ <B>-t</B><I>timeout</I> ] <I>program</I> [ <I>arg</I> ... ]
+
+     <B>DESCRIPTION</B>
+          The input for <B>tcp-env</B> must be a TCP connection.  <B>tcp-env</B>
+          finds out information about that connection, puts the
+          information into several environment variables as described
+          in <B>tcp-environ(5),</B> and runs <I>program</I> with the given
+          arguments.
+
+          Usually <B>tcp-env</B> is run from <B>inetd</B>.  It might instead be run
+          from another server that already sets up the right
+          environment variables; if <B>PROTO</B> is set to <B>TCP</B> when <B>tcp-env</B>
+          is invoked, <B>tcp-env</B> assumes that all the other variables are
+          set up properly, and it does not check whether the input is
+          a TCP connection.
+
+     <B>OPTIONS</B>
+          <B>-r</B>   (Default.)  Attempt to obtain <B>TCPREMOTEINFO</B> from the
+               remote host.
+
+          <B>-R</B>   Do not attempt to obtain <B>TCPREMOTEINFO</B> from the remote
+               host.
+
+          <B>-t</B><I>timeout</I>
+               Give up on the <B>TCPREMOTEINFO</B> connection attempt after
+               <I>timeout</I> seconds.  Default: 30.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="../man5/tcp-environ.html">tcp-environ(5)</A></B>, <B><A HREF="https://qmail.mirrors.auchnet.org/man/man8/inetd.html">inetd(8)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

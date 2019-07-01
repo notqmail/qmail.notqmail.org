@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>qmail-start(8)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+qmail-start(8)       Maintenance Procedures        qmail-start(8)
+
+
+
+<B>NAME</B>
+     qmail-start - turn on mail delivery
+
+<B>SYNOPSIS</B>
+     <B>qmail-start</B> [ <I>aliasempty</I> [ <I>logger</I> <I>arg</I> ... ] ]
+
+<B>DESCRIPTION</B>
+     <B>qmail-start</B> invokes <B><A HREF="qmail-send.html">qmail-send</A></B>, <B><A HREF="qmail-lspawn.html">qmail-lspawn</A></B>,  <B><A HREF="qmail-rspawn.html">qmail-rspawn</A></B>,
+     and  <B><A HREF="qmail-clean.html">qmail-clean</A></B>.   These  four daemons cooperate to deliver
+     messages from the queue.
+
+     <B>qmail-start</B> arranges for <B>qmail-send</B>'s activity record to  be
+     sent to <B>qmail-start</B>'s output.  See <B><A HREF="../man5/qmail-log.html">qmail-log</A>(5)</B> for the for-
+     mat of the activity record.  Other  than  this,  <B>qmail-start</B>
+     does not print anything, even on failure.
+
+     If <I>aliasempty</I> is supplied, <B>qmail-start</B> passes it  to  <B>qmail-</B>
+     <B>lspawn</B>.
+
+     If <I>logger</I> is supplied, <B>qmail-start</B> invokes <I>logger</I>  with  the
+     given  arguments,  and  feeds  <B>qmail-send</B>'s  activity record
+     through <I>logger</I>.
+
+     Environment variables given to <B>qmail-start</B>  will  eventually
+     be  passed  on  to <B><A HREF="qmail-local.html">qmail-local</A></B>, so make sure to clean up the
+     environment if you run <B>qmail-start</B> manually:
+
+        # <A HREF="../man3/env.html">env</A> - PATH="/var/<A HREF="../man7/qmail.html">qmail</A>/bin:$PATH"
+        qmail-start ./Mailbox <A HREF="splogger.html">splogger</A> qmail &amp;
+        (all on one line)
+
+     <B>qmail-start</B> sets the uid and gid of each daemon properly.
+
+     Note that <B>qmail-send</B> normally juggles  several  simultaneous
+     deliveries.   To  reduce  <B>qmail-send</B>'s  impact on other pro-
+     grams, you can run <B>qmail-start</B> with a low priority.
+
+<B>SEE</B> <B>ALSO</B>
+     logger(1),  splogger(1),   nice(1),   qmail-log(5),   qmail-
+     local(8),  qmail-clean(8), qmail-lspawn(8), qmail-rspawn(8),
+     qmail-send(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

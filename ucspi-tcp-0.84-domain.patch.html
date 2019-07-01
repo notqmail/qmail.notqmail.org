@@ -1,0 +1,343 @@
+diff -c ucspi-tcp-0.84/tcprules.1 ucspi-tcp-0.84-mine/tcprules.1
+*** ucspi-tcp-0.84/tcprules.1	Thu Nov 12 00:32:01 1998
+--- ucspi-tcp-0.84-mine/tcprules.1	Sun May 23 17:47:17 1999
+***************
+*** 156,161 ****
+--- 156,168 ----
+  .B 10.2.:ins
+  and
+  .BR 10.3.:ins .
++ .SH "HOST NAMES"
++ .B tcprules
++ can contain domains as well as addresses; search for a
++ match is based on do.ma.in,
++ \&.ma.in,
++ \&.in,
++ \&.  (period used as 'default')
+  .SH "INSTRUCTIONS"
+  The instructions in a rule must begin with either
+  .B allow
+diff -c ucspi-tcp-0.84/tcprules.c ucspi-tcp-0.84-mine/tcprules.c
+*** ucspi-tcp-0.84/tcprules.c	Thu Nov 12 00:32:01 1998
+--- ucspi-tcp-0.84-mine/tcprules.c	Sun May 23 17:19:45 1999
+***************
+*** 58,64 ****
+    unsigned long bot;
+    unsigned long top;
+  
+!   if (byte_chr(address.s,address.len,'@') == address.len) {
+      i = byte_chr(address.s,address.len,'-');
+      if (i < address.len) {
+        left = byte_rchr(address.s,i,'.');
+--- 58,73 ----
+    unsigned long bot;
+    unsigned long top;
+  
+!   for (i = 0; i < address.len; i++) {
+!     if (address.s[i] == '-') continue;
+!     if (address.s[i] == '.') continue;
+!     if (address.s[i] == '@') continue;
+!     if (address.s[i] >= '0')
+!       if (address.s[i] <= '9') continue;
+!     i = address.len + 1;
+!   }
+! 
+!   if (i == address.len) {
+      i = byte_chr(address.s,address.len,'-');
+      if (i < address.len) {
+        left = byte_rchr(address.s,i,'.');
+diff -c ucspi-tcp-0.84/tcpserver.1 ucspi-tcp-0.84-mine/tcpserver.1
+*** ucspi-tcp-0.84/tcpserver.1	Thu Nov 12 00:32:01 1998
+--- ucspi-tcp-0.84-mine/tcpserver.1	Sun May 23 17:31:08 1999
+***************
+*** 7,12 ****
+--- 7,15 ----
+  .B \-1pPhHrRoOdDqQv
+  ]
+  [
++ .B \-NnAa
++ ]
++ [
+  .B \-c\fIlimit
+  ]
+  [
+***************
+*** 200,205 ****
+--- 203,227 ----
+  .B \-P
+  (Default.)
+  Not paranoid.
++ .TP
++ .B \-a
++ \&'deny' connections from an address with no hostname
++ .TP
++ .B \-A
++ \&'deny' connections from an address which is 'paranoid'
++ The environment variable
++ .BR TCPPARANOID
++ is set if the connection is
++ considered to be 'paranoid' (allows programs to tell the difference
++ when
++ .BR TCPREMOTEHOST
++ is not set).
++ .TP
++ .B \-n
++ Do domain name lookups in tcprules file after ip lookup.
++ .TP
++ .B \-N
++ Do domain name lookups in tcprules file before IP lookup
+  .TP
+  .B \-h
+  (Default.)
+diff -c ucspi-tcp-0.84/tcpserver.c ucspi-tcp-0.84-mine/tcpserver.c
+*** ucspi-tcp-0.84/tcpserver.c	Thu Nov 12 00:32:01 1998
+--- ucspi-tcp-0.84-mine/tcpserver.c	Sun May 23 23:19:34 1999
+***************
+*** 27,32 ****
+--- 27,35 ----
+  #include "env.h"
+  #include "cdb.h"
+  
++ #define TCPPARANOID /* if TCPPARANOID options are to be used */
++ #define TCPREMOTEHOSTRULES /* if want remote host checked in rules() */
++ 
+  #define FATAL "tcpserver: fatal: "
+  #define DROP "tcpserver: warning: dropping connection, "
+  int verbosity = 1;
+***************
+*** 46,51 ****
+--- 49,55 ----
+    strerr_warn1("\
+  tcpserver: usage: tcpserver \
+  [ -1pPhHrRoOdDqQv ] \
++ [ -nNaA ] \
+  [ -c limit ] \
+  [ -x rules.cdb ] \
+  [ -B banner ] \
+***************
+*** 102,107 ****
+--- 106,121 ----
+  char *fnrules = 0;
+  int flagdeny = 0;
+  
++ #ifdef TCPREMOTEHOSTRULES
++ stralloc tcpremotehost = {0};
++ int domainchecking = 0;
++ #endif
++ #ifdef TCPPARANOID
++ char *connectionstatus;
++ int blockingparanoid = 0;
++ int blockingnohost = 0;
++ #endif
++ 
+  void printenv()
+  {
+    char *tcplocalhost;
+***************
+*** 113,122 ****
+--- 127,143 ----
+    tcpremotehost = env_get("TCPREMOTEHOST");
+  
+    if (!tcplocalhost) tcplocalhost = "";
++ #ifdef TCPPARANOID
++   if (!tcpremotehost) tcpremotehost = env_get("TCPPARANOID");
++ #endif
+    if (!tcpremotehost) tcpremotehost = "";
+  
+    if (!stralloc_copys(&tmp,"tcpserver: ")) drop_nomem();
++ #ifdef TCPPARANOID
++   if (!stralloc_cats(&tmp,connectionstatus)) drop_nomem();
++ #else
+    if (!stralloc_cats(&tmp,flagdeny ? "deny " : "ok ")) drop_nomem();
++ #endif
+    if (!stralloc_catb(&tmp,strnum,fmt_ulong(strnum,getpid()))) drop_nomem();
+    if (!stralloc_cats(&tmp," ")) drop_nomem();
+    safeappend(&tmp,tcplocalhost);
+***************
+*** 203,209 ****
+--- 224,234 ----
+  
+    while ((next0 = byte_chr(data,datalen,0)) < datalen) {
+      switch(data[0]) {
++ #ifdef TCPPARANOID
++       case 'D': connectionstatus = "deny "; flagdeny = 1; break;
++ #else
+        case 'D': flagdeny = 1; break;
++ #endif
+        case '+': if (!env_put(data + 1)) drop_nomem(); break;
+      }
+      data += next0 + 1; datalen -= next0 + 1;
+***************
+*** 211,216 ****
+--- 236,271 ----
+    return 1;
+  }
+  
++ #ifdef TCPREMOTEHOSTRULES
++ int tcp_domain_check()
++ {
++   if (tcpremotehost.len) {
++     unsigned int i = 0;
++ 
++     if (tcpremoteinfo) {
++       if (!stralloc_copys(&tmp,tcpremoteinfo)) drop_nomem();
++       if (!stralloc_cats(&tmp,"@")) drop_nomem();
++       if (!stralloc_cats(&tmp,tcpremotehost.s)) drop_nomem();
++       if (dorule()) return 1;
++     }
++ 
++     if (!stralloc_copys(&tmp,tcpremotehost.s)) drop_nomem();
++     if (dorule()) return 1;
++     while (++i < tcpremotehost.len)
++       if (tcpremotehost.s[i] == '.') {
++         if (!stralloc_copys(&tmp,tcpremotehost.s+i))
++            drop_nomem();
++         if (dorule()) return 1;
++       }
++     }
++   /* We use .' to indicate a valid host default (blank for IP address) */
++   /* so that if the host isn't set we can act differently on an IP address */
++   if (!stralloc_copys(&tmp, ".")) drop_nomem();
++   if (dorule()) return 1;
++   return 0;
++ }
++ #endif
++ 
+  void rules()
+  {
+    if (!fnrules) return;
+***************
+*** 218,223 ****
+--- 273,282 ----
+    fdrules = open_read(fnrules);
+    if (fdrules == -1) drop_rules();
+  
++ #ifdef TCPREMOTEHOSTRULES
++   if (domainchecking == -1) if(tcp_domain_check()) return;
++ #endif
++ 
+    if (tcpremoteinfo) {
+      if (!stralloc_copys(&tmp,tcpremoteinfo)) drop_nomem();
+      if (!stralloc_cats(&tmp,"@")) drop_nomem();
+***************
+*** 233,238 ****
+--- 292,302 ----
+      --tmp.len;
+    }
+  
++ #ifdef TCPREMOTEHOSTRULES
++   if (domainchecking == 1) if(tcp_domain_check()) return;
++   tmp.len = 0;
++ #endif
++ 
+    dorule();
+  
+    done:
+***************
+*** 266,272 ****
+--- 330,341 ----
+    struct servent *se;
+    int j;
+   
++ #if defined(TCPREMOTEHOSTS) || defined(TCPPARANOID)
++   /* okay the defines mean the options might not actually work - so what? */
++   while ((opt = getopt(argc,argv,"dDvqQhHrR1x:t:u:g:l:b:B:c:pPoOnNaA")) != opteof)
++ #else
+    while ((opt = getopt(argc,argv,"dDvqQhHrR1x:t:u:g:l:b:B:c:pPoO")) != opteof)
++ #endif
+      switch(opt) {
+        case 'b': scan_ulong(optarg,&backlog); break;
+        case 'c': scan_ulong(optarg,&limit); break;
+***************
+*** 290,295 ****
+--- 359,372 ----
+        case 'u': scan_ulong(optarg,&uid); break;
+        case '1': flag1 = 1; break;
+        case 'l': forcelocal = optarg; break;
++ #ifdef TCPREMOTEHOSTRULES
++       case 'n': domainchecking = 1; break;
++       case 'N': domainchecking = -1; break;
++ #endif
++ #ifdef TCPPARANOID
++       case 'a': blockingnohost = 1; break;
++       case 'A': blockingparanoid = 1; break;
++ #endif
+        default: usage();
+      }
+    argc -= optind;
+***************
+*** 383,388 ****
+--- 460,468 ----
+    if (!env_unset("TCPLOCALHOST")) die_nomem();
+    if (!env_unset("TCPREMOTEHOST")) die_nomem();
+    if (!env_unset("TCPREMOTEINFO")) die_nomem();
++ #ifdef TCPPARANOID
++   if (!env_unset("TCPPARANOID")) die_nomem();
++ #endif
+   
+    if (forcelocal)
+      if (!env_put2("TCPLOCALHOST",forcelocal)) die_nomem();
+***************
+*** 397,402 ****
+--- 477,485 ----
+    sig_childblock();
+   
+    for (;;) {
++ #ifdef TCPPARANOID
++     int tcpremotehostset = 0;
++ #endif
+      while (numchildren >= limit) sig_pause();
+      sig_childunblock();
+   
+***************
+*** 464,469 ****
+--- 547,555 ----
+            }
+   
+          if (flagremotehost)
++ #ifdef TCPREMOTEHOSTRULES
++ #define tmp tcpremotehost
++ #endif
+            switch(dns_ptr(&tmp,&ipremote)) {
+              case DNS_MEM: drop_nomem();
+              case 0:
+***************
+*** 478,483 ****
+--- 564,574 ----
+                if (!stralloc_0(&tmp)) drop_nomem();
+                case_lowers(tmp.s);
+                if (!env_put2("TCPREMOTEHOST",tmp.s)) drop_nomem();
++ #ifdef TCPPARANOID
++               tcpremotehostset = 1;
++               break;
++             default: tmp.len = 0; /* reset it, for nohost checking */
++ #endif
+            }
+          if (flagremoteinfo) {
+            tcpremoteinfo = remoteinfo_get(&ipremote,portremote,&iplocal,portlocal,(int) timeout);
+***************
+*** 485,490 ****
+--- 576,598 ----
+              if (!env_put2("TCPREMOTEINFO",tcpremoteinfo)) drop_nomem();
+          }
+  
++ #ifdef TCPPARANOID
++         connectionstatus = "ok ";
++         if (!tcpremotehostset) 
++           if (tmp.len) {
++             if (!stralloc_0(&tmp)) drop_nomem();
++             case_lowers(tmp.s);
++             if (!env_put2("TCPPARANOID", tmp.s)) drop_nomem();
++             if (blockingparanoid) connectionstatus = "deny-paranoid ";
++             else connectionstatus = "ok-paranoid ";
++             }
++           else if (blockingnohost) connectionstatus = "deny-nohost ";
++ 
++         if (str_diffn(connectionstatus, "ok", 2)) flagdeny = 1; else
++ #endif
++ #ifdef TCPREMOTEHOSTRULES
++ #undef tmp
++ #endif
+  	rules();
+  	printenv();
+  	if (flagdeny) _exit(100);

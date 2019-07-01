@@ -1,0 +1,114 @@
+From jik@kamens.brookline.ma.us Thu Dec 09 19:10:03 1999
+X-VM-v5-Data: ([nil nil nil nil nil nil nil nil nil]
+	["2669" "Thu" "9" "December" "1999" "14:06:47" "-0500" "Jonathan Kamens" "jik@kamens.brookline.ma.us" nil "83" "Yet another maildir/xbiff tool" "^From:" nil nil "12" nil nil nil nil nil]
+	nil)
+Return-Path: <jik@kamens.brookline.ma.us>
+Delivered-To: nelson@desk.crynwr.com
+Received: (qmail 4059 invoked by uid 0); 9 Dec 1999 19:10:02 -0000
+Received: from ns.crynwr.com (nelson@192.203.178.14)
+  by desk.crynwr.com with SMTP; 9 Dec 1999 19:10:02 -0000
+Received: (qmail 22481 invoked by uid 500); 9 Dec 1999 19:07:26 -0000
+Delivered-To: nelson@qmail.org
+Received: (qmail 22478 invoked from network); 9 Dec 1999 19:07:26 -0000
+Received: from polaris.shore.net (207.244.124.105)
+  by www.qmail.org with SMTP; 9 Dec 1999 19:07:26 -0000
+Received: from jik.shore.net [206.243.167.15] 
+	by polaris.shore.net with esmtp (Exim)
+	for nelson@qmail.org
+	id 11w8tt-0002sb-00; Thu, 9 Dec 1999 14:06:50 -0500
+Received: from jik2.kamens.brookline.ma.us (IDENT:root@jik2.kamens.brookline.ma.us [192.168.0.3])
+	by jik.shore.net (8.9.0/8.9.0) with ESMTP id OAA23748;
+	Thu, 9 Dec 1999 14:08:28 -0500
+Received: (from jik@localhost)
+	by jik2.kamens.brookline.ma.us (8.9.3/8.9.3) id OAA16897;
+	Thu, 9 Dec 1999 14:06:47 -0500
+Message-Id: <199912091906.OAA16897@jik2.kamens.brookline.ma.us>
+From: Jonathan Kamens <jik@kamens.brookline.ma.us>
+To: nelson@qmail.org
+Subject: Yet another maildir/xbiff tool
+Date: Thu, 9 Dec 1999 14:06:47 -0500
+
+Here's yet another tool for making maildir work with xbiff.  The
+comment at the top of the script explains why this one is better than
+some of the others at www.qmail.org.  Feel free to put this up on the
+Web site.
+
+  jik
+
+#!/usr/bin/perl
+
+# mdcheckmail.pl - a fully functional xbiff mail checker for maildir,
+# written in Perl
+# 
+# Written by Jonathan Kamens <jik@kamens.brookline.ma.us>.  Please
+# send me any comments, fixes, suggestions, etc.
+#
+# To use: 
+#
+# 1) Modify the $maildir variable below to reflect where your mail
+#    directory lives.
+# 2) If you want the script to store its state somewhere other than
+#    the file ~/prevmail, modify the $prevfile setting too.
+# 3) Make sure the script file is executable.
+# 4) Configure xbiff to use it by putting its path in the
+#    "xbiff*checkCommand" X resource or specifying it with the
+#    "-checkCommand" command-line option; see the xbiff man page for
+#    more information.
+#
+# This script was inspired by a similar shell script written by Philip
+# Hands <phil@hands.com>.  However, it improves on that script in a
+# number of ways.  The two biggest improvements are: (1) it doesn't
+# call any external processes at all, so it's more efficient; and (2)
+# it notices if the newest message in the maildir has been read by the
+# user, e.g., because the user has run "mdfrm.pl" or a similar
+# utility, and if so, returns the exit status indicating that there is
+# no new mail.  This means that if you receive new mail, then xbiff
+# alerts you, then you run "mdfrm.pl" to see a summary of the mail,
+# xbiff will unhighlight itself and not alert again until more new
+# mail arrives.  This makes the maildir functionality of xbiff
+# equivalent to the mbox-file functionality.
+
+$maildir = "$ENV{'HOME'}/.Maildir";
+$prevfile = "$ENV{'HOME'}/.prevmail";
+
+##
+## You shouldn't need to modify anything below here.
+##
+
+$msgdir = "$maildir/new";
+($whoami = $0) =~ s,.*/,,;
+
+opendir(DIR, $msgdir) || die "$whoami: opening $msgdir: $!\n";
+
+defined(@msgs = readdir(DIR)) || exit(2);
+
+closedir(DIR) || die "$whoami: closing $msgdir: $!\n";
+
+@msgs = sort grep($_ ne '.' && $_ ne '..', @msgs);
+
+if (! @msgs) {
+    unlink($prevfile);
+    exit(2);
+}
+
+$newsum = unpack("%16C*", "@msgs");
+$oldsum = do $prevfile if (-f $prevfile);
+
+if ($newsum != $oldsum) {
+    open(SUM, ">$prevfile") || die "$whoami: opening $prevfile for writing: $!\n";
+    print(SUM $newsum) || die "$whoami: writing to $prevfile: $!\n";
+    close(SUM) || die "$whoami: closing $prevfile after writing: $!\n";
+    $exit_value = 0;
+}
+else {
+    $exit_value = 1;
+}
+
+$lastmsg = pop @msgs;
+
+if (-A "$msgdir/$lastmsg" < -M _) {
+    exit(2);
+}
+
+exit($exit_value);
+

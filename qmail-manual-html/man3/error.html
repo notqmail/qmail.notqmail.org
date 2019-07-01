@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>error(3)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+error(3)               C Library Functions               error(3)
+
+
+
+<B>NAME</B>
+     error - syscall error codes
+
+<B>SYNTAX</B>
+     <B>#include</B> <B>&lt;error.h&gt;</B>
+
+     extern int <B>errno</B>;
+
+     extern int <B>error_intr</B>;
+     extern int <B>error_nomem</B>;
+     extern int <B>error_noent</B>;
+     extern int <B>error_txtbsy</B>;
+     extern int <B>error_io</B>;
+     extern int <B>error_exist</B>;
+     extern int <B>error_timeout</B>;
+     extern int <B>error_inprogress</B>;
+     extern int <B>error_wouldblock</B>;
+     extern int <B>error_again</B>;
+     extern int <B>error_pipe</B>;
+     extern int <B>error_perm</B>;
+     extern int <B>error_acces</B>;
+
+<B>DESCRIPTION</B>
+     UNIX  syscalls  provide  detailed  error  codes in the <B>errno</B>
+     variable.  The <B>error</B> library provides portable names  for  a
+     variety of possible <B>errno</B> values.
+
+<B>SEE</B> <B>ALSO</B>
+     <A HREF="error_str.html">error_str</A>(3), <A HREF="error_temp.html">error_temp</A>(3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+</PRE></BODY></HTML>

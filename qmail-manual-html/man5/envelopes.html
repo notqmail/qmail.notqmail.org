@@ -1,0 +1,203 @@
+<HTML><HEAD><TITLE>envelopes(5)</TITLE>
+	<META REPACKAGER="(Raul Miller) moth@magenta.com">
+        <META AUTHOR="(Dan Bernstein) djb@koobera.math.uic.edu">
+	</HEAD><BODY><PRE>
+
+
+
+envelopes(5)       Headers, Tables, and Macros       envelopes(5)
+
+
+
+<B>NAME</B>
+     envelopes - sender/recipient lists attached to messages
+
+<B>INTRODUCTION</B>
+     Electronic mail messages are delivered in <I>envelopes</I>.
+
+     An envelope lists a <I>sender</I> and one or more <I>recipients</I>.  Usu-
+     ally  these envelope <A HREF="addresses.html">addresses</A> are the same as the addresses
+     listed in the message header:
+
+        (envelope) from djb to root
+        From: djb
+        To: root
+
+     In  more  complicated  situations,  though,   the   envelope
+     addresses may differ from the header addresses.
+
+<B>ENVELOPE</B> <B>EXAMPLES</B>
+     When a message is delivered to several people  at  different
+     locations,  it  is first photocopied and placed into several
+     envelopes:
+
+        (envelope) from djb to root
+        From: djb                          Copy #1 of message
+        To: root, god@brl.mil
+
+        (envelope) from djb to god@brl.mil
+        From: djb                          Copy #2 of message
+        To: root, god@brl.mil
+
+     When a message is delivered to several people  at  the  same
+     location,  the  sender doesn't have to photocopy it.  He can
+     instead stuff it into one envelope with  several  addresses;
+     the recipients will make the photocopy:
+
+        (envelope) from djb to god@brl.mil, angel@brl.mil
+        From: djb
+        To: god@brl.mil, angel@brl.mil, joe, frde
+
+     Bounced mail is sent back to the  envelope  sender  address.
+     The  bounced mail doesn't list an envelope sender, so bounce
+     loops are impossible:
+
+        (envelope) from &lt;&gt; to djb
+        From: MAILER-DAEMON
+        To: djb
+        Subject: unknown user frde
+
+     The recipient of a message may make another copy and <A HREF="../man1/forward.html">forward</A>
+     it in a new envelope:
+
+        (envelope) from djb to joe
+
+
+
+SunOS 5.5                 Last change:                          1
+
+
+
+
+
+
+envelopes(5)       Headers, Tables, and Macros       envelopes(5)
+
+
+
+        From: djb                          Original message
+        To: joe
+
+        (envelope) from joe to fred
+        From: djb                          Forwarded message
+        To: joe
+
+     A mailing list works almost the same way:
+
+        (envelope) from djb to sos-list
+        From: djb                          Original message
+        To: sos-list
+
+        (envelope) from sos-owner to god@brl.mil
+        From: djb                          Forwarded message
+        To: sos-list                       to recipient #1
+
+        (envelope) from sos-owner to frde
+        From: djb                          Forwarded message
+        To: sos-list                       to recipient #2
+
+     Notice that the mailing  list  is  set  up  to  replace  the
+     envelope  sender  with something new, <B>sos-owner</B>.  So bounces
+     will come back to <B>sos-owner</B>:
+
+        (envelope) from &lt;&gt; to sos-owner
+        From: MAILER-DAEMON
+        To: sos-owner
+        Subject: unknown user frde
+
+     It's a good idea to set up an extra address, <B>sos-owner</B>, like
+     this:   the original envelope sender (<B>djb</B>) has no way to fix
+     bad <B>sos-list</B> addresses, and of course bounces  must  not  be
+     sent to <B>sos-list</B> itself.
+
+<B>HOW</B> <B>ENVELOPE</B> <B>ADDRESSES</B> <B>ARE</B> <B>STORED</B>
+     Envelope  sender  and  envelope  recipient   addresses   are
+     transmitted and recorded in several ways.
+
+     When a user injects mail through <B><A HREF="../man8/qmail-inject.html">qmail-inject</A></B>, he can supply
+     a  <B>Return-Path</B>  line or a <B>-f</B> option for the envelope sender;
+     by default the envelope  sender  is  his  login  name.   The
+     envelope  recipient  addresses can be taken from the command
+     line or from various header fields, depending on the options
+     to <B>qmail-inject</B>.  Similar comments apply to <B>sendmail</B>.
+
+     When a message is transferred from one  machine  to  another
+     through  SMTP,  the  envelope sender is given in a <B>MAIL</B> <B>FROM</B>
+     command, the envelope recipients are given in <B>RCPT</B>  <B>TO</B>  com-
+     mands, and the message is supplied separately by a <B>DATA</B> com-
+     mand.
+
+
+
+
+SunOS 5.5                 Last change:                          2
+
+
+
+
+
+
+envelopes(5)       Headers, Tables, and Macros       envelopes(5)
+
+
+
+     When a message is delivered by <B><A HREF="../man7/qmail.html">qmail</A></B> to a single local reci-
+     pient, <B><A HREF="../man8/qmail-local.html">qmail-local</A></B> records the recipient in <B>Delivered-To</B> and
+     the envelope sender in <B>Return-Path</B>.  It uses <B>Delivered-To</B> to
+     detect mail forwarding loops.
+
+     <B>sendmail</B> normally records the  envelope  sender  in  <B>Return-</B>
+     <B>Path</B>.   It  does not record envelope recipient addresses, on
+     the theory that they are redundant:  you received the  mail,
+     so you must have been one of the envelope recipients.
+
+     Note  that,  if  the  header  doesn't  have  any   recipient
+     addresses,  <B>sendmail</B>  will move envelope recipient addresses
+     back  into  the  header.   This  situation  occurs  if   all
+     addresses  were  originally  listed  as  <B>Bcc</B>,  since  <B>Bcc</B> is
+     automatically removed.  When <B>sendmail</B> sees this, it  creates
+     a new <B>Apparently-To</B> header field with the envelope recipient
+     addresses.  This has the strange  effect  that  each  blind-
+     carbon-copy  recipient  will see a list of all recipients on
+     the same machine.
+
+     When a message is stored in <B><A HREF="mbox.html">mbox</A></B> format, the envelope sender
+     is  recorded  at the top of the message as a UUCP-style <B>From</B>
+     (no colon) line.  Note that this line is less reliable  than
+     the <B>Return-Path</B> line added by <B>qmail-local</B> or <B>sendmail</B>.
+
+<B>SEE</B> <B>ALSO</B>
+     <A HREF="qmail-header.html">qmail-header</A>(5), qmail-local(8), qmail-inject(8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SunOS 5.5                 Last change:                          3
+
+
+
+</PRE></BODY></HTML>

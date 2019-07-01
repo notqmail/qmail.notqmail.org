@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          error_temp - identify soft syscall error codes
+
+     <B>SYNTAX</B>
+          <B>#include</B> <B>&lt;error.h&gt;</B>
+
+          int <B>error_temp</B>(<I>e</I>);
+
+          int <I>e</I>;
+
+     <B>DESCRIPTION</B>
+          <B>error_temp</B> returns 1 if syscall error code <I>e</I> is a soft
+          error, 0 if it is a hard error.  Normally <I>e</I> is <B>errno</B>.
+
+          A hard error is persistent:  file not found, read-only file
+          system, symbolic link loop, etc.
+
+          A soft error is usually transient:  out of memory, out of
+          disk space, I/O error, disk quota exceeded, connection
+          refused, host unreachable, etc.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="error.html">error(3)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

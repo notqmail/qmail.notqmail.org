@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+     <B>NAME</B>
+          fd_copy - duplicate a descriptor
+
+     <B>SYNTAX</B>
+          <B>#include</B> <B>&lt;fd.h&gt;</B>
+
+          int <B>fd_copy</B>(<I>to</I>,<I>from</I>);
+
+          int <I>to</I>;
+          int <I>from</I>;
+
+     <B>DESCRIPTION</B>
+          <B>fd_copy</B> copies descriptor <I>from</I> to descriptor <I>to</I>.  If <I>to</I> was
+          already open, <B>fd_copy</B> closes it.  <B>fd_copy</B> always leaves <I>from</I>
+          intact; if <I>to</I> and <I>from</I> are the same number, <B>fd_copy</B> does
+          nothing.
+
+          <B>fd_copy</B> returns 0 on success, -1 on error.  <B>fd_copy</B> does not
+          guarantee that <I>to</I> will remain open, if it was open, in case
+          of error.
+
+     <B>SEE</B> <B>ALSO</B>
+          <B><A HREF="https://qmail.mirrors.auchnet.org/man/man2/dup.html">dup(2)</A></B>, <B><A HREF="fd_move.html">fd_move(3)</A></B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

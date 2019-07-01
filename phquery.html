@@ -1,0 +1,76 @@
+From: Julie Baumler <a4jb@psulib.cc.pdx.edu>
+To: Yusuf Pisan <y-pisan@nwu.edu>
+cc: djb-qmail@koobera.math.uic.edu
+Subject: Re: Configuring Qmail to use phquery
+Date: Thu, 23 Oct 1997 12:09:13 -0700 (PDT)
+
+Sorry for the late reply - I'm way behind in everything lately.
+
+Qmail is VERY EASY to use with phquery.  We use it here (pdx.edu).
+All you need is a ~alias/.qmail-default file that reads:
+
+|/usr/local/qibin/phquery $EXT
+
+You might want to check that the address is one that phquery can handle
+(some versions crash on 1 letter aliases).  I've decided I'd rather remove
+the occasional misaddressed letter from the queue by hand until I have
+time to upgrade and/or fix phquery. 
+
+Note that if there is a local username, mail will get delivered to that
+address first - we used to have a bunch of hacks in our sendmail.cf file
+to achieve this, so this is an advantage for us.  If you don't want this
+to happen, you will need to put a line in virtual domains like:
+	
+	nwu.edu:phquery
+
+and then instead of a ~alias/.qmail-default file create a
+~alias/.qmail-phquery-default file containing:
+
+|/usr/local/qibin/phquery $EXT2
+
+(Warning, this last line is from memory, not my production site - I tested
+it months ago but never used it in production and don't have my test setup
+anymore.) 
+
+I also create a ~alias/.qmail-alias file that goes to postmaster or
+/dev/null, because some phquery messages go out with an address of
+alias@<hostname> and bounce. 
+
+I already ranted about phquery on the list once this month so I'll skip
+that.  Feel free to ask if you have any more questions.
+
+Julie
+
+On Thu, 9 Oct 1997, Yusuf Pisan wrote:
+
+> Date: Thu, 09 Oct 1997 09:43:26 -0500
+> From: Yusuf Pisan <y-pisan@nwu.edu>
+> To: djb-qmail@koobera.math.uic.edu
+> Subject: Configuring Qmail to use phquery
+> 
+> 
+> How can we configure Qmail to use phquery?
+> 
+> Almost all of our users use a 'ph' alias to have flexibility at which
+> machine they read their email.  Unfortunately, the machine which is
+> responsible for resolving and distributing mail for @nwu.edu addresses is
+> overloaded.  To ease the load on this central machine, and to take over
+> some of the mail delivery onto our own machine we would like to use the
+> 'phquery' program to resolve aliases to determin the appropriate final
+> destination.
+> 
+> How can you configure Qmail to use phquery?
+> 
+> --
+> Yusuf Pisan
+> Northwestern University
+> The Institute for the Learning Sciences
+> Qualitative Reasoning Group
+> mailto:y-pisan@nwu.edu
+> http://www.cs.nwu.edu/~yusuf/
+> 
+> 
+> 
+
+
+

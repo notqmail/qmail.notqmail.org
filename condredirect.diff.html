@@ -1,0 +1,12 @@
+*** condredirect.c	Tue Apr 15 01:05:23 1997
+--- ../qmail-evanc/condredirect.c	Mon Jun 30 19:58:01 1997
+***************
+*** 56,61 ****
+--- 56,62 ----
+   switch(wait_exitcode(wstat))
+    {
+     case 0: break;
++    case 100: strerr_die2x(100,FATAL,"permanent child error");
+     case 111: die_temp("condredirect: fatal: temporary child error\n");
+     default: die_success();
+    }
