@@ -17,15 +17,15 @@ qmail-send(8)        Maintenance Procedures         qmail-send(8)
 
 <B>DESCRIPTION</B>
      <B>qmail-send</B> handles messages placed into the  outgoing  queue
-     by <B><A HREF="qmail-queue.html">qmail-queue</A></B>.  It uses <B><A HREF="qmail-lspawn.html">qmail-lspawn</A></B> to deliver messages to
-     local recipients and <B><A HREF="qmail-rspawn.html">qmail-rspawn</A></B>  to  deliver  messages  to
+     by <B><A HREF="../man8/qmail-queue.html">qmail-queue</A></B>.  It uses <B><A HREF="../man8/qmail-lspawn.html">qmail-lspawn</A></B> to deliver messages to
+     local recipients and <B><A HREF="../man8/qmail-rspawn.html">qmail-rspawn</A></B>  to  deliver  messages  to
      remote  recipients.   If a message is temporarily undeliver-
      able to one or more <A HREF="../man5/addresses.html">addresses</A>, <B>qmail-send</B> leaves it  in  the
      queue and tries the addresses again later.
 
      <B>qmail-send</B> prints a readable record  of  its  activities  to
      descriptor  0.   It  writes commands to <B>qmail-lspawn</B>, <B>qmail-</B>
-     <B>rspawn</B>, and <B><A HREF="qmail-clean.html">qmail-clean</A></B> on descriptors  1,  3,  and  5,  and
+     <B>rspawn</B>, and <B><A HREF="../man8/qmail-clean.html">qmail-clean</A></B> on descriptors  1,  3,  and  5,  and
      reads responses from descriptors 2, 4, and 6.  <B>qmail-send</B> is
      responsible for avoiding deadlock.
 

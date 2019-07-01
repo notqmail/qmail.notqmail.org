@@ -30,16 +30,16 @@ qmail-pw2u(8)        Maintenance Procedures         qmail-pw2u(8)
      <B>qmail-pw2u</B>.
 
      If   you    put    the    output    of    <B>qmail-pw2u</B>    into
-     <B>/var/<A HREF="../man7/qmail.html">qmail</A>/users/assign</B>,  and  then  run  <B><A HREF="qmail-newu.html">qmail-newu</A></B>, <B>qmail-</B>
+     <B>/var/<A HREF="../man7/qmail.html">qmail</A>/users/assign</B>,  and  then  run  <B><A HREF="../man8/qmail-newu.html">qmail-newu</A></B>, <B>qmail-</B>
      <B>lspawn</B> will obey  the  assignments  printed  by  <B>qmail-pw2u</B>.
      <B>WARNING:</B>  After  changing  any  users,  uids,  gids, or home
      directories in your passwd file, you must run <B>qmail-pw2u</B> and
-     <B>qmail-newu</B>  again  if  you  want  <B><A HREF="qmail-lspawn.html">qmail-lspawn</A></B>  to  see  the
+     <B>qmail-newu</B>  again  if  you  want  <B><A HREF="../man8/qmail-lspawn.html">qmail-lspawn</A></B>  to  see  the
      changes.
 
 <B>RULES</B>
-     By default, <B>qmail-pw2u</B> follows  the  same  rules  as  <B><A HREF="qmail-getpw.html">qmail-</A></B>
-     <B><A HREF="qmail-getpw.html">getpw</A></B>.   It skips <I>user</I> if (1) <I>uid</I> is zero, (2) <I>home</I> does not
+     By default, <B>qmail-pw2u</B> follows  the  same  rules  as  <B><A HREF="../man8/qmail-getpw.html">qmail-</A></B>
+     <B><A HREF="../man8/qmail-getpw.html">getpw</A></B>.   It skips <I>user</I> if (1) <I>uid</I> is zero, (2) <I>home</I> does not
      exist, (3) <I>user</I> does not own  <I>home</I>,  or  (4)  <I>user</I>  contains
      uppercase  letters.   It then gives each remaining <I>user</I> con-
      trol over the basic <I>user</I> address and all  <A HREF="../man5/addresses.html">addresses</A>  of  the

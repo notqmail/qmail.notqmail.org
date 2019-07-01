@@ -17,7 +17,7 @@ qmail-lspawn(8)      Maintenance Procedures       qmail-lspawn(8)
 
 <B>DESCRIPTION</B>
      <B>qmail-lspawn</B> reads a series of local delivery commands  from
-     descriptor 0, invokes <B><A HREF="qmail-local.html">qmail-local</A></B> to perform the deliveries,
+     descriptor 0, invokes <B><A HREF="../man8/qmail-local.html">qmail-local</A></B> to perform the deliveries,
      and  prints  the  results  to  descriptor  1.    It   passes
      <I>aliasempty</I>  to  <B>qmail-local</B> as the default delivery instruc-
      tion.
@@ -28,7 +28,7 @@ qmail-lspawn(8)      Maintenance Procedures       qmail-lspawn(8)
      For each recipient address,  <B>qmail-lspawn</B>  finds  out  which
      local  user  controls  that  address.   It  first checks the
      <B><A HREF="../man5/qmail-users.html">qmail-users</A></B> mechanism; if the address is not  listed  there,
-     it  invokes <B><A HREF="qmail-getpw.html">qmail-getpw</A></B>.  <B>qmail-lspawn</B> then runs <B>qmail-local</B>
+     it  invokes <B><A HREF="../man8/qmail-getpw.html">qmail-getpw</A></B>.  <B>qmail-lspawn</B> then runs <B>qmail-local</B>
      under the user's uid and gid.  It does not set up  any  sup-
      plementary groups.
 
@@ -36,7 +36,7 @@ qmail-lspawn(8)      Maintenance Procedures       qmail-lspawn(8)
      address.
 
 <B>SEE</B> <B>ALSO</B>
-     <A HREF="../man5/envelopes.html">envelopes</A>(5), qmail-users(5), qmail-getpw(8), <A HREF="qmail-send.html">qmail-send</A>(8),
+     <A HREF="../man5/envelopes.html">envelopes</A>(5), qmail-users(5), qmail-getpw(8), <A HREF="../man8/qmail-send.html">qmail-send</A>(8),
      qmail-local(8)
 
 
