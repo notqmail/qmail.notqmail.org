@@ -54,10 +54,10 @@ while(<IN>) {
         $status = ""
       }
     }
-    $mirrorstatus = -s "/www/qmail/mirrorstatus/$mail";
-    $mirrorlatest = -M "/www/qmail/mirrorstatus/$mail";
+    $mirrorstatus = -s "$dir/mirrorstatus/$mail";
+    $mirrorlatest = -M "$dir/mirrorstatus/$mail";
     if ($status && $mail) {
-        open(F, ">>/www/qmail/mirrorstatus/$mail") or die;
+        open(F, ">>$dir/mirrorstatus/$mail") or die;
         print F " ";
         close(F);
         $qmail = $mail;
