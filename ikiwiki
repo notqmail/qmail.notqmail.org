@@ -8,7 +8,7 @@
 # Remember to re-run ikiwiki --setup any time you edit this file.
 #
 # name of the wiki
-wikiname: wiki
+wikiname: qmail.notqmail.org
 # contact email for wiki
 #adminemail: me@example.com
 # users who are wiki admins
@@ -28,7 +28,7 @@ reverse_proxy: 0
 # filename of cgi wrapper to generate
 cgi_wrapper: ''
 # mode for cgi_wrapper (can safely be made suid)
-cgi_wrappermode: 06755
+cgi_wrappermode: 00755
 # number of seconds to delay CGI requests when overloaded
 cgi_overload_delay: ''
 # message to display when overloaded (may contain html)
@@ -36,7 +36,7 @@ cgi_overload_message: ''
 # enable optimization of only refreshing committed changes?
 only_committed_changes: 0
 # rcs backend to use
-rcs: ''
+rcs: git
 # plugins to add to the default configuration
 add_plugins:
 - html
@@ -110,13 +110,73 @@ deterministic: 0
 
 ######################################################################
 # core plugins
-#   (editpage, htmlscrubber, inline, link, meta, parentlinks, templatebody)
+#   (editpage, git, htmlscrubber, inline, link, meta, parentlinks,
+#    templatebody)
 ######################################################################
+
+# git plugin
+# git hook to generate
+git_wrapper: /home/notqmail/sites/notqmail.org/qmail/git/qmail.notqmail.org.git/hooks/post-update
+# shell command for git_wrapper to run, in the background
+git_wrapper_background_command: git push --all github
+# mode for git_wrapper (can safely be made suid)
+git_wrappermode: 00755
+# git pre-receive hook to generate
+#git_test_receive_wrapper: /git/wiki.git/hooks/pre-receive
+# unix users whose commits should be checked by the pre-receive hook
+#untrusted_committers: []
+# gitweb url to show file history ([[file]] substituted)
+#historyurl: http://git.example.com/gitweb.cgi?p=wiki.git;a=history;f=[[file]];hb=HEAD
+# gitweb url to show a diff ([[file]], [[sha1_to]], [[sha1_from]], [[sha1_commit]], and [[sha1_parent]] substituted)
+#diffurl: http://git.example.com/gitweb.cgi?p=wiki.git;a=blobdiff;f=[[file]];h=[[sha1_to]];hp=[[sha1_from]];hb=[[sha1_commit]];hpb=[[sha1_parent]]
+# where to pull and push changes (set to empty string to disable)
+gitorigin_branch: origin
+# branch that the wiki is stored in
+gitmaster_branch: main
 
 # htmlscrubber plugin
 # PageSpec specifying pages not to scrub
-#htmlscrubber_skip: '!*/Discussion'
 htmlscrubber_skip: '*'
+
+# inline plugin
+# enable rss feeds by default?
+#rss: 0
+# enable atom feeds by default?
+#atom: 0
+# allow rss feeds to be used?
+#allowrss: 0
+# allow atom feeds to be used?
+#allowatom: 0
+# urls to ping (using XML-RPC) on feed update
+pingurl: []
+
+######################################################################
+# auth plugins
+#   (anonok, blogspam, emailauth, httpauth, lockedit, moderatedcomments,
+#    opendiscussion, openid, passwordauth, signinedit)
+######################################################################
+
+# anonok plugin
+# PageSpec to limit which pages anonymous users can edit
+#anonok_pagespec: '*/discussion'
+
+# blogspam plugin
+# PageSpec of pages to check for spam
+#blogspam_pagespec: postcomment(*)
+# options to send to blogspam server
+#blogspam_options: blacklist=1.2.3.4,blacklist=8.7.6.5,max-links=10
+# blogspam server JSON url
+#blogspam_server: ''
+
+# emailauth plugin
+# email address to send emailauth mails as (default: adminemail)
+#emailauth_sender: ''
+
+# httpauth plugin
+# url to redirect to when authentication is needed
+#cgiauthurl: http://example.com/wiki/auth/ikiwiki.cgi
+# PageSpec of pages where only httpauth will be used for authentication
+#httpauth_pagespec: '!*/Discussion'
 
 # lockedit plugin
 # PageSpec controlling which pages are locked
@@ -150,7 +210,7 @@ htmlscrubber_skip: '*'
 # location of highlight's filetypes.conf
 #filetypes_conf: /etc/highlight/filetypes.conf
 # location of highlight's langDefs directory
-#langdefdir: /usr/share/highlight/langDefs
+#langdefdir: /opt/pkg/share/highlight/langDefs
 
 # mdwn plugin
 # enable multimarkdown features?
@@ -202,7 +262,7 @@ mdwn_alpha_lists: 0
 # underlay plugin
 # extra underlay directories to add
 #add_underlays:
-#- /home/schmonz/wiki.underlay
+#- /home/notqmail/wiki.underlay
 
 ######################################################################
 # web plugins
