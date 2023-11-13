@@ -1,0 +1,7 @@
+var.sitecanonical	= "qmail.notqmail.org"
+var.siteroot		= "/home/notqmail/sites/notqmail.org/qmail/"
+var.siteport		= 36386
+var.siteport_tls	= 36408
+
+include			"/etc/lighttpd/schmonz_ssl.conf"
+include			"/etc/lighttpd/schmonz_hosted.conf"
