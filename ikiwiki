@@ -20,7 +20,7 @@ srcdir: /home/notqmail/sites/notqmail.org/qmail/src
 # where to build the wiki
 destdir: /home/notqmail/sites/notqmail.org/qmail/html
 # base url to the wiki
-url: http://qmail.notqmail.org/
+url: https://qmail.notqmail.org/
 # url to the ikiwiki.cgi
 cgiurl: ''
 # do not adjust cgiurl if CGI is accessed via different URL
@@ -41,13 +41,19 @@ rcs: git
 add_plugins:
 - html
 # plugins to disable
-disable_plugins: []
+disable_plugins:
+- anonok
+- editpage
+- emailauth
+- openid
+- passwordauth
+- recentchanges
 # additional directory to search for template files
 templatedir: /opt/pkg/share/ikiwiki/templates
 # base wiki source location
 underlaydir: /opt/pkg/share/ikiwiki/basewiki
 # display verbose messages?
-verbose: 0
+#verbose: 1
 # log to syslog?
 #syslog: 1
 # create output files named page/index.html?
@@ -57,7 +63,7 @@ prefix_directives: 1
 # use page/index.mdwn source files
 indexpages: 0
 # enable Discussion pages?
-discussion: 1
+discussion: 0
 # name of Discussion pages
 discussionpage: Discussion
 # use elements new in HTML5 like <section>?
@@ -65,7 +71,7 @@ html5: 0
 # only send cookies over SSL connections?
 sslcookie: 0
 # extension to use for new pages
-default_pageext: mdwn
+default_pageext: md
 # extension to use for html files
 htmlext: html
 # strftime format string to display date
@@ -102,7 +108,7 @@ allow_symlinks_before_srcdir: 0
 cookiejar:
   file: /home/notqmail/.ikiwiki/cookies
 # set custom user agent string for outbound HTTP requests e.g. when fetching aggregated RSS feeds
-useragent: ikiwiki/3.20190228
+useragent: ikiwiki/3.20200202.3
 # theme has a responsive layout? (mobile-optimized)
 responsive_layout: 1
 # try harder to produce deterministic output
